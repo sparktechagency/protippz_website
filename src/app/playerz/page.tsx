@@ -1,3 +1,4 @@
+
 import PlayerzCards from '@/components/Playerz/PlayerzCards';
 import SearchAndSortComponent from '@/components/Playerz/SearchAndSortComponent';
 import Teams from '@/components/Playerz/Teams'
@@ -181,7 +182,7 @@ const playersData: Player[] = [
 
 const PlayerZPage = () => {
     return (
-        <div className='container mx-auto'>
+        <div className='container mx-auto mt-10'>
             <Teams />
             <Heading
                 headingText="PLAYERZ"
