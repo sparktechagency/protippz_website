@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Button, Modal, Form, Input } from 'antd';
 import check from '@/Assets/check.png'
 import Image from 'next/image';
+import Title from 'antd/es/typography/Title';
 
 interface SendTipsButtonProps {
     _id: string;
@@ -13,7 +14,7 @@ const RedeemButton: React.FC<SendTipsButtonProps> = ({ _id }) => {
     const [isSecondModalOpen, setIsSecondModalOpen] = useState(false);
     const [isThirdModalOpen, setIsThirdModalOpen] = useState(false);
     const [isModalVisible, setIsModalVisible] = useState(false);
-
+    const [isVerifyModalOpen, setIsVerifyModalOpen] = useState(true)
     const handleOk = () => {
         setIsModalVisible(false);
     };
@@ -156,7 +157,55 @@ const RedeemButton: React.FC<SendTipsButtonProps> = ({ _id }) => {
                     </Form.Item>
                 </Form>
             </Modal>
+            <Modal
+                open={isVerifyModalOpen}
+                onCancel={() => setIsVerifyModalOpen(false)}
+                centered
+                footer={false}
+            >
+                <div className="flex flex-col items-center p-8 rounded-lg max-w-lg w-full bg-white shadow-lg">
 
+
+                    <Title level={3} className="text-center text-[#053697] text-3xl mt-4">
+                        Enter Code
+                    </Title>
+
+                    <Form
+                        name=""
+                        layout="vertical"
+                        className="w-full"
+                    >
+                        <Form.Item
+                            label="Please enter the 6 digit code"
+                            name="otp"
+                            className='text-center flex justify-center items-center'
+                            rules={[
+                                { required: true, message: 'Please enter your Otp' },
+                            ]}
+                        >
+                            <Input.OTP length={6}
+                                className="h-[42px]"
+                            />
+                        </Form.Item>
+                        {/* Uncomment if terms checkbox is needed */}
+                        {/* <Form.Item name="terms" valuePropName="checked">
+                        <Checkbox onChange={handleCheckboxChange} className="text-[#053697]">
+                            I agree to the <Text underline>Terms and Privacy Policy</Text>
+                        </Checkbox>
+                    </Form.Item> */}
+
+                        <Form.Item>
+                            <Button
+                                type="primary"
+                                htmlType="submit"
+                                className="w-full bg-[#053697] hover:bg-[#467eee] h-[42px] max-w-[320px] mx-auto block"
+                            >
+                                Verify Otp
+                            </Button>
+                        </Form.Item>
+                    </Form>
+                </div>
+            </Modal >
 
         </>
     );
