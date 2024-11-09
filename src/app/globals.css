@@ -72,6 +72,24 @@ body {
   outline: none; 
   box-shadow: 0 0 0 2px rgba(0, 128, 0, 0.2);
 }
+.custom-collapse .ant-collapse-header {
+  padding: 12px 24px;
+  border: 1px solid #00c96d; /* Green border */
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.custom-panel .ant-collapse-content {
+  border-top: none; /* Remove inner top border */
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.custom-panel .ant-collapse-content-box {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  color: #1a73e8; /* Content color */
+}
 
 @layer base {
   * {
