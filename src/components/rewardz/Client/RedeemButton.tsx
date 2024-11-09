@@ -12,6 +12,15 @@ const RedeemButton: React.FC<SendTipsButtonProps> = ({ _id }) => {
     const [isFirstModalOpen, setIsFirstModalOpen] = useState(false);
     const [isSecondModalOpen, setIsSecondModalOpen] = useState(false);
     const [isThirdModalOpen, setIsThirdModalOpen] = useState(false);
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
+    const handleOk = () => {
+        setIsModalVisible(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
 
     const showFirstModal = () => {
         setIsFirstModalOpen(true);
@@ -51,7 +60,10 @@ const RedeemButton: React.FC<SendTipsButtonProps> = ({ _id }) => {
                 onOk={handleFirstModalOk}
                 onCancel={handleFirstModalCancel}
                 footer={[
-                    <button onClick={handleFirstModalOk} className="bg-blue-600 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none">
+                    <button onClick={() => {
+                        setIsModalVisible(true)
+                        // handleFirstModalOk
+                    }} className="bg-blue-600 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none">
                         Redeem
                     </button>
                 ]}
@@ -86,10 +98,66 @@ const RedeemButton: React.FC<SendTipsButtonProps> = ({ _id }) => {
                 footer={null}
             >
                 <div className="flex justify-center items-center gap-3 flex-col py-10">
-                    <Image src={check} alt='check' height={100} width={100}/>
+                    <Image src={check} alt='check' height={100} width={100} />
                     <p className="text-lg font-semibold mt-4">Your email is successfully verified.</p>
                 </div>
             </Modal>
+            <Modal
+                title={<span className="text-lg font-bold text-blue-900">Verify Name and Mailing Address</span>}
+                visible={isModalVisible}
+                onOk={handleOk}
+                onCancel={handleCancel}
+                footer={null}
+                centered
+            >
+                <Form layout="vertical">
+                    <Form.Item label="Full Name" className="mt-4">
+                        <Input
+                            placeholder="Enter full name"
+                            className="rounded-lg border border-green-400"
+                        />
+                    </Form.Item>
+
+                    <Form.Item label="Mailing Address" className="mt-4">
+                        <Form.Item label="Street Address" className="mb-2">
+                            <Input
+                                placeholder="Your email"
+                                className="rounded-lg border border-green-400"
+                            />
+                        </Form.Item>
+                        <Form.Item label="City" className="mb-2">
+                            <Input
+                                placeholder="Your email"
+                                className="rounded-lg border border-green-400"
+                            />
+                        </Form.Item>
+                        <Form.Item label="State" className="mb-2">
+                            <Input
+                                placeholder="Your email"
+                                className="rounded-lg border border-green-400"
+                            />
+                        </Form.Item>
+                        <Form.Item label="Zip Code" className="mb-2">
+                            <Input
+                                placeholder="Your email"
+                                className="rounded-lg border border-green-400"
+                            />
+                        </Form.Item>
+                    </Form.Item>
+
+                    <Form.Item className="mt-4">
+                        <Button
+                            type="primary"
+                            htmlType="submit"
+                            className="w-full rounded-lg bg-blue-900 text-white"
+                        >
+                            Submit
+                        </Button>
+                    </Form.Item>
+                </Form>
+            </Modal>
+
+
         </>
     );
 };

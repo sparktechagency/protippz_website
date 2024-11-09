@@ -44,11 +44,11 @@ const DepositFundForm = () => {
     <div style={{
       width: '100vw'
     }} className='w-full container mx-auto'>
-      <Form onSubmitCapture={handleSubmit} layout="vertical" className="w-full p-8 bg-white shadow-lg rounded-lg">
+      <Form onSubmitCapture={handleSubmit} layout="vertical" className="w-full p-8 bg-white shadow-lg rounded-lg max-w-4xl mx-auto">
         <h2 className="text-2xl font-semibold text-center mb-6">Select Deposit Option</h2>
 
         <div className="flex flex-col md:flex-row gap-6">
-          <div className="w-full md:w-1/3 p-4 border rounded-lg ">
+          <div className="w-full md:w-2/5 p-4 border rounded-lg ">
             <Form.Item>
               <Radio.Group
                 value={paymentMethod}
@@ -76,7 +76,7 @@ const DepositFundForm = () => {
           </div>
 
           {/* Card Details or PayPal Info */}
-          <div className="w-full md:w-2/3 p-4 bg-gray-50 rounded-lg">
+          <div className="w-full md:w-3/5 p-4 bg-gray-50 rounded-lg">
             {paymentMethod === 'credit' ? (
               <>
                 <Form.Item label={<span className="text-lg font-medium text-blue-900">Card Holder’s Name</span>} className="mb-4">
