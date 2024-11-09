@@ -61,6 +61,17 @@ body {
     --chart-5: 340 75% 55%;
   }
 }
+.custom-input {
+  height: 42px;
+  border-color: green;
+}
+
+.custom-input:hover,
+.custom-input:focus {
+  border-color: green !important;
+  outline: none; 
+  box-shadow: 0 0 0 2px rgba(0, 128, 0, 0.2);
+}
 
 @layer base {
   * {
