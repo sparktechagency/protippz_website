@@ -45,7 +45,7 @@ const PlayerzCards: React.FC<PlayerzCardsProps> = ({ item }) => {
             </div>
 
             <div className="flex justify-end mt-4">
-                <SendTipsButton _id={item?._id} />
+                <SendTipsButton item={item} />
             </div>
         </div>
     );
