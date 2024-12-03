@@ -3,21 +3,18 @@ import React, { useState } from 'react';
 import { Modal, Form, Input, Radio, Button } from 'antd';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-
-interface Player {
-    name: string;
-    sport: string;
-    image: string;
-    isFavorite: boolean;
-    _id: string;
-}
+import { imageUrl, post } from '@/ApisRequests/server';
+import toast from 'react-hot-toast';
+import { TeamInterface } from '@/app/teamz/page';
 
 interface SendTipsButtonProps {
-    item: Player;
+    item: TeamInterface;
 }
 
 const SendTipsButton: React.FC<SendTipsButtonProps> = ({ item }) => {
+    const [form] = Form.useForm()
     const router = useRouter()
+    const [amount, setAmount] = useState('')
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
     const [isOopsModalOpen, setIsOopsModalOpen] = useState(false);
@@ -31,17 +28,47 @@ const SendTipsButton: React.FC<SendTipsButtonProps> = ({ item }) => {
         setIsPaymentModalOpen(false);
         setIsOopsModalOpen(false);
     };
-
+    // first modal handler 
     const handleFormSubmit = (values: any) => {
-        console.log('Submitted values:', values);
+        toast.dismiss()
+        const amount = Object.entries(values).filter(([key, val]) => !!val).map(([key, val]) => val).join()
+        if (Number(amount) < 0 || !amount) return toast.error('please select amount')
+        setAmount(amount)
         setIsModalOpen(false);
-        setIsPaymentModalOpen(true); // Open payment modal
+        setIsPaymentModalOpen(true);
     };
+    // 2nd modal handler 
+    const handlePaymentSubmit = async (value: any) => {
+        console.log('Payment method selected', value?.paymentMethod == 'deposit');
+        if (value?.paymentMethod == 'deposit') {
+            try {
+                const MakeTip = await post('/tip/create', {
+                    "entityId": item?._id,
+                    "entityType": "Team",
+                    "amount": Number(amount),
+                    "tipBy": "Profile balance"
+                }, {
+                    headers: {
+                        'Authorization': `${localStorage.getItem('token')}`
+                    }
+                })
+                if (MakeTip?.success) {
+                    toast.success(MakeTip?.message)
+                    setIsPaymentModalOpen(false);
+                } else {
+                    toast.error(MakeTip.message)
+                    setIsPaymentModalOpen(false);
+                    setIsOopsModalOpen(true);
+                }
 
-    const handlePaymentSubmit = () => {
-        console.log('Payment method selected');
-        setIsPaymentModalOpen(false); // Close payment modal
-        setIsOopsModalOpen(true); // Open "Oops!" modal
+            } catch (error) {
+                console.log(error)
+            }
+        } else {
+            router.push(`/send-tip?amount=${amount}&entityType=Team&entityId=${item?._id}`)
+        }
+
+
     };
 
     return (
@@ -59,24 +86,25 @@ const SendTipsButton: React.FC<SendTipsButtonProps> = ({ item }) => {
             >
                 <div className="text-center">
                     <Image
-                        src={item.image}
-                        alt={item.name}
+                        src={imageUrl(item?.team_logo)}
+                        alt={item?.name}
                         width={100}
                         height={100}
                         className="rounded-full mx-auto mb-4"
                         unoptimized
                     />
-                    <h2 className="text-xl font-bold text-blue-900">{item.name}</h2>
-                    <p><span className="text-green-500 font-semibold">League:</span> {item.name}</p>
-                    <p><span className="text-green-500 font-semibold">Sport:</span> {item.sport}</p>
+                    <h2 className="text-xl font-bold text-blue-900">{item?.name}</h2>
+                    {/* <p><span className="text-green-500 font-semibold">League:</span> NCAA</p> */}
+                    <p><span className="text-green-500 font-semibold">Team:</span> {item?.name}</p>
+                    <p><span className="text-green-500 font-semibold">league:</span> {item?.league?.name}</p>
                 </div>
-                <Form
+                <Form form={form}
                     onFinish={handleFormSubmit}
                     layout="vertical"
                     className="mt-6"
                 >
                     <Form.Item label="Select Your Amount" name="amountOption">
-                        <Radio.Group>
+                        <Radio.Group onChange={() => form.setFieldValue('customAmount', '')}>
                             <Radio value={5}>$5</Radio>
                             <Radio value={25}>$25</Radio>
                             <Radio value={100}>$100</Radio>
@@ -84,7 +112,9 @@ const SendTipsButton: React.FC<SendTipsButtonProps> = ({ item }) => {
                     </Form.Item>
 
                     <Form.Item label="Enter Your Amount" name="customAmount">
-                        <Input placeholder="Enter amount" />
+                        <Input onChange={() => {
+                            form.setFieldValue('amountOption', 0)
+                        }} placeholder="Enter amount" />
                     </Form.Item>
 
                     <Form.Item>
@@ -142,5 +172,4 @@ const SendTipsButton: React.FC<SendTipsButtonProps> = ({ item }) => {
         </>
     );
 };
-
 export default SendTipsButton;

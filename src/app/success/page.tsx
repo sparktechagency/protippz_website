@@ -14,7 +14,6 @@ const Page = async ({ searchParams }: { searchParams: Promise<{ [key: string]: s
             'Authorization': `${(await cookie).get('token')?.value}`
         }
     })
-    console.log(res, PayerID, paymentId)
     if (res?.success) {
         return (
             <div className="flex justify-center items-center min-h-screen ">

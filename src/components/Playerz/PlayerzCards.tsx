@@ -11,7 +11,11 @@ interface PlayerzCardsProps {
 
 const PlayerzCards: React.FC<PlayerzCardsProps> = ({ item }) => {
     return (
-        <div className="relative bg-white border border-green-300 rounded-lg shadow-md max-w-lg p-4 m-4 h-72 flex flex-col justify-between w-full mx-auto">
+        <div style={{
+            backgroundImage: `url("${imageUrl(item?.player_bg_image)}")`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+        }} className="relative bg-white border border-green-300 rounded-lg shadow-md max-w-lg p-4 m-4 h-72 flex flex-col justify-between w-full mx-auto">
             {/* Player Details Section */}
             <div className="flex flex-col justify-between pr-20">
                 <div className="text-left">

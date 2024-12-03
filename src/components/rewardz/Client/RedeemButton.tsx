@@ -4,12 +4,14 @@ import { Button, Modal, Form, Input } from 'antd';
 import check from '@/Assets/check.png'
 import Image from 'next/image';
 import Title from 'antd/es/typography/Title';
+import { RewardInterface } from '@/app/rewardz/page';
 
 interface SendTipsButtonProps {
-    _id: string;
+    item: RewardInterface;
 }
 
-const RedeemButton: React.FC<SendTipsButtonProps> = ({ _id }) => {
+const RedeemButton: React.FC<SendTipsButtonProps> = ({ item }) => {
+    console.log(item)
     const [isFirstModalOpen, setIsFirstModalOpen] = useState(false);
     const [isSecondModalOpen, setIsSecondModalOpen] = useState(false);
     const [isThirdModalOpen, setIsThirdModalOpen] = useState(false);
