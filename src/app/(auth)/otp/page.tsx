@@ -1,13 +1,16 @@
 'use client';
 import React, { useState } from 'react';
-import { Button, Input, Checkbox, Typography, Form } from 'antd';
+import { Button, Input, Checkbox, Typography, Form, Spin } from 'antd';
 import Image from 'next/image';
 import logo from '@/Assets/logo.png';
 import logo_bg from '@/Assets/logo_bg.png';
 import { useRouter } from 'next/navigation';
+import { OtpVerify } from '@/ApisRequests/Auth';
+import toast from 'react-hot-toast';
 const { Title, Text } = Typography;
 
 const OtpPage: React.FC = () => {
+    const [loading, setLoading] = useState(false)
     const router = useRouter()
     const [formValues, setFormValues] = useState({
         otp: '',
@@ -21,9 +24,21 @@ const OtpPage: React.FC = () => {
         });
     };
 
-    const onFinish = (values: any) => {
-        router.push('/reset-password')
-        console.log('Success:', values);
+    const onFinish = async (values: any) => {
+        setLoading(true)
+        const data = {
+            "email": localStorage.getItem('email') || "",
+            "verifyCode": Number(values?.otp)
+        }
+        const res = await OtpVerify(data)
+        setLoading(false)
+        if (res?.success) {
+            toast.success(res?.message || 'Email Verified')
+            router.push('/sign-in')
+        } else {
+            toast.error(res?.message || 'something went wrong')
+        }
+        console.log(res)
     };
 
     const onFinishFailed = (errorInfo: any) => {
@@ -61,7 +76,7 @@ const OtpPage: React.FC = () => {
                             { required: true, message: 'Please enter your Otp' },
                         ]}
                     >
-                        <Input.OTP length={6}
+                        <Input.OTP length={5}
                             className="h-[42px]"
                         />
                     </Form.Item>
@@ -78,7 +93,7 @@ const OtpPage: React.FC = () => {
                             htmlType="submit"
                             className="w-full bg-[#053697] hover:bg-[#467eee] h-[42px] max-w-[320px] mx-auto block"
                         >
-                            Verify Otp
+                            {loading ? <Spin size='small' /> : 'Verify Otp'}
                         </Button>
                     </Form.Item>
                 </Form>

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/Shared/Client/Navbar";
 import Footer from "@/components/Shared/Client/Footer";
+import { AuthProvider } from "@/provider/ContextProvider";
 
 
 
@@ -21,11 +21,13 @@ export default function RootLayout({
       <body
         className={``}
       >
-        <Navbar />
-        <div className="min-h-[72vh] flex flex-col justify-center items-center">
-          {children}
-        </div>
-        <Footer />
+        <AuthProvider>
+          <Navbar />
+          <div className="min-h-[72vh] flex flex-col justify-center items-center">
+            {children}
+          </div>
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );

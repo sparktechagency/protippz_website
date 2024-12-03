@@ -1,186 +1,43 @@
 
+import { get } from '@/ApisRequests/server';
 import PlayerzCards from '@/components/Playerz/PlayerzCards';
 import SearchAndSortComponent from '@/components/Playerz/SearchAndSortComponent';
 import Teams from '@/components/Playerz/Teams'
 import Heading from '@/components/Shared/Heading';
+import { SearchParams } from 'next/dist/server/request/search-params';
 import React from 'react'
 export const metadata = {
     title: 'PROTIPPZ - PLAYERZ',
     description: 'Learn how to tip your favorite player/team, earn rewards, and win prizes with TIPPZ.',
 };
-interface Player {
-    name: string;
-    team: string;
-    position: string;
-    image: string;
-    isFavorite: boolean;
-    _id: string;
+
+export interface Player {
+    "_id": string,
+    "name": string,
+    "league": {
+        "_id": string,
+        "name": string,
+        "sport": string
+    },
+    "team": {
+        "_id": string,
+        "name": string
+    },
+    "position": string,
+    "player_image": string,
+    "player_bg_image": string,
+    "totalTips": number,
+    "paidAmount": number,
+    "dueAmount": number,
+    "isBookmark": false
 }
-
-const playersData: Player[] = [
-    {
-        name: "Robert Smith",
-        team: "Inter Milan",
-        position: "Forward",
-        image: "https://i.ibb.co/h98pv90/pngwing-com-1-1.png",
-        isFavorite: true,
-        _id: "1",
-    },
-    {
-        name: "John Doe",
-        team: "Manchester United",
-        position: "Defender",
-        image: "https://i.ibb.co/5BnGTQk/pngegg-11-1.png",
-        isFavorite: false,
-        _id: "2",
-    },
-    {
-        name: "James Brown",
-        team: "Chelsea",
-        position: "Midfielder",
-        image: "https://i.ibb.co/z2SSsNL/pngegg-10-1.png",
-        isFavorite: true,
-        _id: "3",
-    },
-    {
-        name: "Lucas White",
-        team: "Arsenal",
-        position: "Goalkeeper",
-        image: "https://i.ibb.co/2vK5rbh/pngegg-12-1.png",
-        isFavorite: false,
-        _id: "4",
-    },
-    {
-        name: "David Black",
-        team: "Liverpool",
-        position: "Forward",
-        image: "https://i.ibb.co/F5GVnxX/klipartz-com-1.png",
-        isFavorite: true,
-        _id: "5",
-    },
-    {
-        name: "Chris Green",
-        team: "Manchester City",
-        position: "Defender",
-        image: "https://i.ibb.co/h98pv90/pngwing-com-1-1.png",
-        isFavorite: false,
-        _id: "6",
-    },
-    {
-        name: "Matt Blue",
-        team: "Tottenham",
-        position: "Midfielder",
-        image: "https://i.ibb.co/4j4JBkm/image-11.png",
-        isFavorite: true,
-        _id: "7",
-    },
-    {
-        name: "Nick Gray",
-        team: "Leicester City",
-        position: "Goalkeeper",
-        image: "https://i.ibb.co/5BnGTQk/pngegg-11-1.png",
-        isFavorite: false,
-        _id: "8",
-    },
-    {
-        name: "Tom Silver",
-        team: "Everton",
-        position: "Forward",
-        image: "https://i.ibb.co/z2SSsNL/pngegg-10-1.png",
-        isFavorite: true,
-        _id: "9",
-    },
-    {
-        name: "Jake Violet",
-        team: "Wolves",
-        position: "Defender",
-        image: "https://i.ibb.co/2vK5rbh/pngegg-12-1.png",
-        isFavorite: false,
-        _id: "10",
-    },
-    {
-        name: "Paul Yellow",
-        team: "Southampton",
-        position: "Midfielder",
-        image: "https://i.ibb.co/F5GVnxX/klipartz-com-1.png",
-        isFavorite: true,
-        _id: "11",
-    },
-    {
-        name: "Rick Orange",
-        team: "Aston Villa",
-        position: "Goalkeeper",
-        image: "https://i.ibb.co/h98pv90/pngwing-com-1-1.png",
-        isFavorite: false,
-        _id: "12",
-    },
-    {
-        name: "Mark Gold",
-        team: "Newcastle",
-        position: "Forward",
-        image: "https://i.ibb.co/4j4JBkm/image-11.png",
-        isFavorite: true,
-        _id: "13",
-    },
-    {
-        name: "Gary Bronze",
-        team: "West Ham",
-        position: "Defender",
-        image: "https://i.ibb.co/5BnGTQk/pngegg-11-1.png",
-        isFavorite: false,
-        _id: "14",
-    },
-    {
-        name: "Simon Copper",
-        team: "Brighton",
-        position: "Midfielder",
-        image: "https://i.ibb.co/z2SSsNL/pngegg-10-1.png",
-        isFavorite: true,
-        _id: "15",
-    },
-    {
-        name: "Ethan Steele",
-        team: "Crystal Palace",
-        position: "Goalkeeper",
-        image: "https://i.ibb.co/2vK5rbh/pngegg-12-1.png",
-        isFavorite: false,
-        _id: "16",
-    },
-    {
-        name: "Liam Jade",
-        team: "Burnley",
-        position: "Forward",
-        image: "https://i.ibb.co/F5GVnxX/klipartz-com-1.png",
-        isFavorite: true,
-        _id: "17",
-    },
-    {
-        name: "Owen Brass",
-        team: "Fulham",
-        position: "Defender",
-        image: "https://i.ibb.co/h98pv90/pngwing-com-1-1.png",
-        isFavorite: false,
-        _id: "18",
-    },
-    {
-        name: "Tyler Iron",
-        team: "Leeds United",
-        position: "Midfielder",
-        image: "https://i.ibb.co/4j4JBkm/image-11.png",
-        isFavorite: true,
-        _id: "19",
-    },
-    {
-        name: "Leo Pearl",
-        team: "Sheffield United",
-        position: "Goalkeeper",
-        image: "https://i.ibb.co/5BnGTQk/pngegg-11-1.png",
-        isFavorite: false,
-        _id: "20",
-    },
-];
-
-const PlayerZPage = () => {
+interface ParamsProps {
+    searchParams: Promise<{ [key: string]: string | undefined | null }>
+}
+const PlayerZPage = async ({ searchParams }: ParamsProps) => {
+    const { searchTerm, name, position, page, league } = await searchParams
+    const param = { searchTerm, name, position, page, league }
+    const [data, meta] = await getPlayer(param)
     return (
         <div className='container mx-auto mt-10'>
             <Teams />
@@ -191,7 +48,7 @@ const PlayerZPage = () => {
             <SearchAndSortComponent />
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
                 {
-                    playersData?.map(item => <PlayerzCards item={item} key={item?._id} />)
+                    data?.map((item: Player) => <PlayerzCards item={item} key={item?._id} />)
                 }
             </div>
         </div>
@@ -199,3 +56,11 @@ const PlayerZPage = () => {
 }
 
 export default PlayerZPage
+const getPlayer = async (param: SearchParams | {}) => {
+    const paramsUrl = Object.entries(param)
+        .filter(([key, value]) => value !== undefined)
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
+    const res = await get(`/player/get-all?${paramsUrl}`)
+    return [res.data?.result, res.data?.meta]
+}

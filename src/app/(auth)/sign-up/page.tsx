@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Button, Input, Checkbox, Typography, Form } from 'antd';
+import { Button, Input, Checkbox, Typography, Form, Spin } from 'antd';
 import { FaGoogle } from 'react-icons/fa6';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { CheckboxChangeEvent } from 'antd/es/checkbox';
@@ -9,9 +9,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import logo_green from '@/Assets/logo_green.png';
 import phoneImage from '@/Assets/phone_image.png';
+import { signUpHandler } from '@/ApisRequests/Auth';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 const { Title, Text } = Typography;
 
 const SignUpPage: React.FC = () => {
+    const [loading, setLoading] = useState(false)
+    const router = useRouter()
     const [formValues, setFormValues] = useState({
         fullName: '',
         email: '',
@@ -30,8 +35,30 @@ const SignUpPage: React.FC = () => {
         });
     };
 
-    const onFinish = (values: any) => {
-        console.log('Success:', values);
+    const onFinish = async (values: any) => {
+        setLoading(true)
+        const data = {
+            "password": values?.password,
+            "confirmPassword": values?.confirmPassword,
+            "userData": {
+                "name": values?.fullName,
+                "username": values?.username,
+                "phone": values?.phoneNumber,
+                "email": values?.email,
+                "address": values?.address
+
+            }
+        }
+        const res = await signUpHandler(data)
+        setLoading(false)
+        if (res?.success) {
+            localStorage.setItem('email', values?.email)
+            toast.success(res?.message || 'Please check your email')
+            router.push('/otp')
+        } else {
+            toast.error(res?.message || 'something went wrong')
+        }
+
     };
 
     const onFinishFailed = (errorInfo: any) => {
@@ -161,7 +188,7 @@ const SignUpPage: React.FC = () => {
                             htmlType="submit"
                             className="w-full mb-3 bg-[#053697] hover:bg-[#467eee] h-[42px]"
                         >
-                            Sign up
+                            {loading ? <Spin size='small' /> : ' Sign up'}
                         </Button>
                     </Form.Item>
                 </Form>

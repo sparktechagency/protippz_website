@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Button, Input, Checkbox, Typography, Form } from 'antd';
+import { Button, Input, Checkbox, Typography, Form, Spin } from 'antd';
 import { FaGoogle } from 'react-icons/fa6';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { CheckboxChangeEvent } from 'antd/es/checkbox';
@@ -9,32 +9,71 @@ import Image from 'next/image';
 import logo from '@/Assets/logo.png';
 import logo_bg from '@/Assets/logo_bg.png';
 import Link from 'next/link';
-
+import { useGoogleLogin } from '@react-oauth/google';
+import { SignInHandler } from '@/ApisRequests/Auth';
+import toast from 'react-hot-toast';
+import Cookies from "js-cookie"
 const { Title, Text } = Typography;
 
 const SignInPage: React.FC = () => {
-    const [formValues, setFormValues] = useState({
-        email: '',
-        password: '',
-        termsAccepted: false,
+    const [loading, setLoading] = useState(false)
+    const login = useGoogleLogin({
+        onSuccess: tokenResponse => console.log(tokenResponse),
+        onError: err => console.log(err)
     });
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFormValues({
-            ...formValues,
-            [e.target.name]: e.target.value,
-        });
-    };
-
-    const handleCheckboxChange = (e: CheckboxChangeEvent) => {
-        setFormValues({
-            ...formValues,
-            termsAccepted: e.target.checked,
-        });
-    };
-
-    const onFinish = (values: any) => {
-        console.log('Success:', values);
+    const onFinish = async (values: any) => {
+        setLoading(true)
+        const res = await SignInHandler(values)
+        setLoading(false)
+        if (res?.success) {
+            localStorage.setItem('token', res?.data?.accessToken)
+            Cookies.set('token', res?.data?.accessToken)
+            if (Cookies.get('token')) {
+                toast.success(res?.message || 'logged in successfully')
+                window.location.href = '/'
+            } else {
+                toast.custom((t) => (
+                    <div
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            background: '#fff',
+                            color: '#000',
+                            padding: '12px 16px',
+                            border: '1px solid #ddd',
+                            borderRadius: '8px',
+                            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                            width: '350px',
+                        }}
+                    >
+                        <span style={{ flex: 1, marginRight: '8px' }}>
+                            ⚠️ Logged in successfully, but cookies are disabled in your browser. Some features may not work as expected.
+                        </span>
+                        <button
+                            style={{
+                                background: '#f27405',
+                                color: '#fff',
+                                border: 'none',
+                                borderRadius: '4px',
+                                padding: '4px 8px',
+                                cursor: 'pointer',
+                            }}
+                            onClick={() => toast.dismiss(t.id)} // Manually dismiss the toast
+                        >
+                            Close
+                        </button>
+                    </div>
+                ), {
+                    duration: 5000,
+                    position: 'top-center',
+                });
+                window.location.href = '/'
+            }
+        } else {
+            toast.error(res?.message || 'something went wrong')
+        }
     };
 
     const onFinishFailed = (errorInfo: any) => {
@@ -57,11 +96,11 @@ const SignInPage: React.FC = () => {
                     Sign up
                 </Title>
 
-                <Button
+                <Button onClick={() => login()}
                     icon={<FaGoogle />}
                     className="w-full mb-4 bg-white text-[#053697] h-[42px] border border-gray-300"
                 >
-                    Sign up with Google
+                    Sign in with Google
                 </Button>
 
                 <Form
@@ -72,17 +111,15 @@ const SignInPage: React.FC = () => {
                     className="w-full"
                 >
                     <Form.Item
-                        label="Email"
-                        name="email"
+                        label="Email or Username"
+                        name="userNameOrEmail"
                         rules={[
-                            { required: true, message: 'Please enter your email' },
-                            { type: 'email', message: 'Please enter a valid email' },
+                            { required: true, message: 'Please enter your email or username' },
+                            // { type: 'email', message: 'Please enter a valid email' },
                         ]}
                     >
                         <Input
-                            placeholder="Email"
-                            name="email"
-                            onChange={handleInputChange}
+                            placeholder="Email or username"
                             className="h-[42px]"
                         />
                     </Form.Item>
@@ -96,8 +133,6 @@ const SignInPage: React.FC = () => {
                     >
                         <Input.Password
                             placeholder="Password"
-                            name="password"
-                            onChange={handleInputChange}
                             className="h-[42px]"
                             iconRender={(visible) => (visible ? <FaEye /> : <FaEyeSlash />)}
                         />
@@ -116,7 +151,7 @@ const SignInPage: React.FC = () => {
                             htmlType="submit"
                             className="w-full bg-[#053697] hover:bg-[#467eee] h-[42px]"
                         >
-                            Sign In
+                            {loading ? <Spin /> : 'Sign In'}
                         </Button>
                     </Form.Item>
                 </Form>

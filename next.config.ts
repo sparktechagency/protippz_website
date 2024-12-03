@@ -1,16 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'i.ibb.co',
-        port: '',
+        protocol: 'http',
+        hostname: '192.168.10.11',
+        port: '5050', 
       },
     ],
-  }
+  },
 };
 
 export default nextConfig;

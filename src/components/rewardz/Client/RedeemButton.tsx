@@ -14,7 +14,7 @@ const RedeemButton: React.FC<SendTipsButtonProps> = ({ _id }) => {
     const [isSecondModalOpen, setIsSecondModalOpen] = useState(false);
     const [isThirdModalOpen, setIsThirdModalOpen] = useState(false);
     const [isModalVisible, setIsModalVisible] = useState(false);
-    const [isVerifyModalOpen, setIsVerifyModalOpen] = useState(true)
+    const [isVerifyModalOpen, setIsVerifyModalOpen] = useState(false)
     const handleOk = () => {
         setIsModalVisible(false);
     };

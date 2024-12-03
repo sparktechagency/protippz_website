@@ -5,7 +5,7 @@ import { IoIosNotificationsOutline, IoMdMenu } from 'react-icons/io';
 import logo from '@/Assets/logo.png';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaRegUserCircle } from 'react-icons/fa';
+import { FaDollarSign, FaRegUserCircle, FaStar } from 'react-icons/fa';
 
 const Navbar: React.FC = () => {
     const [drawerVisible, setDrawerVisible] = useState(false);
@@ -88,19 +88,21 @@ const Navbar: React.FC = () => {
                     <div className="flex flex-col space-y-2">
                         <div className="flex items-center space-x-2 px-3 py-1 rounded-full bg-green-100">
                             <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white border border-green-500">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                {/* <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="12" cy="12" r="10" stroke="#38A169" strokeWidth="2" />
                                     <text x="12" y="16" textAnchor="middle" fontSize="12" fill="#38A169" fontWeight="bold">$</text>
-                                </svg>
+                                </svg> */}
+                                <FaDollarSign className='text-green-500' />
                             </span>
                             <span className="text-green-800 font-semibold">1500</span>
                         </div>
                         <div className="flex items-center space-x-2 px-3 py-1 rounded-full bg-green-100">
                             <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white border border-green-500">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                {/* <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="12" cy="12" r="10" stroke="#38A169" strokeWidth="2" />
                                     <text x="12" y="16" textAnchor="middle" fontSize="12" fill="#38A169" fontWeight="bold">*</text>
-                                </svg>
+                                </svg> */}
+                                <FaStar className='text-green-500' />
                             </span>
                             <span className="text-green-800 font-semibold">1200</span>
                         </div>
