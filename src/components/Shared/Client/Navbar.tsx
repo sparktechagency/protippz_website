@@ -43,9 +43,9 @@ const Navbar: React.FC = () => {
             <Menu.Item key="7">
                 <Link href="/faqs">FAQs</Link>
             </Menu.Item>
-            <Menu.Item key="8">
+            {/* <Menu.Item key="8">
                 <Link href="/settings">Settings</Link>
-            </Menu.Item>
+            </Menu.Item> */}
             <Menu.Item key="9">
                 <Link href="/invite-friends">Invite Friends</Link>
             </Menu.Item>

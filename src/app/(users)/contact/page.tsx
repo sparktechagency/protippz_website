@@ -4,7 +4,17 @@ import { Form, Input, Button } from 'antd';
 import 'react-phone-input-2/lib/style.css';
 import PhoneInput from 'react-phone-input-2';
 import logo_bg from '@/Assets/logo_bg.png'
+import { post } from '@/ApisRequests/server';
+import toast from 'react-hot-toast';
 const ContactUsPage: React.FC = () => {
+    const onFinish = async (value: any) => {
+        const res = await post('/contact-us', value)
+        if (res?.message == 'Contact email sent successfully') {
+            toast.success(res?.message)
+        } else {
+            toast.error(res?.message)
+        }
+    }
     return (
         <div
             className="flex items-center justify-center min-h-screen w-full"
@@ -17,7 +27,7 @@ const ContactUsPage: React.FC = () => {
             <div className="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full">
                 <h2 className="text-center text-[#053697] text-2xl font-bold mb-6">Contact Us</h2>
 
-                <Form layout="vertical" onFinish={(values) => console.log('Form Values:', values)}>
+                <Form layout="vertical" onFinish={onFinish}>
                     <Form.Item
                         label="Name*"
                         name="name"

@@ -1,5 +1,6 @@
 
 import { get } from '@/ApisRequests/server';
+import PaginationComponents from '@/components/Shared/Client/Pagination';
 import Heading from '@/components/Shared/Heading';
 import SearchAndSortComponent from '@/components/Teamz/SearchAndSortComponent';
 import Teams from '@/components/Teamz/Teams';
@@ -47,6 +48,11 @@ const TeamPage = async ({ searchParams }: ParamsProps) => {
                 {
                     playersData?.map(item => <TeamzCards item={item} key={item?._id} />)
                 }
+            </div>
+            <div className='flex justify-center items-center'>
+                <PaginationComponents
+                    paginationData={meta}
+                />
             </div>
         </div>
     )

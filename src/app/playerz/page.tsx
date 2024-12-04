@@ -3,6 +3,7 @@ import { get } from '@/ApisRequests/server';
 import PlayerzCards from '@/components/Playerz/PlayerzCards';
 import SearchAndSortComponent from '@/components/Playerz/SearchAndSortComponent';
 import Teams from '@/components/Playerz/Teams'
+import PaginationComponents from '@/components/Shared/Client/Pagination';
 import Heading from '@/components/Shared/Heading';
 import { SearchParams } from 'next/dist/server/request/search-params';
 import { cookies } from 'next/headers';
@@ -32,6 +33,7 @@ export interface Player {
     "dueAmount": number,
     "isBookmark": false
 }
+
 interface ParamsProps {
     searchParams: Promise<{ [key: string]: string | undefined | null }>
 }
@@ -51,6 +53,11 @@ const PlayerZPage = async ({ searchParams }: ParamsProps) => {
                 {
                     data?.map((item: Player) => <PlayerzCards item={item} key={item?._id} />)
                 }
+            </div>
+            <div className='flex justify-center items-center'>
+                <PaginationComponents
+                    paginationData={meta}
+                />
             </div>
         </div>
     )

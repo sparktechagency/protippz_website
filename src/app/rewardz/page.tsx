@@ -6,6 +6,7 @@ import rewardbg from '@/Assets/rewardbg.png'
 import React from 'react'
 import { FaLongArrowAltRight } from 'react-icons/fa';
 import { get } from '@/ApisRequests/server';
+import PaginationComponents from '@/components/Shared/Client/Pagination';
 
 export interface RewardInterface {
     _id: string,
@@ -28,7 +29,7 @@ interface PageProps {
 const RewardzPage = async ({ searchParams }: PageProps) => {
     const { searchTerm, category } = await searchParams
     const params = { category, searchTerm }
-    const [data, pagination] = await getReward(params)
+    const [data, meta] = await getReward(params)
     const rewardData = data as RewardInterface[]
     return (
         <>
@@ -43,6 +44,11 @@ const RewardzPage = async ({ searchParams }: PageProps) => {
                     {
                         rewardData?.map(item => <RewardzCards item={item} key={item?._id} />)
                     }
+                </div>
+                <div className='flex justify-center items-center'>
+                    <PaginationComponents
+                        paginationData={meta}
+                    />
                 </div>
             </div>
             <div style={{
