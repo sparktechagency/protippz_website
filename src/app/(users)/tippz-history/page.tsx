@@ -66,6 +66,7 @@ const TippzHistoryPage = () => {
             title: 'Tippz Amount',
             dataIndex: 'amount',
             key: 'amount',
+            render: (amount: number) => <span>${amount}</span>
         },
         {
             title: 'Points',
