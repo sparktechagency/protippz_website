@@ -7,10 +7,14 @@ import { Form, Radio, Input, Button } from 'antd';
 import Image from 'next/image';
 import cards from "@/Assets/cards.png";
 import paypal from "@/Assets/paypal.png";
+import toast from 'react-hot-toast';
+import { patch, post } from '@/ApisRequests/server';
+import { useRouter } from 'next/navigation';
 
 const stripePromise: Promise<Stripe | null> = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY || '');
 
 const DepositFundForm = () => {
+  const router = useRouter()
   const stripe = useStripe();
   const elements = useElements();
   const [paymentMethod, setPaymentMethod] = useState('credit');
@@ -18,10 +22,22 @@ const DepositFundForm = () => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    if (amount && Number(amount) > 999999) {
+      return toast.error('amount cant be more then 999999')
+    }
+    const clientSecret = await post('/deposit/create-deposit-intent', {
+      "amount": Number(amount),
+      "paymentBy": paymentMethod === 'credit' ? "Credit Card" : "Paypal"
+
+    }, {
+      headers: {
+        'Authorization': `${localStorage.getItem('token')}`
+      }
+    })
     if (paymentMethod === 'credit' && stripe && elements) {
       const cardElement = elements.getElement(CardElement);
       const { error, paymentIntent } = await stripe.confirmCardPayment(
-        'YOUR_CLIENT_SECRET', // Replace with your client secret from backend
+        clientSecret?.data?.clientSecret,
         {
           payment_method: {
             card: cardElement!,
@@ -34,10 +50,22 @@ const DepositFundForm = () => {
       if (error) {
         console.error(error);
       } else {
-        console.log('Payment success:', paymentIntent);
+        const executePayment = await post('/deposit/execute-stripe-deposit', {
+          "transactionId": paymentIntent?.id,
+        }, {
+          headers: {
+            'Authorization': `${localStorage.getItem('token')}`
+          }
+        })
+        if (executePayment?.success) {
+          toast.success(executePayment?.message)
+          router.push('/')
+        } else {
+          toast.error(executePayment?.message)
+        }
       }
     } else if (paymentMethod === 'paypal') {
-      console.log('Process PayPal payment');
+      router.push(clientSecret?.data?.approvalUrl)
     }
   };
   return (
@@ -85,14 +113,14 @@ const DepositFundForm = () => {
                 <Form.Item label={<span className="text-lg font-medium text-blue-900">Card Number</span>} className="mb-4">
                   <CardElement options={{ style: { base: { fontSize: '16px', color: '#424770', '::placeholder': { color: '#9ca3af' } } } }} className="border border-green-400 rounded-lg p-2" />
                 </Form.Item>
-                <div className="flex gap-4">
+                {/* <div className="flex gap-4">
                   <Form.Item label={<span className="text-lg font-medium text-blue-900">Expire Date</span>} className="flex-1 mb-4">
                     <Input placeholder="MM/YY" className="rounded-lg border border-green-400" />
                   </Form.Item>
                   <Form.Item label={<span className="text-lg font-medium text-blue-900">CVV</span>} className="flex-1 mb-4">
                     <Input placeholder="CVV" className="rounded-lg border border-green-400" />
                   </Form.Item>
-                </div>
+                </div> */}
               </>
             ) : (
               <div className="text-center">
@@ -101,7 +129,7 @@ const DepositFundForm = () => {
             )}
 
             <Form.Item label={<span className="text-lg font-medium text-blue-900">Enter Amount</span>} className="mt-4">
-              <Input
+              <Input type='number'
                 placeholder="Enter amount here"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}

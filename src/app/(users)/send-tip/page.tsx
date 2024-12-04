@@ -63,7 +63,6 @@ const DepositFundForm = () => {
                             'Authorization': `${localStorage.getItem('token')}`
                         }
                     })
-                    console.log(executePayment)
                     if (executePayment?.success) {
                         toast.success(executePayment?.message)
                         router.push('/playerz')
@@ -74,7 +73,7 @@ const DepositFundForm = () => {
             } else if (paymentMethod === 'paypal') {
                 // console.log(clientSecret)
                 router.push(clientSecret?.data?.approvalUrl)
-                console.log('Process PayPal payment');
+                // console.log('Process PayPal payment');
             }
         } catch (error) {
 
