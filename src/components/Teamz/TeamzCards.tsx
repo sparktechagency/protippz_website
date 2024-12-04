@@ -3,6 +3,7 @@ import Image from 'next/image';
 import SendTipsButton from './Client/SendTipsButton';
 import { TeamInterface } from '@/app/teamz/page';
 import { imageUrl } from '@/ApisRequests/server';
+import BookmarkButton from '../Shared/Client/BookmarkButton';
 
 
 interface TeamzCardsProps {
@@ -13,8 +14,8 @@ const TeamzCards: React.FC<TeamzCardsProps> = ({ item }) => {
     return (
         <div style={{
             backgroundImage: `url("${imageUrl(item?.team_bg_image)}")`,
-            backgroundSize: 'cover', 
-            backgroundPosition: 'center', 
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
         }} className="relative bg-white border border-green-300 rounded-lg shadow-md max-w-lg p-4 m-4 h-72 flex flex-col justify-between w-full mx-auto">
             {/* Player Details Section */}
             <div className="flex flex-col justify-between pr-20">
@@ -25,7 +26,12 @@ const TeamzCards: React.FC<TeamzCardsProps> = ({ item }) => {
                     <p className="text-blue-900">{item.league?.sport}</p>
                 </div>
                 <div className="absolute top-4 right-4 text-green-500 text-2xl">
-                    <span>{item.isBookmark ? '★' : '☆'}</span>
+                    {/* <span>{item.isBookmark ? '★' : '☆'}</span> */}
+                    <BookmarkButton
+                        isBookmark={item?.isBookmark}
+                        type='team'
+                         _id={item?._id}
+                    />
                 </div>
             </div>
 

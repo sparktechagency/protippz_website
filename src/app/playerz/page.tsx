@@ -5,6 +5,7 @@ import SearchAndSortComponent from '@/components/Playerz/SearchAndSortComponent'
 import Teams from '@/components/Playerz/Teams'
 import Heading from '@/components/Shared/Heading';
 import { SearchParams } from 'next/dist/server/request/search-params';
+import { cookies } from 'next/headers';
 import React from 'react'
 export const metadata = {
     title: 'PROTIPPZ - PLAYERZ',
@@ -56,11 +57,16 @@ const PlayerZPage = async ({ searchParams }: ParamsProps) => {
 }
 
 export default PlayerZPage
-const getPlayer = async (param: SearchParams | {}) => {
+export const getPlayer = async (param: SearchParams | {}) => {
+    const cookie = cookies()
     const paramsUrl = Object.entries(param)
         .filter(([key, value]) => value !== undefined)
         .map(([key, value]) => `${key}=${value}`)
         .join('&');
-    const res = await get(`/player/get-all?${paramsUrl}`)
+    const res = await get(`/player/get-all?${paramsUrl}`, {
+        headers: {
+            'Authorization': `${(await cookie).get('token')?.value}`
+        },
+    })
     return [res.data?.result, res.data?.meta]
 }

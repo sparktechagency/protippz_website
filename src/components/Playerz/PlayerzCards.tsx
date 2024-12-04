@@ -3,6 +3,7 @@ import Image from 'next/image';
 import SendTipsButton from './Client/SendTipsButton';
 import { Player } from '@/app/playerz/page';
 import { imageUrl } from '@/ApisRequests/server';
+import BookmarkButton from '../Shared/Client/BookmarkButton';
 
 
 interface PlayerzCardsProps {
@@ -27,7 +28,12 @@ const PlayerzCards: React.FC<PlayerzCardsProps> = ({ item }) => {
                     <p className="text-blue-900">{item.position}</p>
                 </div>
                 <div className="absolute top-4 right-4 text-green-500 text-2xl">
-                    <span>{item.isBookmark ? '★' : '☆'}</span>
+                    {/* <span>{item.isBookmark ? '★' : '☆'}</span> */}
+                    <BookmarkButton
+                        _id={item?._id}
+                        isBookmark={item?.isBookmark}
+                        type='player'
+                    />
                 </div>
             </div>
 

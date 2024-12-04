@@ -33,6 +33,7 @@ const request = async (
     const { body, headers = {}, cacheTag, server = defaultServer } = options;
     body instanceof FormData ? {} : headers['Content-Type'] = 'application/json'
     try {
+        
         const response = await fetch(`${server}${url}`, {
             method,
             headers: {
@@ -40,7 +41,7 @@ const request = async (
                 ...headers,
             },
             body: body instanceof FormData ? body : JSON.stringify(body),
-            cache: 'no-store', // Prevent caching
+            cache: 'no-store',
         });
         // if (!response.ok) {
         //     throw new Error(`Error: ${response.status} ${response.statusText}`);
@@ -49,7 +50,7 @@ const request = async (
         const result = await response.json();
         // console.log('response',result)
 
-        if (cacheTag) {
+        if (cacheTag && method !== 'GET') {
             console.log(`Revalidate cache tag: ${cacheTag}`);
             revalidateTag(cacheTag)
         }

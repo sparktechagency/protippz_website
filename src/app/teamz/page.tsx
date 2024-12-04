@@ -5,6 +5,7 @@ import SearchAndSortComponent from '@/components/Teamz/SearchAndSortComponent';
 import Teams from '@/components/Teamz/Teams';
 import TeamzCards from '@/components/Teamz/TeamzCards';
 import { SearchParams } from 'next/dist/server/request/search-params';
+import { cookies } from 'next/headers';
 import React from 'react'
 export const metadata = {
     title: 'PROTIPPZ - PLAYERZ',
@@ -12,17 +13,17 @@ export const metadata = {
 };
 export interface TeamInterface {
     _id: string,
-    name:  string,
-    team_logo:  string,
+    name: string,
+    team_logo: string,
     league: {
         _id: string,
-        name:  string,
-        sport:  string,
+        name: string,
+        sport: string,
     },
-    team_bg_image:  string,
+    team_bg_image: string,
     totalTips: number,
-    paidAmount:number,
-    dueAmount:number,
+    paidAmount: number,
+    dueAmount: number,
     isBookmark: boolean
 }
 
@@ -31,7 +32,7 @@ interface ParamsProps {
 }
 const TeamPage = async ({ searchParams }: ParamsProps) => {
     const { searchTerm, name, page, league } = await searchParams
-    const param = { searchTerm, sort:name, page, league }
+    const param = { searchTerm, sort: name, page, league }
     const [data, meta] = await getTeam(param)
     const playersData = data as TeamInterface[]
     return (
@@ -54,10 +55,15 @@ const TeamPage = async ({ searchParams }: ParamsProps) => {
 export default TeamPage
 
 const getTeam = async (param: SearchParams | {}) => {
+    const cookie = cookies()
     const paramsUrl = Object.entries(param)
         .filter(([key, value]) => value !== undefined)
         .map(([key, value]) => `${key}=${value}`)
         .join('&');
-    const res = await get(`/team/get-all?${paramsUrl}`)
+    const res = await get(`/team/get-all?${paramsUrl}`, {
+        headers: {
+            'Authorization': `${(await cookie).get('token')?.value}`
+        },
+    })
     return [res.data?.result, res.data?.meta]
 }

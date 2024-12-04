@@ -59,7 +59,8 @@ const DepositFundForm = () => {
         })
         if (executePayment?.success) {
           toast.success(executePayment?.message)
-          router.push('/')
+          // router.push('/')
+          window.location.href='/'
         } else {
           toast.error(executePayment?.message)
         }

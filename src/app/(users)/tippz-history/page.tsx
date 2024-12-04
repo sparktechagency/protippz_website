@@ -1,89 +1,64 @@
 'use client'
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Table, Typography, Avatar } from 'antd';
-interface player {
-    key: string,
-    date: string,
-    player: { name: string, avatar: string },
-    amount: string,
-    points: number,
+import { get, imageUrl } from '@/ApisRequests/server';
+
+interface Player {
+    key: string;
+    date: string;
+    player: { name: string; avatar: string };
+    amount: string;
+    points: number;
 }
+
 const { Title } = Typography;
 
+interface TipHistoryInterface {
+    "_id": string;
+    "user": {
+        "_id": string;
+        "name": string;
+        "email": string;
+        "profile_image": string;
+    };
+    "entityId": string;
+    "entityType": string;
+    "point": number;
+    "amount": number;
+    "paymentStatus": string;
+    "tipBy": string;
+    "entity": {
+        "name": string;
+        "position": string;
+        "player_image": string;
+    },
+    "createdAt": string
+}
+interface Pagination {
+    "page": number,
+    "limit": number,
+    "total": number,
+    "totalPage": number
+}
 const TippzHistoryPage = () => {
-    const data: player[] = [
-        {
-            key: '1',
-            date: '12/06/24',
-            player: { name: 'New York Liberty', avatar: 'https://i.ibb.co.com/f4tzYw2/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg' },
-            amount: '$100',
-            points: 200,
-        },
-        {
-            key: '2',
-            date: '10/06/24',
-            player: { name: 'Devon Lane', avatar: 'https://i.ibb.co.com/f4tzYw2/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg' },
-            amount: '$5',
-            points: 20,
-        },
-        {
-            key: '3',
-            date: '10/06/24',
-            player: { name: 'Los Angeles Sparks', avatar: 'https://i.ibb.co.com/f4tzYw2/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg' },
-            amount: '$25',
-            points: 50,
-        },
-        {
-            key: '4',
-            date: '05/06/24',
-            player: { name: 'Devon Lane', avatar: 'https://i.ibb.co.com/f4tzYw2/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg' },
-            amount: '$150',
-            points: 250,
-        },
-        {
-            key: '5',
-            date: '04/06/24',
-            player: { name: 'Los Angeles Sparks', avatar: 'https://i.ibb.co.com/f4tzYw2/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg' },
-            amount: '$50',
-            points: 100,
-        },
-        {
-            key: '6',
-            date: '04/06/24',
-            player: { name: 'Floyd Miles', avatar: 'https://i.ibb.co.com/f4tzYw2/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg' },
-            amount: '$10',
-            points: 30,
-        },
-        {
-            key: '7',
-            date: '04/06/24',
-            player: { name: 'Indiana Fever', avatar: 'https://i.ibb.co.com/f4tzYw2/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg' },
-            amount: '$100',
-            points: 150,
-        },
-        {
-            key: '8',
-            date: '04/06/24',
-            player: { name: 'Floyd Miles', avatar: 'https://i.ibb.co.com/f4tzYw2/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg' },
-            amount: '$200',
-            points: 250,
-        },
-    ];
-
+    const [tipHistory, setTipHistory] = useState<TipHistoryInterface[]>([]);
+    const [pagination, setPagination] = useState<Pagination>();
+    const [page, setPage] = useState(1)
     const columns = [
         {
             title: 'Date',
             dataIndex: 'date',
             key: 'date',
+            render: (_: any, record: TipHistoryInterface) => <span>{record?.createdAt?.split('T')?.[0]}</span>
         },
         {
             title: 'Team/Player',
             dataIndex: 'player',
             key: 'player',
-            render: (_: any, record: player) => (
+            render: (_: any, record: TipHistoryInterface) => (
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <Avatar src={record?.player?.avatar} alt={record?.player?.name} style={{ marginRight: 8 }} />
-                    <span>{record?.player?.name}</span>
+                    <Avatar src={imageUrl(record?.entity?.player_image)} alt={record?.entity?.name} style={{ marginRight: 8 }} />
+                    <span>{record?.entity?.name}</span>
                 </div>
             ),
         },
@@ -94,18 +69,35 @@ const TippzHistoryPage = () => {
         },
         {
             title: 'Points',
-            dataIndex: 'points',
-            key: 'points',
+            dataIndex: 'point',
+            key: 'point',
         },
     ];
+
+    useEffect(() => {
+        const getMyTip = async () => {
+            const res = await get(`/tip/my-tips?page=${page}`, {
+                headers: {
+                    'Authorization': `${typeof localStorage === 'undefined' ? '' : localStorage.getItem('token')}`,
+                },
+            });
+            setTipHistory(res.data?.result);
+            setPagination(res.data?.meta);
+        };
+        getMyTip();
+    }, []);
 
     return (
         <div style={{ padding: '20px', textAlign: 'center' }}>
             <Title level={2} style={{ color: '#1A73E8' }}>Tippz History</Title>
             <Table
                 columns={columns}
-                dataSource={data}
-                pagination={false}
+                dataSource={tipHistory}
+                pagination={{
+                    pageSize: pagination?.limit,
+                    total: pagination?.total,
+                    onChange: (page) => setPage(page)
+                }}
                 bordered
                 style={{ maxWidth: '800px', margin: 'auto', marginTop: '20px' }}
                 rowClassName={(record, index) => (index % 2 === 0 ? 'even-row' : 'odd-row')}
