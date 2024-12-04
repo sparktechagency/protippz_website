@@ -1,9 +1,12 @@
 
 'use client'
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, Input, Button, Upload } from 'antd';
 import { UserOutlined, MailOutlined, PhoneOutlined, HomeOutlined, CameraOutlined } from '@ant-design/icons';
 import Image from 'next/image';
+import { useContextData } from '@/provider/ContextProvider';
+import { imageUrl, patch } from '@/ApisRequests/server';
+import toast from 'react-hot-toast';
 
 interface ProfileFormValues {
     fullName: string;
@@ -15,21 +18,67 @@ interface ProfileFormValues {
 
 
 const UpdateProfileForm: React.FC = () => {
-    const onFinish = (values: ProfileFormValues) => {
-        console.log('Form values:', values);
+    const [fileList, setFileList] = useState<any>(null);
+    const [form] = Form.useForm();
+    const data = useContextData();
+
+    const onFinish = async (values: ProfileFormValues) => {
+        const { email, username, ...otherValues } = values
+        const formData = new FormData();
+        const formattedData = {
+            data: JSON.stringify(otherValues),
+            profile_image: fileList?.[0]?.originFileObj || data?.userData?.profile_image,
+        };
+        Object.keys(formattedData).forEach(key => {
+            const value = formattedData[key as keyof typeof formattedData]
+            formData.append(key, value)
+        });
+
+        const res = await patch('/normal-user/update-profile', formData, {
+            headers: {
+                "Authorization": `${localStorage.getItem('token')}`
+            },
+        });
+        if (res?.success) {
+            toast.success('Profile updated successfully');
+        } else {
+            toast.error('Fail updated Profile');
+        }
     };
 
+    useEffect(() => {
+        form.setFieldsValue({
+            address: data?.userData?.address,
+            email: data?.userData?.email,
+            name: data?.userData?.name,
+            phone: data?.userData?.phone,
+            username: data?.userData?.username,
+        })
+    }, [data])
+
+    const handleUploadChange = (info: any) => {
+        if (info.file.status === 'done') {
+            toast.success('Image uploaded successfully');
+        } else if (info.file.status === 'error') {
+            toast.error('Image upload failed');
+        }
+        setFileList(info.fileList);
+    };
     return (
         <div className="container mx-auto p-8 text-center w-full">
             <h1 className="text-4xl font-bold text-blue-700 mb-8">Edit Profile</h1>
 
             <div className="flex flex-col items-center mb-6 relative">
-                <Upload showUploadList={false}>
+                <Upload
+                    showUploadList={false}
+                    onChange={handleUploadChange}
+                    beforeUpload={() => false} // Prevent automatic upload
+                >
                     <Image
                         width={100}
                         height={100}
                         unoptimized
-                        src="https://i.ibb.co.com/f4tzYw2/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg"
+                        src={fileList ? URL.createObjectURL(fileList[0]?.originFileObj) : imageUrl(data?.userData?.profile_image || '') || "https://i.ibb.co.com/f4tzYw2/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg"}
                         alt="Profile"
                         className="w-32 h-32 rounded-full object-cover mb-4"
                     />
@@ -40,13 +89,14 @@ const UpdateProfileForm: React.FC = () => {
             </div>
 
             <Form<ProfileFormValues>
+                form={form}
                 layout="vertical"
                 onFinish={onFinish}
                 className="max-w-lg w-full mx-auto grid grid-cols-1 md:grid-cols-2 gap-4"
             >
                 <Form.Item
                     label="Full Name"
-                    name="fullName"
+                    name="name"
                     initialValue="Robert Smith"
                     rules={[{ required: true, message: 'Please enter your full name' }]}
                 >
@@ -65,21 +115,21 @@ const UpdateProfileForm: React.FC = () => {
                         { type: 'email', message: 'Please enter a valid email' },
                     ]}
                 >
-                    <Input  className="custom-input" placeholder="Email" prefix={<MailOutlined />} />
+                    <Input disabled className="custom-input" placeholder="Email" prefix={<MailOutlined />} />
                 </Form.Item>
 
                 <Form.Item
                     label="User Name"
                     name="username"
-                    initialValue="Robert@234"
+                    initialValue="siyam"
                     rules={[{ required: true, message: 'Please enter your username' }]}
                 >
-                    <Input placeholder="User Name" className="custom-input" prefix={<UserOutlined />} />
+                    <Input disabled placeholder="User Name" className="custom-input" prefix={<UserOutlined />} />
                 </Form.Item>
 
                 <Form.Item
                     label="Phone Number"
-                    name="phoneNumber"
+                    name="phone"
                     initialValue="+54645674567"
                     rules={[{ required: true, message: 'Please enter your phone number' }]}
                 >

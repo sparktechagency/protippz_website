@@ -31,23 +31,23 @@ const request = async (
     } = {}
 ) => {
     const { body, headers = {}, cacheTag, server = defaultServer } = options;
-
+    body instanceof FormData ? {} : headers['Content-Type'] = 'application/json'
     try {
         const response = await fetch(`${server}${url}`, {
             method,
             headers: {
-                'Content-Type': body instanceof FormData ? 'multipart/form-data' : 'application/json',
+                //     'Content-Type': body instanceof FormData ? 'multipart/form-data' : 'application/json',
                 ...headers,
             },
             body: body instanceof FormData ? body : JSON.stringify(body),
             cache: 'no-store', // Prevent caching
         });
         // if (!response.ok) {
-            //     throw new Error(`Error: ${response.status} ${response.statusText}`);
-            // }
-            
-            const result = await response.json();
-            // console.log('response',result)
+        //     throw new Error(`Error: ${response.status} ${response.statusText}`);
+        // }
+
+        const result = await response.json();
+        // console.log('response',result)
 
         if (cacheTag) {
             console.log(`Revalidate cache tag: ${cacheTag}`);
