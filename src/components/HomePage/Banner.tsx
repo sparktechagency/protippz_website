@@ -1,6 +1,9 @@
+'use client'
+import { useContextData } from '@/provider/ContextProvider';
 import Link from 'next/link';
 import React from 'react';
 const Banner = () => {
+    const data = useContextData()
     return (
         <>
             <div
@@ -17,9 +20,14 @@ const Banner = () => {
                     <p className="text-lg md:text-xl mb-6 max-w-md">
                         Tip your favorite players and teams, earn rewards, win prizes, and join a community of passionate sports lovers.
                     </p>
-                    <Link href={`/sign-up`} className="bg-[#053697] hover:bg-[#6491eb] text-white font-semibold py-3 px-6 rounded-lg transition-all">
-                        Sign up Now
-                    </Link>
+                    {
+                        data?.userData?._id ? <Link href={`/playerz`} className="bg-[#053697] hover:bg-[#6491eb] text-white font-semibold py-3 px-6 rounded-lg transition-all">
+                            Start Tip
+                        </Link> : <Link href={`/sign-up`} className="bg-[#053697] hover:bg-[#6491eb] text-white font-semibold py-3 px-6 rounded-lg transition-all">
+                            Sign up Now
+                        </Link>
+                    }
+
                 </div>
             </div>
             {/* <div className='container mx-auto center-center mt-10 md:p-0 p-2 relative'>

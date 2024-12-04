@@ -6,10 +6,11 @@ import logo from '@/Assets/logo.png';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaDollarSign, FaRegUserCircle, FaStar } from 'react-icons/fa';
+import { useContextData } from '@/provider/ContextProvider';
 
 const Navbar: React.FC = () => {
     const [drawerVisible, setDrawerVisible] = useState(false);
-
+    const data = useContextData()
     const showDrawer = () => {
         setDrawerVisible(true);
     };
@@ -85,41 +86,37 @@ const Navbar: React.FC = () => {
 
                 {/* Action Buttons for Desktop */}
                 <div className="hidden md:flex items-center space-x-4">
-                    <div className="flex flex-col space-y-2">
-                        <div className="flex items-center space-x-2 px-3 py-1 rounded-full bg-green-100">
-                            <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white border border-green-500">
-                                {/* <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="12" cy="12" r="10" stroke="#38A169" strokeWidth="2" />
-                                    <text x="12" y="16" textAnchor="middle" fontSize="12" fill="#38A169" fontWeight="bold">$</text>
-                                </svg> */}
-                                <FaDollarSign className='text-green-500' />
-                            </span>
-                            <span className="text-green-800 font-semibold">1500</span>
-                        </div>
-                        <div className="flex items-center space-x-2 px-3 py-1 rounded-full bg-green-100">
-                            <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white border border-green-500">
-                                {/* <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="12" cy="12" r="10" stroke="#38A169" strokeWidth="2" />
-                                    <text x="12" y="16" textAnchor="middle" fontSize="12" fill="#38A169" fontWeight="bold">*</text>
-                                </svg> */}
-                                <FaStar className='text-green-500' />
-                            </span>
-                            <span className="text-green-800 font-semibold">1200</span>
-                        </div>
-                    </div>
-                    <div className="flex space-x-2">
-                        <Link href={`/notification`} className="flex items-center justify-center w-10 h-10 rounded-full bg-green-100">
-                            <IoIosNotificationsOutline className="text-green-500" style={{ fontSize: '18px' }} />
-                        </Link>
-                        <Dropdown overlay={userMenu} trigger={['click']}>
-                            <div className="flex items-center justify-center w-10 h-10 rounded-full bg-green-100 cursor-pointer">
-                                <FaRegUserCircle className="text-green-500" style={{ fontSize: '18px' }} />
+                    {
+                        data?.userData?._id ? <>
+                            <div className="flex flex-col space-y-2">
+                                <div className="flex items-center space-x-2 px-3 py-1 rounded-full bg-green-100">
+                                    <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white border border-green-500">
+                                        <FaDollarSign className='text-green-500' />
+                                    </span>
+                                    <span className="text-green-800 font-semibold">{data?.userData?.totalAmount}</span>
+                                </div>
+                                <div className="flex items-center space-x-2 px-3 py-1 rounded-full bg-green-100">
+                                    <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white border border-green-500">
+                                        <FaStar className='text-green-500' />
+                                    </span>
+                                    <span className="text-green-800 font-semibold">{data?.userData?.totalPoint}</span>
+                                </div>
                             </div>
-                        </Dropdown>
-                    </div>
-                    <Link href={`/sign-in`} className="bg-[#2FC191] hover:bg-[#55ddb0] p-[6px] px-4 rounded-md text-white transition-all whitespace-nowrap">
-                        Sign In
-                    </Link>
+                            <div className="flex space-x-2">
+                                <Link href={`/notification`} className="flex items-center justify-center w-10 h-10 rounded-full bg-green-100">
+                                    <IoIosNotificationsOutline className="text-green-500" style={{ fontSize: '18px' }} />
+                                </Link>
+                                <Dropdown overlay={userMenu} trigger={['click']}>
+                                    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-green-100 cursor-pointer">
+                                        <FaRegUserCircle className="text-green-500" style={{ fontSize: '18px' }} />
+                                    </div>
+                                </Dropdown>
+                            </div>
+                        </> : <Link href={`/sign-in`} className="bg-[#2FC191] hover:bg-[#55ddb0] p-[6px] px-4 rounded-md text-white transition-all whitespace-nowrap">
+                            Sign In
+                        </Link>
+                    }
+
                 </div>
 
                 {/* Drawer for Mobile */}
@@ -150,19 +147,38 @@ const Navbar: React.FC = () => {
                             <Link href="/store" className="hover:text-[#053697] cursor-pointer">STORE</Link>
                         </li>
                     </ul>
-                    <div className="flex items-center space-x-4 mt-4">
-                        <Link href={`/notification`} className="flex items-center justify-center w-10 h-10 rounded-full bg-green-100">
-                            <IoIosNotificationsOutline className="text-green-500" style={{ fontSize: '18px' }} />
-                        </Link>
-                        <Dropdown overlay={userMenu} trigger={['click']}>
-                            <div className="flex items-center justify-center w-10 h-10 rounded-full bg-green-100 cursor-pointer">
-                                <FaRegUserCircle className="text-green-500" style={{ fontSize: '18px' }} />
+
+                    {
+                        data?.userData?._id ? <>
+                            <div className="flex flex-col space-y-2 my-2">
+                                <div className="flex items-center space-x-2 px-3 py-1 rounded-full bg-green-100">
+                                    <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white border border-green-500">
+                                        <FaDollarSign className='text-green-500' />
+                                    </span>
+                                    <span className="text-green-800 font-semibold">{data?.userData?.totalAmount}</span>
+                                </div>
+                                <div className="flex items-center space-x-2 px-3 py-1 rounded-full bg-green-100">
+                                    <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white border border-green-500">
+                                        <FaStar className='text-green-500' />
+                                    </span>
+                                    <span className="text-green-800 font-semibold">{data?.userData?.totalPoint}</span>
+                                </div>
                             </div>
-                        </Dropdown>
-                    </div>
-                    <Link href={`/sign-in`} onClick={closeDrawer} className="block w-full mt-3 bg-[#2FC191] hover:bg-[#55ddb0] p-[6px] px-4 rounded-md text-white transition-all">
-                        Sign In
-                    </Link>
+                            <div className="flex items-center space-x-4 mt-4">
+                                <Link href={`/notification`} className="flex items-center justify-center w-10 h-10 rounded-full bg-green-100">
+                                    <IoIosNotificationsOutline className="text-green-500" style={{ fontSize: '18px' }} />
+                                </Link>
+                                <Dropdown overlay={userMenu} trigger={['click']}>
+                                    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-green-100 cursor-pointer">
+                                        <FaRegUserCircle className="text-green-500" style={{ fontSize: '18px' }} />
+                                    </div>
+                                </Dropdown>
+                            </div>
+                        </> : <Link href={`/sign-in`} onClick={closeDrawer} className="block w-full mt-3 bg-[#2FC191] hover:bg-[#55ddb0] p-[6px] px-4 rounded-md text-white transition-all">
+                            Sign In
+                        </Link>
+                    }
+
                 </Drawer>
             </nav>
         </div>
