@@ -65,14 +65,14 @@ const WithdrawFundForm = () => {
                                 onChange={(e) => setPaymentMethod(e.target.value)}
                                 className="w-full"
                             >
-                                <div className="flex items-center mb-4 p-3 border rounded-lg border-green-400">
+                                {/* <div className="flex items-center mb-4 p-3 border rounded-lg border-green-400">
                                     <Radio value="credit" className="flex items-center ">
                                         <div className='flex flex-nowrap gap-3 items-center'>
                                             <p className="font-medium text-lg text-blue-900 whitespace-nowrap">Credit Card</p>
                                             <Image alt="Credit Card Logos" height={400} width={800} src={cards} className="w-[140px]" />
                                         </div>
                                     </Radio>
-                                </div>
+                                </div> */}
                                 <div className="flex items-center p-3 border rounded-lg border-green-400">
                                     <Radio value="ach" className="flex items-center">
                                         <div className='flex flex-nowrap gap-3 items-center justify-between'>
@@ -93,98 +93,100 @@ const WithdrawFundForm = () => {
                         </Form.Item>
                     </div>
                     <div className="w-full md:w-3/5 p-4 bg-gray-50 rounded-lg">
-                        {paymentMethod === 'credit' ? (
-                            <>
-                                <Form.Item label={<span className="text-lg font-medium text-blue-900">Card Holder’s Name</span>} className="mb-4">
-                                    <Input placeholder="Name here" className="rounded-lg border border-green-400" />
-                                </Form.Item>
-                                <Form.Item label={<span className="text-lg font-medium text-blue-900">Card Number</span>} className="mb-4">
-                                    <CardElement options={{ style: { base: { fontSize: '16px', color: '#424770', '::placeholder': { color: '#9ca3af' } } } }} className="border border-green-400 rounded-lg p-2" />
-                                </Form.Item>
-                                <div className="flex gap-4">
-                                    <Form.Item label={<span className="text-lg font-medium text-blue-900">Expire Date</span>} className="flex-1 mb-4">
-                                        <Input placeholder="MM/YY" className="rounded-lg border border-green-400" />
+                        {
+                            // paymentMethod === 'credit' ? (
+                            //     <>
+                            //         <Form.Item label={<span className="text-lg font-medium text-blue-900">Card Holder’s Name</span>} className="mb-4">
+                            //             <Input placeholder="Name here" className="rounded-lg border border-green-400" />
+                            //         </Form.Item>
+                            //         <Form.Item label={<span className="text-lg font-medium text-blue-900">Card Number</span>} className="mb-4">
+                            //             <CardElement options={{ style: { base: { fontSize: '16px', color: '#424770', '::placeholder': { color: '#9ca3af' } } } }} className="border border-green-400 rounded-lg p-2" />
+                            //         </Form.Item>
+                            //         <div className="flex gap-4">
+                            //             <Form.Item label={<span className="text-lg font-medium text-blue-900">Expire Date</span>} className="flex-1 mb-4">
+                            //                 <Input placeholder="MM/YY" className="rounded-lg border border-green-400" />
+                            //             </Form.Item>
+                            //             <Form.Item label={<span className="text-lg font-medium text-blue-900">CVV</span>} className="flex-1 mb-4">
+                            //                 <Input placeholder="CVV" className="rounded-lg border border-green-400" />
+                            //             </Form.Item>
+                            //         </div>
+                            //     </>
+                            // ) :
+                            paymentMethod === 'ach' ? (
+                                <div>
+                                    <Form.Item label={<span className="text-lg font-medium text-blue-900">Bank Account Number</span>} className="mt-4">
+                                        <Input
+                                            placeholder="Name here"
+                                            className="rounded-lg border border-green-400"
+                                        />
                                     </Form.Item>
-                                    <Form.Item label={<span className="text-lg font-medium text-blue-900">CVV</span>} className="flex-1 mb-4">
-                                        <Input placeholder="CVV" className="rounded-lg border border-green-400" />
+
+                                    <Form.Item label={<span className="text-lg font-medium text-blue-900">Routing Number</span>} className="mt-4">
+                                        <Input
+                                            placeholder="Name here"
+                                            className="rounded-lg border border-green-400"
+                                        />
+                                    </Form.Item>
+
+                                    <Form.Item label={<span className="text-lg font-medium text-blue-900">Account Type</span>} className="mt-4">
+                                        <Input
+                                            placeholder="Name here"
+                                            className="rounded-lg border border-green-400"
+                                        />
+                                    </Form.Item>
+
+                                    <Form.Item label={<span className="text-lg font-medium text-blue-900">Bank Name</span>} className="mt-4">
+                                        <Input
+                                            placeholder="Name here"
+                                            className="rounded-lg border border-green-400"
+                                        />
+                                    </Form.Item>
+
+                                    <Form.Item label={<span className="text-lg font-medium text-blue-900">Account Holder Name</span>} className="mt-4">
+                                        <Input
+                                            placeholder="Name here"
+                                            className="rounded-lg border border-green-400"
+                                        />
                                     </Form.Item>
                                 </div>
-                            </>
-                        ) : paymentMethod === 'ach' ? (
-                            <div>
-                                <Form.Item label={<span className="text-lg font-medium text-blue-900">Bank Account Number</span>} className="mt-4">
-                                    <Input
-                                        placeholder="Name here"
-                                        className="rounded-lg border border-green-400"
-                                    />
-                                </Form.Item>
-
-                                <Form.Item label={<span className="text-lg font-medium text-blue-900">Routing Number</span>} className="mt-4">
-                                    <Input
-                                        placeholder="Name here"
-                                        className="rounded-lg border border-green-400"
-                                    />
-                                </Form.Item>
-
-                                <Form.Item label={<span className="text-lg font-medium text-blue-900">Account Type</span>} className="mt-4">
-                                    <Input
-                                        placeholder="Name here"
-                                        className="rounded-lg border border-green-400"
-                                    />
-                                </Form.Item>
-
-                                <Form.Item label={<span className="text-lg font-medium text-blue-900">Bank Name</span>} className="mt-4">
-                                    <Input
-                                        placeholder="Name here"
-                                        className="rounded-lg border border-green-400"
-                                    />
-                                </Form.Item>
-
-                                <Form.Item label={<span className="text-lg font-medium text-blue-900">Account Holder Name</span>} className="mt-4">
-                                    <Input
-                                        placeholder="Name here"
-                                        className="rounded-lg border border-green-400"
-                                    />
-                                </Form.Item>
-                            </div>
-                        ) : (
-                            <div>
-                                <Form.Item label={<span className="text-lg font-medium text-blue-900">Full Name</span>} className="mt-4">
-                                    <Input
-                                        placeholder="Name here"
-                                        className="rounded-lg border border-green-400"
-                                    />
-                                </Form.Item>
-
-                                <Form.Item label={<span className="text-lg font-medium text-blue-900">Mailing Address</span>} className="mt-4">
-                                    <Form.Item label="Street Address" className="mb-2">
+                            ) : (
+                                <div>
+                                    <Form.Item label={<span className="text-lg font-medium text-blue-900">Full Name</span>} className="mt-4">
                                         <Input
                                             placeholder="Name here"
                                             className="rounded-lg border border-green-400"
                                         />
                                     </Form.Item>
-                                    <Form.Item label="City" className="mb-2">
-                                        <Input
-                                            placeholder="Name here"
-                                            className="rounded-lg border border-green-400"
-                                        />
-                                    </Form.Item>
-                                    <Form.Item label="State" className="mb-2">
-                                        <Input
-                                            placeholder="Name here"
-                                            className="rounded-lg border border-green-400"
-                                        />
-                                    </Form.Item>
-                                    <Form.Item label="Zip Code" className="mb-2">
-                                        <Input
-                                            placeholder="Name here"
-                                            className="rounded-lg border border-green-400"
-                                        />
-                                    </Form.Item>
-                                </Form.Item>
 
-                            </div>
-                        )}
+                                    <Form.Item label={<span className="text-lg font-medium text-blue-900">Mailing Address</span>} className="mt-4">
+                                        <Form.Item label="Street Address" className="mb-2">
+                                            <Input
+                                                placeholder="Name here"
+                                                className="rounded-lg border border-green-400"
+                                            />
+                                        </Form.Item>
+                                        <Form.Item label="City" className="mb-2">
+                                            <Input
+                                                placeholder="Name here"
+                                                className="rounded-lg border border-green-400"
+                                            />
+                                        </Form.Item>
+                                        <Form.Item label="State" className="mb-2">
+                                            <Input
+                                                placeholder="Name here"
+                                                className="rounded-lg border border-green-400"
+                                            />
+                                        </Form.Item>
+                                        <Form.Item label="Zip Code" className="mb-2">
+                                            <Input
+                                                placeholder="Name here"
+                                                className="rounded-lg border border-green-400"
+                                            />
+                                        </Form.Item>
+                                    </Form.Item>
+
+                                </div>
+                            )}
                         <Form.Item className="mt-6">
                             <Button type="primary" htmlType="submit" className="w-full bg-[#053697] h-[42px] text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition duration-300">
                                 Withdraw Now
