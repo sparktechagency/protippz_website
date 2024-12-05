@@ -174,7 +174,8 @@ const playersData: Player[] = [
 
 
 const FavoritePlayerz = () => {
-    return playersData?.map(item => <PlayerzCards item={item} key={item?._id} />)
+    // return playersData?.map(item => <PlayerzCards item={item} key={item?._id} />)
+    return <></>
 }
 
 export default FavoritePlayerz

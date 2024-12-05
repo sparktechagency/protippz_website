@@ -15,7 +15,7 @@ const stripePromise: Promise<Stripe | null> = loadStripe(process.env.NEXT_PUBLIC
 
 const DepositFundForm = () => {
     const router = useRouter()
-    const currentParams = new URLSearchParams(window.location.search)
+    const currentParams = new URLSearchParams(typeof window == 'undefined' ? "" : window.location.search)
     const stripe = useStripe();
     const elements = useElements();
     const [paymentMethod, setPaymentMethod] = useState('credit');
