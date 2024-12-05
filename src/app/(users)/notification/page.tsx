@@ -1,3 +1,6 @@
+import { get } from '@/ApisRequests/server';
+import PaginationComponents from '@/components/Shared/Client/Pagination';
+import { cookies, headers } from 'next/headers';
 import React from 'react';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 
@@ -28,24 +31,43 @@ const notifications = [
         date: "10 July 2024 at 8:32 PM"
     }
 ];
-
-const NotificationPage = () => {
+interface NotificationsType {
+    "_id": string,
+    "title": string,
+    "message": string,
+    "seen": boolean,
+    "createdAt": string,
+}
+const NotificationPage = async () => {
+    const cookie = cookies()
+    const token = (await cookie).get('token')?.value
+    // notification/get-notifications
+    const res = await get('/notification/get-notifications', {
+        headers: {
+            'Authorization': `${token}`,
+        },
+    })
+    const data = res.data?.result as NotificationsType[];
+    const meta = res.data?.meta;
     return (
         <div className="container mx-auto p-4">
             <h1 className="text-4xl font-bold text-blue-700 mb-12 text-center">Notifications</h1>
             <div className="space-y-4">
-                {notifications.map((notification, index) => (
-                    <div key={index} className="flex justify-between items-start border-b pb-4">
+                {data?.map((notification) => (
+                    <div className="flex justify-between items-start border-b pb-4">
                         <div>
                             <h2 className="text-lg font-semibold text-blue-700">{notification.title}</h2>
                             <p className="text-green-600">{notification.message}</p>
                         </div>
                         <div className="flex items-center text-green-500 space-x-2">
                             <AiOutlineClockCircle className="text-xl" />
-                            <span className="text-sm">{notification.date}</span>
+                            <span className="text-sm">{notification.createdAt?.split('T')?.[0]}</span>
                         </div>
                     </div>
                 ))}
+            </div>
+            <div className="flex justify-center items-center">
+                <PaginationComponents paginationData={meta} />
             </div>
         </div>
     );

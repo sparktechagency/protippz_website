@@ -7,7 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FaDollarSign, FaRegUserCircle, FaStar } from 'react-icons/fa';
 import { useContextData } from '@/provider/ContextProvider';
-
+import Cookies from 'js-cookie';
 const Navbar: React.FC = () => {
     const [drawerVisible, setDrawerVisible] = useState(false);
     const data = useContextData()
@@ -53,7 +53,11 @@ const Navbar: React.FC = () => {
                 <Link href="/contact">Contact Us</Link>
             </Menu.Item>
             <Menu.Item key="11">
-                <Link href="/sign-out">Sign out</Link>
+                <button onClick={() => {
+                    Cookies.remove('token')
+                    localStorage.removeItem('token')
+                    window.location.href='sign-in'
+                }}>Sign out</button>
             </Menu.Item>
         </Menu>
     );

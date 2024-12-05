@@ -1,7 +1,35 @@
-import React from 'react';
-import { Button } from 'antd';
+'use client'
+import React, { useState } from 'react';
+import { Button, Input, Modal } from 'antd';
+import { post } from '@/ApisRequests/server';
+import { FiClipboard } from 'react-icons/fi';
+import toast from 'react-hot-toast';
 
 const InviteFriendsPage: React.FC = () => {
+    const [inviteLink, setInviteLink] = useState('')
+    const [openModal, setOpenModal] = useState(false)
+    const inviteHandler = async () => {
+        const res = await post('/invite/invite-friend', {}, {
+            headers: {
+                'Authorization': `${localStorage.getItem('token')}`
+            }
+        })
+        if (res?.success) {
+            setInviteLink(res?.data?.link)
+            setOpenModal(true)
+        } else {
+            toast.error(res?.message)
+        }
+    }
+    const handleCopy = () => {
+        navigator.clipboard.writeText(inviteLink)
+            .then(() => {
+                toast.success('The invite link has been copied to your clipboard.');
+            })
+            .catch(() => {
+                toast.error('There was an error copying the invite link.');
+            });
+    };
     return (
         <div className="container mx-auto px-4 py-8">
             <h2 className="text-center text-[#053697] text-4xl font-bold mb-2">
@@ -50,10 +78,33 @@ const InviteFriendsPage: React.FC = () => {
                 <p className="text-gray-700 mb-6">
                     Click below to start inviting friends and watch your rewards grow!
                 </p>
-                <Button type="primary" className="bg-green-500 h-[42px] text-white font-semibold px-8 py-2 rounded-md">
+                <Button onClick={inviteHandler} type="primary" className="bg-green-500 h-[42px] text-white font-semibold px-8 py-2 rounded-md">
                     Invite Friends
                 </Button>
             </div>
+            <Modal
+                centered
+                footer={false}
+                open={openModal}
+                onCancel={() => setOpenModal(false)}
+                width={500}
+            >
+                <div className="flex flex-col items-center">
+                    <h3 className="text-2xl font-semibold text-green-600 mb-6 text-center">
+                        Invite Link Created Successfully!
+                    </h3>
+                    <div className="flex items-center w-full">
+                        <p className='text-center w-full'>{inviteLink}</p>
+                        <button
+                            onClick={handleCopy}>
+                            <FiClipboard
+                                size={24}
+                                className="ml-2 cursor-pointer text-green-600 hover:text-green-700 transition-all duration-300 ease-in-out"
+                            />
+                        </button>
+                    </div>
+                </div>
+            </Modal>
         </div>
     );
 };

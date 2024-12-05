@@ -12,9 +12,12 @@ import phoneImage from '@/Assets/phone_image.png';
 import { signUpHandler } from '@/ApisRequests/Auth';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import { useGoogleLogin } from '@react-oauth/google';
 const { Title, Text } = Typography;
-
+import Cookies from 'js-cookie';
+import { post } from '@/ApisRequests/server';
 const SignUpPage: React.FC = () => {
+    const [invite, setInvite] = useState(new URLSearchParams(typeof window == 'undefined' ? '' : window?.location?.search)?.get('invite'))
     const [loading, setLoading] = useState(false)
     const router = useRouter()
     const [formValues, setFormValues] = useState({
@@ -34,7 +37,79 @@ const SignUpPage: React.FC = () => {
             termsAccepted: e.target.checked,
         });
     };
+    const login = useGoogleLogin({
+        onSuccess: async (tokenResponse) => {
+            const response = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${tokenResponse?.access_token}`,
+                },
+            });
 
+            if (!response.ok) {
+                toast.error('Failed to fetch user info')
+            }
+            const { name, picture, email } = await response.json();
+            const data = {
+                name,
+                picture,
+                email,
+                username: name,
+                "inviteToken": invite || ""
+            };
+            const res = await post('/auth/google-login', data)
+            if (res?.success) {
+                Cookies.remove('token')
+                localStorage.setItem('token', res?.data?.accessToken)
+                Cookies.set('token', res?.data?.accessToken)
+                if (Cookies.get('token')) {
+                    toast.success(res?.message || 'logged in successfully')
+                    window.location.href = '/'
+                } else {
+                    toast.custom((t) => (
+                        <div
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'space-between',
+                                background: '#fff',
+                                color: '#000',
+                                padding: '12px 16px',
+                                border: '1px solid #ddd',
+                                borderRadius: '8px',
+                                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                                width: '350px',
+                            }}
+                        >
+                            <span style={{ flex: 1, marginRight: '8px' }}>
+                                ⚠️ Logged in successfully, but cookies are disabled in your browser. Some features may not work as expected.
+                            </span>
+                            <button
+                                style={{
+                                    background: '#f27405',
+                                    color: '#fff',
+                                    border: 'none',
+                                    borderRadius: '4px',
+                                    padding: '4px 8px',
+                                    cursor: 'pointer',
+                                }}
+                                onClick={() => toast.dismiss(t.id)} // Manually dismiss the toast
+                            >
+                                Close
+                            </button>
+                        </div>
+                    ), {
+                        duration: 5000,
+                        position: 'top-center',
+                    });
+                    window.location.href = '/'
+                }
+            } else {
+                toast.error(res?.message || 'something went wrong')
+            }
+        },
+        onError: err => console.log(err)
+    });
     const onFinish = async (values: any) => {
         setLoading(true)
         const data = {
@@ -45,9 +120,9 @@ const SignUpPage: React.FC = () => {
                 "username": values?.username,
                 "phone": values?.phoneNumber,
                 "email": values?.email,
-                "address": values?.address
-
-            }
+                "address": values?.address,
+                "inviteToken": invite || ""
+            },
         }
         const res = await signUpHandler(data)
         setLoading(false)
@@ -70,10 +145,8 @@ const SignUpPage: React.FC = () => {
 
             <div className="flex flex-col items-center bg-[#2FC191] p-8 rounded-lg max-w-2xl mt-10 w-full">
                 <Image src={logo_green} alt="logo" height={100} width={200} />
-
                 <Title level={3} className="text-center text-[#053697] text-3xl">Sign up</Title>
-
-                <Button
+                <Button onClick={() => login()}
                     icon={<FaGoogle />}
                     className="w-full mb-4 bg-white text-[#053697] h-[42px]"
                 >

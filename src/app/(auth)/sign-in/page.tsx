@@ -13,20 +13,83 @@ import { useGoogleLogin } from '@react-oauth/google';
 import { SignInHandler } from '@/ApisRequests/Auth';
 import toast from 'react-hot-toast';
 import Cookies from "js-cookie"
+import { post } from '@/ApisRequests/server';
 const { Title, Text } = Typography;
-
 const SignInPage: React.FC = () => {
     const [loading, setLoading] = useState(false)
     const login = useGoogleLogin({
-        onSuccess: tokenResponse => console.log(tokenResponse),
+        onSuccess: async (tokenResponse) => {
+            const response = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${tokenResponse?.access_token}`,
+                },
+            });
+
+            if (!response.ok) {
+                toast.error('Failed to fetch user info')
+            }
+            const { name, picture, email } = await response.json();
+            const data = { name, picture, email, username: name, };
+            const res = await post('/auth/google-login', data)
+            if (res?.success) {
+                Cookies.remove('token')
+                localStorage.setItem('token', res?.data?.accessToken)
+                Cookies.set('token', res?.data?.accessToken)
+                if (Cookies.get('token')) {
+                    toast.success(res?.message || 'logged in successfully')
+                    window.location.href = '/'
+                } else {
+                    toast.custom((t) => (
+                        <div
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'space-between',
+                                background: '#fff',
+                                color: '#000',
+                                padding: '12px 16px',
+                                border: '1px solid #ddd',
+                                borderRadius: '8px',
+                                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                                width: '350px',
+                            }}
+                        >
+                            <span style={{ flex: 1, marginRight: '8px' }}>
+                                ⚠️ Logged in successfully, but cookies are disabled in your browser. Some features may not work as expected.
+                            </span>
+                            <button
+                                style={{
+                                    background: '#f27405',
+                                    color: '#fff',
+                                    border: 'none',
+                                    borderRadius: '4px',
+                                    padding: '4px 8px',
+                                    cursor: 'pointer',
+                                }}
+                                onClick={() => toast.dismiss(t.id)} // Manually dismiss the toast
+                            >
+                                Close
+                            </button>
+                        </div>
+                    ), {
+                        duration: 5000,
+                        position: 'top-center',
+                    });
+                    window.location.href = '/'
+                }
+            } else {
+                toast.error(res?.message || 'something went wrong')
+            }
+        },
         onError: err => console.log(err)
     });
-
     const onFinish = async (values: any) => {
         setLoading(true)
         const res = await SignInHandler(values)
         setLoading(false)
         if (res?.success) {
+            Cookies.remove('token')
             localStorage.setItem('token', res?.data?.accessToken)
             Cookies.set('token', res?.data?.accessToken)
             if (Cookies.get('token')) {
@@ -168,3 +231,4 @@ const SignInPage: React.FC = () => {
 };
 
 export default SignInPage;
+

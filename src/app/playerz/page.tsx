@@ -47,8 +47,6 @@ const PlayerZPage = async ({ searchParams }: ParamsProps) => {
         page: page || undefined,
         league: league || undefined,
     };
-
-    // Fetch data directly within the page component
     const cookie = cookies();
     const token = (await cookie).get('token')?.value;
 
@@ -56,15 +54,13 @@ const PlayerZPage = async ({ searchParams }: ParamsProps) => {
         .filter(([key, value]) => value !== undefined)
         .map(([key, value]) => `${key}=${value}`)
         .join('&');
-
     const res = await get(`/player/get-all?${paramsUrl}`, {
         headers: {
-            'Authorization': `Bearer ${token}`,
+            'Authorization': `${token}`,
         },
     });
     const data = res.data?.result;
     const meta = res.data?.meta;
-
     return (
         <div className="container mx-auto mt-10">
             <Teams />
