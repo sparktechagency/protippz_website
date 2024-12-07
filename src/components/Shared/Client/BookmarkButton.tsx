@@ -27,7 +27,8 @@ const BookmarkButton = ({ isBookmark, type, _id }: { isBookmark: boolean, type: 
             })
             if (res?.success) {
                 toast.success(res?.message)
-                router.push(type == 'team' ? '/teamz' : '/playerz', { scroll: false })
+                // router.push(type == 'team' ? '/teamz' : '/playerz', { scroll: false })
+                router.refresh()
             } else {
                 toast.error(res?.message)
             }
