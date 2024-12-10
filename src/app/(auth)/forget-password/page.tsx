@@ -6,10 +6,14 @@ import Image from 'next/image';
 import logo from '@/Assets/logo.png';
 import logo_bg from '@/Assets/logo_bg.png';
 import Link from 'next/link';
+import { post } from '@/ApisRequests/server';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 const { Title, Text } = Typography;
 
 const ForgetPasswordPage: React.FC = () => {
+    const router = useRouter()
     const [formValues, setFormValues] = useState({
         email: '',
 
@@ -22,8 +26,15 @@ const ForgetPasswordPage: React.FC = () => {
         });
     };
 
-    const onFinish = (values: any) => {
-        console.log('Success:', values);
+    const onFinish = async (values: any) => {
+        const res = await post('/auth/forget-password', values, {})
+        if (res?.success) {
+            localStorage.setItem('email', values?.email)
+            toast.success(res?.message)
+            router.push(`/forget-otp`)
+        } else {
+            toast.error(res?.message)
+        }
     };
 
     const onFinishFailed = (errorInfo: any) => {

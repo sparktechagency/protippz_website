@@ -1,26 +1,21 @@
 'use client';
-
 import React, { useState } from 'react';
-import { Button, Input, Checkbox, Typography, Form } from 'antd';
-import { FaGoogle } from 'react-icons/fa6';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { CheckboxChangeEvent } from 'antd/es/checkbox';
+import { Button, Input, Checkbox, Typography, Form, Spin } from 'antd';
 import Image from 'next/image';
 import logo from '@/Assets/logo.png';
 import logo_bg from '@/Assets/logo_bg.png';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { post } from '@/ApisRequests/server';
+import { OtpVerify } from '@/ApisRequests/Auth';
 import toast from 'react-hot-toast';
-
+import { post } from '@/ApisRequests/server';
 const { Title, Text } = Typography;
 
-const ResetPage: React.FC = () => {
+const ForgetOtpPage: React.FC = () => {
+    const [loading, setLoading] = useState(false)
     const router = useRouter()
     const [formValues, setFormValues] = useState({
-        confirmPassword: '',
-        password: '',
-        termsAccepted: false,
+        otp: '',
+
     });
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,16 +25,17 @@ const ResetPage: React.FC = () => {
         });
     };
 
-
     const onFinish = async (values: any) => {
+        setLoading(true)
         const data = {
-            ...values,
-            email: localStorage.getItem('email')
+            "email": localStorage.getItem('email') || "",
+            "resetCode": Number(values?.otp)
         }
-        const res = await post('/auth/reset-password', data)
+        const res = await post('/auth/verify-reset-otp', data, {})
+        setLoading(false)
         if (res?.success) {
-            toast.success(res?.message || 'Password reset successfully')
-            router.push('/sign-in')
+            toast.success(res?.message || 'Email Verified')
+            router.push('/forget-password')
         } else {
             toast.error(res?.message || 'something went wrong')
         }
@@ -62,7 +58,7 @@ const ResetPage: React.FC = () => {
                 <Image src={logo} alt="logo" height={100} width={200} />
 
                 <Title level={3} className="text-center text-[#053697] text-3xl mt-4">
-                    Set New Password
+                    Verify password reset code
                 </Title>
 
                 <Form
@@ -73,33 +69,15 @@ const ResetPage: React.FC = () => {
                     className="w-full"
                 >
                     <Form.Item
-                        label="Password"
-                        name="password"
+                        label="Verification Code"
+                        name="otp"
+                        className='text-center flex justify-center items-center'
                         rules={[
-                            { required: true, message: 'Please enter your password' },
+                            { required: true, message: 'Please enter your Otp' },
                         ]}
                     >
-                        <Input.Password
-                            placeholder="Password"
-                            name="password"
-                            onChange={handleInputChange}
+                        <Input.OTP length={5}
                             className="h-[42px]"
-                            iconRender={(visible) => (visible ? <FaEye /> : <FaEyeSlash />)}
-                        />
-                    </Form.Item>
-                    <Form.Item
-                        label="Confirm Password"
-                        name="confirmPassword"
-                        rules={[
-                            { required: true, message: 'Please enter Confirm Password' },
-                        ]}
-                    >
-                        <Input.Password
-                            placeholder="Confirm Password"
-                            name="confirmPassword"
-                            onChange={handleInputChange}
-                            className="h-[42px]"
-                            iconRender={(visible) => (visible ? <FaEye /> : <FaEyeSlash />)}
                         />
                     </Form.Item>
                     {/* Uncomment if terms checkbox is needed */}
@@ -113,9 +91,9 @@ const ResetPage: React.FC = () => {
                         <Button
                             type="primary"
                             htmlType="submit"
-                            className="w-full bg-[#053697] hover:bg-[#467eee] h-[42px]"
+                            className="w-full bg-[#053697] hover:bg-[#467eee] h-[42px] max-w-[320px] mx-auto block"
                         >
-                            Set New Password
+                            {loading ? <Spin size='small' /> : 'Verify Otp'}
                         </Button>
                     </Form.Item>
                 </Form>
@@ -124,4 +102,4 @@ const ResetPage: React.FC = () => {
     );
 };
 
-export default ResetPage;
+export default ForgetOtpPage;
