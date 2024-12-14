@@ -1,6 +1,7 @@
 import { revalidateTag } from "next/cache"
 
 const base = 'http://192.168.10.11:5050'
+// const base = 'https://585d-103-145-138-193.ngrok-free.app'
 export const baseUrl = async (url: string) => {
     if (url?.startsWith('/')) return `${base}${url}`
     if (url?.startsWith('http')) return `${url}`
@@ -18,6 +19,7 @@ export const imageUrl = (url: string) => {
     }
     return `${base}/${url}`
 }
+// const defaultServer = 'https://585d-103-145-138-193.ngrok-free.app';
 const defaultServer = 'http://192.168.10.11:5050';
 
 const request = async (
