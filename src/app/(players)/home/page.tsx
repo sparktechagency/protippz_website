@@ -45,7 +45,7 @@ const PlayerHomePage = () => {
 
                 {/* Tax Information */}
                 <div className=' p-2  rounded-md border border-[#2FC191]'>
-                    <Link href={`/`} className="w-full text-left text-[#053697] font-medium hover:underline flex justify-between items-center">
+                    <Link href={`/tax-information`} className="w-full text-left text-[#053697] font-medium hover:underline flex justify-between items-center">
                         Tax Information <IoChevronForwardSharp />
                     </Link>
                 </div>
