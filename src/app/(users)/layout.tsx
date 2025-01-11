@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Shared/Client/Navbar";
 import Footer from "@/components/Shared/Client/Footer";
 import { AuthProvider } from "@/provider/ContextProvider";
+import NextTopLoader from "nextjs-toploader";
 
 export const metadata: Metadata = {
   title: "PROTIPPZ",
@@ -16,6 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={``}>
+        <NextTopLoader />
         <AuthProvider>
           <Navbar />
           <div className="min-h-[72vh] flex flex-col justify-center items-center">

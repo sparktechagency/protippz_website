@@ -3,7 +3,7 @@
 import { patch } from "@/ApisRequests/server";
 import { useContextData } from "@/provider/ContextProvider";
 import { Form, FormProps } from "antd";
-import { use, useEffect } from "react";
+import { useEffect } from "react";
 import toast from "react-hot-toast";
 
 interface IValue {

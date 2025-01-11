@@ -19,7 +19,7 @@ interface User {
   profile_image: string;
   totalAmount: number;
   totalPoint: number;
-  dueAmount:Number;
+  dueAmount: number;
   user: {
     role: string;
   };
