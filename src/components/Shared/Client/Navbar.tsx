@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Drawer, Dropdown, Menu } from "antd";
 import { IoIosNotificationsOutline, IoMdMenu } from "react-icons/io";
 import logo from "@/Assets/logo.png";
@@ -21,37 +21,14 @@ const Navbar: React.FC = () => {
   };
 
   // Dropdown menu for user options
-  const userMenu = (
+  const [userMenu, setUserMenu] = useState(
     <Menu>
       <Menu.Item key="1">
-        <Link href="/profile">My Profile</Link>
-      </Menu.Item>
-      <Menu.Item key="2">
-        <Link href="/deposit">Deposit Funds</Link>
-      </Menu.Item>
-      <Menu.Item key="3">
-        <Link href="/withdraw">Withdraw Funds</Link>
-      </Menu.Item>
-      <Menu.Item key="4">
-        <Link href="/tippz-history">TIPPZ HISTORY</Link>
-      </Menu.Item>
-      <Menu.Item key="5">
-        <Link href="/transaction-log">Transaction Log</Link>
-      </Menu.Item>
-      <Menu.Item key="6">
-        <Link href="/favorites">Favorites</Link>
-      </Menu.Item>
-      <Menu.Item key="7">
-        <Link href="/faqs">FAQs</Link>
-      </Menu.Item>
-      {/* <Menu.Item key="8">
-                <Link href="/settings">Settings</Link>
-            </Menu.Item> */}
-      <Menu.Item key="9">
-        <Link href="/invite-friends">Invite Friends</Link>
-      </Menu.Item>
-      <Menu.Item key="10">
-        <Link href="/contact">Contact Us</Link>
+        <Link
+          href={data?.userData?.user?.role == "player" ? `home` : "/profile"}
+        >
+          My Profile
+        </Link>
       </Menu.Item>
       <Menu.Item key="11">
         <button
@@ -66,6 +43,88 @@ const Navbar: React.FC = () => {
       </Menu.Item>
     </Menu>
   );
+
+  useEffect(() => {
+    if (data?.userData?.user?.role != "player") {
+      setUserMenu(
+        <Menu>
+          <Menu.Item key="1">
+            <Link
+              href={
+                data?.userData?.user?.role == "Player" ? `home` : "/profile"
+              }
+            >
+              My Profile
+            </Link>
+          </Menu.Item>
+
+          <Menu.Item key="2">
+            <Link href="/deposit">Deposit Funds</Link>
+          </Menu.Item>
+          {/* <Menu.Item key="3">
+            <Link href="/withdraw">Withdraw Funds</Link>
+          </Menu.Item> */}
+          <Menu.Item key="4">
+            <Link href="/tippz-history">TIPPZ HISTORY</Link>
+          </Menu.Item>
+          <Menu.Item key="5">
+            <Link href="/transaction-log">Transaction Log</Link>
+          </Menu.Item>
+          <Menu.Item key="6">
+            <Link href="/favorites">Favorites</Link>
+          </Menu.Item>
+          <Menu.Item key="7">
+            <Link href="/faqs">FAQs</Link>
+          </Menu.Item>
+          {/* <Menu.Item key="8">
+                <Link href="/settings">Settings</Link>
+            </Menu.Item> */}
+          <Menu.Item key="9">
+            <Link href="/invite-friends">Invite Friends</Link>
+          </Menu.Item>
+          <Menu.Item key="10">
+            <Link href="/contact">Contact Us</Link>
+          </Menu.Item>
+          <Menu.Item key="11">
+            <button
+              onClick={() => {
+                Cookies.remove("token");
+                localStorage.removeItem("token");
+                window.location.href = "sign-in";
+              }}
+            >
+              Sign out
+            </button>
+          </Menu.Item>
+        </Menu>
+      );
+    } else {
+      setUserMenu(
+        <Menu>
+          <Menu.Item key="1">
+            <Link
+              href={
+                data?.userData?.user?.role == "player" ? `home` : "/profile"
+              }
+            >
+              My Profile
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="11">
+            <button
+              onClick={() => {
+                Cookies.remove("token");
+                localStorage.removeItem("token");
+                window.location.href = "sign-in";
+              }}
+            >
+              Sign out
+            </button>
+          </Menu.Item>
+        </Menu>
+      );
+    }
+  }, [data?.userData]);
 
   return (
     <div className="p-4 bg-white shadow-md">
