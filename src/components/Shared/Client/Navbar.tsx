@@ -19,13 +19,17 @@ const Navbar: React.FC = () => {
   const closeDrawer = () => {
     setDrawerVisible(false);
   };
-
   // Dropdown menu for user options
   const [userMenu, setUserMenu] = useState(
     <Menu>
       <Menu.Item key="1">
         <Link
-          href={data?.userData?.user?.role == "player" ? `home` : "/profile"}
+          href={
+            data?.userData?.user?.role == "player" ||
+            data?.userData?.user?.role == "team"
+              ? `home`
+              : "/profile"
+          }
         >
           My Profile
         </Link>
@@ -45,13 +49,19 @@ const Navbar: React.FC = () => {
   );
 
   useEffect(() => {
-    if (data?.userData?.user?.role != "player") {
+    if (
+      data?.userData?.user?.role != "player" &&
+      data?.userData?.user?.role != "team"
+    ) {
       setUserMenu(
         <Menu>
           <Menu.Item key="1">
             <Link
               href={
-                data?.userData?.user?.role == "Player" ? `home` : "/profile"
+                data?.userData?.user?.role == "player" ||
+                data?.userData?.user?.role == "team"
+                  ? `home`
+                  : "/profile"
               }
             >
               My Profile
@@ -104,7 +114,10 @@ const Navbar: React.FC = () => {
           <Menu.Item key="1">
             <Link
               href={
-                data?.userData?.user?.role == "player" ? `home` : "/profile"
+                data?.userData?.user?.role == "player" ||
+                data?.userData?.user?.role == "team"
+                  ? `home`
+                  : "/profile"
               }
             >
               My Profile

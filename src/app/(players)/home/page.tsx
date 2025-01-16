@@ -28,12 +28,14 @@ const PlayerHomePage = () => {
           <p className="block text-sm font-medium text-[#053697]">
             Player Name:
           </p>
-          <p className=" rounded-md px-3 py-2 text-[#2FC191]">Robert Smith</p>
+          <p className=" rounded-md px-3 py-2 text-[#2FC191]">
+            {data?.userData?.name}
+          </p>
         </div>
         <div className="mb-4 flex justify-between items-center border  p-2 py-0 rounded-md border-[#2FC191]">
-          <p className="block text-sm font-medium text-[#053697]">Team Name:</p>
+          <p className="block text-sm font-medium text-[#053697]">email:</p>
           <p className=" rounded-md px-3 py-2 text-[#2FC191]">
-            New York Liberty
+            {data?.userData?.email}
           </p>
         </div>
         <div className="mb-4 flex justify-between items-center border  p-2 py-0 rounded-md border-[#2FC191]">

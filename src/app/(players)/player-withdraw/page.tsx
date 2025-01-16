@@ -8,12 +8,15 @@ import check2 from "@/Assets/check2.png";
 import { useContextData } from "@/provider/ContextProvider";
 import toast from "react-hot-toast";
 import { post } from "@/ApisRequests/server";
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
 const WithDrawPage = () => {
+  const [loading, setLoading] = useState(false);
   const data = useContextData();
   const [paymentMethod, setPaymentMethod] = useState("ach");
-  const [amount, setAmount] = useState(data?.userData?.totalAmount || 0);
-
+  const [amount, setAmount] = useState(data?.userData?.dueAmount || 0);
+  const router = useRouter();
   // Submit handler
   const handleSubmit = async (values: any) => {
     try {
@@ -59,7 +62,104 @@ const WithDrawPage = () => {
       toast.error("Failed to withdraw funds");
     }
   };
-
+  // handle bank account
+  const accountConnect = async () => {
+    setLoading(true);
+    const res = await post(
+      `/stripe/connect-stripe`,
+      { test: "" },
+      {
+        headers: {
+          Authorization: `${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    setLoading(false);
+    if (res?.success) {
+      window.open(res?.data, "_blank");
+    } else {
+      Swal.fire({
+        title: "Oops!",
+        text: res?.message,
+        icon: "error",
+        confirmButtonColor: "#3085d6",
+        confirmButtonText: "OK",
+      });
+    }
+  };
+  // const withdraw
+  const withdrawMoney = async () => {
+    setLoading(true);
+    const res = await post(
+      `/withdraw/ach-withdraw`,
+      { amount: Number(amount) },
+      {
+        headers: {
+          Authorization: `${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    setLoading(false);
+    if (res?.success) {
+      Swal.fire({
+        title: "Success!",
+        text: res?.message,
+        icon: "success",
+        confirmButtonColor: "#3085d6",
+        confirmButtonText: "OK",
+      });
+      router.push("/home");
+    } else if (res.message === "Transfer failed update your bank info") {
+      Swal.fire({
+        title: "Bank Account Details Missing",
+        text: "It seems that your bank account details are incomplete. Please update your bank account information on our website to proceed. Rest assured, the process is safe and 100% secure.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Update Bank Account",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            setLoading(true);
+            const res = await post(
+              `/stripe/update-connected-account`,
+              {},
+              {
+                headers: {
+                  Authorization: `${localStorage.getItem("token")}`,
+                },
+              }
+            );
+            console.log(res);
+            if (res?.success) {
+              window.open(res?.data?.link, "_blank");
+            } else {
+              Swal.fire({
+                title: "Oops!",
+                text: res?.message,
+                icon: "error",
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: "OK",
+              });
+            }
+          } catch (error) {
+            console.error("Error:", error);
+          } finally {
+            setLoading(false);
+          }
+        }
+      });
+    } else {
+      Swal.fire({
+        title: "Oops!",
+        text: res?.message,
+        icon: "error",
+        confirmButtonColor: "#3085d6",
+        confirmButtonText: "OK",
+      });
+    }
+  };
   return (
     <div style={{ width: "100vw" }} className="w-full container mx-auto">
       <div className="w-full p-8 bg-white rounded-lg max-w-4xl mx-auto">
@@ -69,7 +169,7 @@ const WithDrawPage = () => {
         </h2>
         <h2 className="text-3xl font-semibold text-center mb-6 text-blue-900">
           <span className="text-[#2FC191]">Total Funds : </span> $
-          {data?.userData?.totalAmount}
+          {data?.userData?.dueAmount}
         </h2>
         <Form.Item name="amount">
           <div className="flex justify-center items-center gap-3 max-w-[400px] mx-auto md:flex-row flex-col">
@@ -80,10 +180,10 @@ const WithDrawPage = () => {
               value={amount}
               onChange={(e) => {
                 toast.dismiss();
-                if (!data?.userData?.totalAmount) {
+                if (!data?.userData?.dueAmount) {
                   return toast.error("Insufficient balance");
                 }
-                if (Number(e.target.value) > data?.userData?.totalAmount) {
+                if (Number(e.target.value) > data?.userData?.dueAmount) {
                   return toast.error("Insufficient balance");
                 }
                 setAmount(Number(e.target.value));
@@ -140,119 +240,39 @@ const WithDrawPage = () => {
 
           <div className="w-full md:w-3/5 p-4 bg-gray-50 rounded-lg">
             {paymentMethod === "ach" ? (
-              <Form layout="vertical" onFinish={handleSubmit}>
-                <Form.Item
-                  label={
-                    <span className="text-lg font-medium text-blue-900">
-                      Bank Account Number
-                    </span>
+              <div className="flex justify-center items-center gap-2 flex-col mt-8">
+                <Button
+                  loading={loading}
+                  className="px-5"
+                  type="primary"
+                  onClick={
+                    data?.userData?.isStripeConnected
+                      ? () => {
+                          withdrawMoney();
+                        }
+                      : () => {
+                          Swal.fire({
+                            title: "Bank Account Missing",
+                            text: "It seems like you haven't added your bank account to this website. Please add your bank account to proceed. It's safe and 100% secure.",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#3085d6",
+                            cancelButtonColor: "#d33",
+                            confirmButtonText: "Add Bank Account",
+                          }).then((result) => {
+                            if (result.isConfirmed) {
+                              accountConnect();
+                            }
+                          });
+                        }
                   }
-                  name="bankAccountNumber"
-                  className="mt-4"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input your bank account number!",
-                    },
-                  ]}
                 >
-                  <Input
-                    placeholder="Enter Bank Account Number"
-                    className="rounded-lg border border-green-400"
-                  />
-                </Form.Item>
-
-                <Form.Item
-                  label={
-                    <span className="text-lg font-medium text-blue-900">
-                      Routing Number
-                    </span>
-                  }
-                  name="routingNumber"
-                  className="mt-4"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input your routing number!",
-                    },
-                  ]}
-                >
-                  <Input
-                    placeholder="Enter Routing Number"
-                    className="rounded-lg border border-green-400"
-                  />
-                </Form.Item>
-
-                <Form.Item
-                  label={
-                    <span className="text-lg font-medium text-blue-900">
-                      Account Type
-                    </span>
-                  }
-                  name="accountType"
-                  className="mt-4"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input your account type!",
-                    },
-                  ]}
-                >
-                  <Input
-                    placeholder="Enter Account Type"
-                    className="rounded-lg border border-green-400"
-                  />
-                </Form.Item>
-
-                <Form.Item
-                  label={
-                    <span className="text-lg font-medium text-blue-900">
-                      Bank Name
-                    </span>
-                  }
-                  name="bankName"
-                  className="mt-4"
-                  rules={[
-                    { required: true, message: "Please input your bank name!" },
-                  ]}
-                >
-                  <Input
-                    placeholder="Enter Bank Name"
-                    className="rounded-lg border border-green-400"
-                  />
-                </Form.Item>
-
-                <Form.Item
-                  label={
-                    <span className="text-lg font-medium text-blue-900">
-                      Account Holder Name
-                    </span>
-                  }
-                  name="accountHolderName"
-                  className="mt-4"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input your account holder name!",
-                    },
-                  ]}
-                >
-                  <Input
-                    placeholder="Enter Account Holder Name"
-                    className="rounded-lg border border-green-400"
-                  />
-                </Form.Item>
-
-                <Form.Item className="mt-6">
-                  <Button
-                    type="primary"
-                    htmlType="submit"
-                    className="w-full bg-[#053697] h-[42px] text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition duration-300"
-                  >
-                    Withdraw Now
-                  </Button>
-                </Form.Item>
-              </Form>
+                  {loading ? `Please wait..` : `Withdrawal to your bank`}
+                </Button>
+                <p className="text-lg font-semibold text-gray-700  p-4 rounded-md shadow-sm">
+                  It's safe and 100% secure.
+                </p>
+              </div>
             ) : (
               <Form layout="vertical" onFinish={handleSubmit}>
                 <Form.Item
