@@ -15,6 +15,12 @@ const nextConfig: NextConfig = {
         hostname: '10.0.60.37',
         port: '5050',
       },
+      {
+        protocol: 'https',
+        // hostname: '192.168.10.11',
+        hostname: 'api.protippz.com',
+        // port: '5050',
+      },
     ],
   },
 };

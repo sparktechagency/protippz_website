@@ -14,7 +14,7 @@ const TeamzCards: React.FC<TeamzCardsProps> = ({ item }) => {
   return (
     <div className="relative border border-green-300 rounded-lg shadow-md max-w-lg m-4 h-72 flex flex-col justify-between w-full mx-auto">
       {/* Player Details Section */}
-      <div className="absolute h-full w-full bg-white bg-opacity-45">
+      <div className="absolute h-full w-full ">
         <Image
           src={item?.team_bg_image ? imageUrl(item?.team_bg_image) : bg}
           alt={item.name}
@@ -23,6 +23,7 @@ const TeamzCards: React.FC<TeamzCardsProps> = ({ item }) => {
           className="object-cover rounded-md h-full w-full"
         />
       </div>
+      <div className="absolute h-full w-full bg-white bg-opacity-80"></div>
       <div className="h-56 p-4 z-40">
         <div className="flex flex-col justify-between pr-20">
           <div className="text-left">
