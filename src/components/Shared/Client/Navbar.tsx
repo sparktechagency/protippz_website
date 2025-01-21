@@ -11,7 +11,6 @@ import Cookies from "js-cookie";
 const Navbar: React.FC = () => {
   const [drawerVisible, setDrawerVisible] = useState(false);
   const data = useContextData();
-  console.log(data);
   const showDrawer = () => {
     setDrawerVisible(true);
   };
@@ -192,22 +191,27 @@ const Navbar: React.FC = () => {
           {data?.userData?._id ? (
             <>
               <div className="flex flex-col space-y-2">
-                <div className="flex items-center space-x-2 px-3 py-1 rounded-full bg-green-100">
-                  <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white border border-green-500">
-                    <FaDollarSign className="text-green-500" />
-                  </span>
-                  <span className="text-green-800 font-semibold">
-                    {data?.userData?.totalAmount}
-                  </span>
-                </div>
-                <div className="flex items-center space-x-2 px-3 py-1 rounded-full bg-green-100">
-                  <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white border border-green-500">
-                    <FaStar className="text-green-500" />
-                  </span>
-                  <span className="text-green-800 font-semibold">
-                    {data?.userData?.totalPoint}
-                  </span>
-                </div>
+                {data?.userData?.user?.role != "player" &&
+                  data?.userData?.user?.role != "team" && (
+                    <>
+                      <div className="flex items-center space-x-2 px-3 py-1 rounded-full bg-green-100">
+                        <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white border border-green-500">
+                          <FaDollarSign className="text-green-500" />
+                        </span>
+                        <span className="text-green-800 font-semibold">
+                          {data?.userData?.totalAmount}
+                        </span>
+                      </div>
+                      <div className="flex items-center space-x-2 px-3 py-1 rounded-full bg-green-100">
+                        <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white border border-green-500">
+                          <FaStar className="text-green-500" />
+                        </span>
+                        <span className="text-green-800 font-semibold">
+                          {data?.userData?.totalPoint}
+                        </span>
+                      </div>
+                    </>
+                  )}
               </div>
               <div className="flex space-x-2">
                 <Link

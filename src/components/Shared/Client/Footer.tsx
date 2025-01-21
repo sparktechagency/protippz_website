@@ -20,17 +20,19 @@ const Footer = () => {
             <Image src={logo} alt="PROTIPPZ" width={150} height={50} />
           </div>
           <div className="flex justify-center space-x-8 mb-6 text-blue-500">
+            <Link href="/terms">
+              <span className="hover:text-[#053697] cursor-pointer">Terms</span>
+            </Link>
+            <Link href="/privacy">
+              <span className="hover:text-[#053697] cursor-pointer">
+                Privacy
+              </span>
+            </Link>
             <Link href="/contact">
               <span className="hover:text-[#053697] cursor-pointer">
                 contact
               </span>
             </Link>
-            {/* <Link href="/terms">
-                            <span className="hover:text-[#053697] cursor-pointer">Terms</span>
-                        </Link>
-                        <Link href="/privacy">
-                            <span className="hover:text-[#053697] cursor-pointer">Privacy</span>
-                        </Link> */}
           </div>
         </div>
         <hr className="border-t border-blue-500 mb-6" />

@@ -1,4 +1,4 @@
-import React from "react";
+import category from "@/Assets/category.png";
 import {
   Carousel,
   CarouselContent,
@@ -9,6 +9,7 @@ import {
 import Image from "next/image";
 import { get, imageUrl } from "@/ApisRequests/server";
 import SetTemParams from "../Playerz/Client/SetTemParams";
+
 interface RewardInterface {
   _id: string;
   name: string;
@@ -17,6 +18,7 @@ interface RewardInterface {
   updatedAt: string;
   deliveryOption: string;
 }
+
 const Rewards = async () => {
   const [data, pagination] = await getCategory();
   const teamLogos = data as RewardInterface[];
@@ -29,11 +31,11 @@ const Rewards = async () => {
           teamLogos.map((team) => (
             <CarouselItem
               key={team?._id}
-              className="basis-1/4 md:basis-1/7 lg:basis-1/12 "
+              className="basis-1/4 md:basis-1/7 lg:basis-1/12"
             >
               <div className="relative">
                 <Image
-                  src={imageUrl(team?.image)}
+                  src={team?.image ? imageUrl(team?.image) : category}
                   alt={team?.name}
                   className="w-[100px] h-[100px] object-contain"
                   height={100}

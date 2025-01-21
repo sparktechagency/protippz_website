@@ -269,7 +269,6 @@ const RedeemButton: React.FC<SendTipsButtonProps> = ({ item }) => {
 
   const handleGuideModalNext = () => {
     setIsGuideModalOpen(false);
-    console.log(item?.category?.deliveryOption);
     item?.category?.deliveryOption == "Email"
       ? setIsEmailVerificationModalOpen(true)
       : setIsShippingAddressModalOpen(true);

@@ -94,7 +94,7 @@ const TaxInformationPage = () => {
             },
           ]}
         >
-          <Radio.Group onChange={(value) => console.log(value)}>
+          <Radio.Group onChange={(value) => {}}>
             <Space direction="vertical">
               <Radio value={"Resident"}>Resident</Radio>
               <Radio value={"Non-Resident"}>Non-Resident</Radio>

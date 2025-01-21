@@ -71,9 +71,7 @@ const DepositFundForm = () => {
                     }
                 }
             } else if (paymentMethod === 'paypal') {
-                // console.log(clientSecret)
                 router.push(clientSecret?.data?.approvalUrl)
-                // console.log('Process PayPal payment');
             }
         } catch (error) {
 

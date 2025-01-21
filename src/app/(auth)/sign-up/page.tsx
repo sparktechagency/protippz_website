@@ -108,7 +108,7 @@ const SignUpPage: React.FC = () => {
                 toast.error(res?.message || 'something went wrong')
             }
         },
-        onError: err => console.log(err)
+        onError: err => {}
     });
     const onFinish = async (values: any) => {
         setLoading(true)
@@ -137,7 +137,6 @@ const SignUpPage: React.FC = () => {
     };
 
     const onFinishFailed = (errorInfo: any) => {
-        console.log('Failed:', errorInfo);
     };
 
     return (

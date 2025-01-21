@@ -53,12 +53,11 @@ const WithDrawPage = () => {
       );
       if (res?.success) {
         toast.success(res?.message);
-        window.location.href = "/";
+        window.location.href = "/home";
       } else {
         toast.error(res?.message);
       }
     } catch (error) {
-      console.error(error);
       toast.error("Failed to withdraw funds");
     }
   };
@@ -108,7 +107,7 @@ const WithDrawPage = () => {
         confirmButtonColor: "#3085d6",
         confirmButtonText: "OK",
       });
-      router.push("/home");
+      window.location.href = "/home";
     } else if (res.message === "Transfer failed update your bank info") {
       Swal.fire({
         title: "Bank Account Details Missing",
@@ -131,7 +130,6 @@ const WithDrawPage = () => {
                 },
               }
             );
-            console.log(res);
             if (res?.success) {
               window.open(res?.data?.link, "_blank");
             } else {
@@ -144,7 +142,6 @@ const WithDrawPage = () => {
               });
             }
           } catch (error) {
-            console.error("Error:", error);
           } finally {
             setLoading(false);
           }

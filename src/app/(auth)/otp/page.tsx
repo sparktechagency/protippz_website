@@ -38,11 +38,9 @@ const OtpPage: React.FC = () => {
         } else {
             toast.error(res?.message || 'something went wrong')
         }
-        console.log(res)
     };
 
     const onFinishFailed = (errorInfo: any) => {
-        console.log('Failed:', errorInfo);
     };
 
     return (

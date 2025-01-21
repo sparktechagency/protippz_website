@@ -18,7 +18,6 @@ const ChangePasswordPage: React.FC = () => {
                 layout="vertical"
                 className="max-w-md mx-auto"
                 onFinish={async (values) => {
-                    // console.log('Form Values:', values)
                     const res = await post('/auth/change-password', values, {
                         headers: {
                             'Authorization': `${localStorage.getItem('token')}`

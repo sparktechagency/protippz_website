@@ -1,4 +1,5 @@
 import React from "react";
+import teamImage from "@/Assets/team.webp";
 import {
   Carousel,
   CarouselContent,
@@ -30,12 +31,15 @@ const Teams = async () => {
             >
               <div className="relative">
                 <Image
-                  src={imageUrl(team.league_image)}
+                  src={
+                    team?.league_image ? imageUrl(team.league_image) : teamImage
+                  } //
                   alt={team.name}
                   className="w-[100px] h-[100px] object-contain"
                   height={100}
                   width={100}
                 />
+                <p>{team?.name?.slice(0, 10)}..</p>
                 <SetTemParams ParamKey="league" value={team?._id} />
               </div>
             </CarouselItem>

@@ -9,6 +9,7 @@ export const baseUrl = async (url: string) => {
     if (url?.startsWith('http')) return `${url}`
     return `${base}/${url}`
 }
+
 export const imageUrl = (url: string) => {
     if (!url) {
         return ""
@@ -21,6 +22,7 @@ export const imageUrl = (url: string) => {
     }
     return `${base}/${url}`
 }
+
 // const defaultServer = 'https://585d-103-145-138-193.ngrok-free.app';
 // const defaultServer = 'http://3.135.129.190:5000';
 // const defaultServer = "http://18.218.23.153:5000 ";
@@ -54,10 +56,8 @@ const request = async (
         // }
 
         const result = await response.json();
-        // console.log('response',result)
 
         if (cacheTag && method !== 'GET') {
-            console.log(`Revalidate cache tag: ${cacheTag}`);
             revalidateTag(cacheTag)
         }
 

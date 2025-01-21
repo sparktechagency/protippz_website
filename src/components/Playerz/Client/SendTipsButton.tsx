@@ -43,7 +43,6 @@ const SendTipsButton: React.FC<SendTipsButtonProps> = ({ item }) => {
   };
   // 2nd modal handler
   const handlePaymentSubmit = async (value: any) => {
-    console.log("Payment method selected", value?.paymentMethod == "deposit");
     if (value?.paymentMethod == "deposit") {
       try {
         const MakeTip = await post(
@@ -69,7 +68,6 @@ const SendTipsButton: React.FC<SendTipsButtonProps> = ({ item }) => {
           setIsOopsModalOpen(true);
         }
       } catch (error) {
-        console.log(error);
       }
     } else {
       router.push(
