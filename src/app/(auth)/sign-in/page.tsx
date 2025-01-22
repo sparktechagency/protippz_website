@@ -150,8 +150,7 @@ const SignInPage: React.FC = () => {
     }
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-  };
+  const onFinishFailed = (errorInfo: any) => {};
 
   return (
     <div
@@ -178,6 +177,7 @@ const SignInPage: React.FC = () => {
         </Button>
 
         <Form
+          requiredMark={false}
           name="signin"
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}

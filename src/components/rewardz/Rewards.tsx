@@ -25,7 +25,7 @@ const Rewards = async () => {
   return (
     <Carousel className="w-full">
       <CarouselPrevious className={`md:-left-4 left-0 z-50`} />
-      <CarouselContent>
+      <CarouselContent className="flex items-center justify-center">
         {teamLogos &&
           Array.isArray(teamLogos) &&
           teamLogos.map((team) => (
@@ -33,7 +33,7 @@ const Rewards = async () => {
               key={team?._id}
               className="basis-1/4 md:basis-1/7 lg:basis-1/12"
             >
-              <div className="relative">
+              <div className="relative flex flex-col items-center justify-center">
                 <Image
                   src={team?.image ? imageUrl(team?.image) : category}
                   alt={team?.name}
@@ -42,7 +42,7 @@ const Rewards = async () => {
                   width={100}
                   unoptimized
                 />
-                <p className="text-center mt-2">{team.name}</p>
+                <p className="text-center text-sm">{team.name}</p>
                 <SetTemParams
                   key={team?._id}
                   ParamKey="category"
@@ -59,6 +59,6 @@ const Rewards = async () => {
 
 export default Rewards;
 const getCategory = async () => {
-  const res = await get("/reward-category/get-all?limit=99999999", {});
+  const res = await get("/reward-category/get-all?limit=999999999", {});
   return [res?.data?.result, res?.data?.meta];
 };

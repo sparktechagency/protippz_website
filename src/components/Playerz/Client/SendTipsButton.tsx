@@ -67,8 +67,7 @@ const SendTipsButton: React.FC<SendTipsButtonProps> = ({ item }) => {
           setIsPaymentModalOpen(false);
           setIsOopsModalOpen(true);
         }
-      } catch (error) {
-      }
+      } catch (error) {}
     } else {
       router.push(
         `/send-tip?amount=${amount}&entityType=Player&entityId=${item?._id}`
@@ -98,7 +97,7 @@ const SendTipsButton: React.FC<SendTipsButtonProps> = ({ item }) => {
             alt={item.name}
             width={100}
             height={100}
-            className="rounded-full mx-auto mb-4"
+            className="rounded-full border-2 mx-auto mb-4"
             unoptimized
           />
           <h2 className="text-xl font-bold text-blue-900">{item.name}</h2>
@@ -113,6 +112,7 @@ const SendTipsButton: React.FC<SendTipsButtonProps> = ({ item }) => {
           </p>
         </div>
         <Form
+          requiredMark={false}
           form={form}
           onFinish={handleFormSubmit}
           layout="vertical"

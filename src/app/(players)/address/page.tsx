@@ -42,6 +42,7 @@ const AddressPage = () => {
         Edit Address
       </p>
       <Form
+        requiredMark={false}
         form={form}
         layout="vertical"
         onFinish={onFinish}

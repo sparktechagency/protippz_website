@@ -99,6 +99,6 @@ const getReward = async (params: searchParamsInterface) => {
     .filter(([key, value]) => value !== undefined)
     .map(([key, value]) => `${key}=${value}`)
     .join("&");
-  const res = await get(`/reward/get-all?${paramsUrl}`);
+  const res = await get(`/reward/get-all?${paramsUrl}&limit=99999`);
   return [res.data?.result, res.data?.meta];
 };

@@ -43,6 +43,7 @@ const TaxInformationPage = () => {
         Tax Information
       </p>
       <Form
+        requiredMark={false}
         form={form}
         layout="vertical"
         onFinish={onFinish}

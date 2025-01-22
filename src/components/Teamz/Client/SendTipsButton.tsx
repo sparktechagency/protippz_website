@@ -67,8 +67,7 @@ const SendTipsButton: React.FC<SendTipsButtonProps> = ({ item }) => {
           setIsPaymentModalOpen(false);
           setIsOopsModalOpen(true);
         }
-      } catch (error) {
-      }
+      } catch (error) {}
     } else {
       router.push(
         `/send-tip?amount=${amount}&entityType=Team&entityId=${item?._id}`
@@ -113,6 +112,7 @@ const SendTipsButton: React.FC<SendTipsButtonProps> = ({ item }) => {
           </p>
         </div>
         <Form
+          requiredMark={false}
           form={form}
           onFinish={handleFormSubmit}
           layout="vertical"

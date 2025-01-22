@@ -1,16 +1,33 @@
+'use client'
 import React from "react";
 import Image from "next/image";
 import SendTipsButton from "./Client/RedeemButton";
 import { imageUrl } from "@/ApisRequests/server";
 import { RewardInterface } from "@/app/(default)/rewardz/page";
-
+import { motion } from "framer-motion";
 interface RewardCardsProps {
   item: RewardInterface;
 }
 
 const RewardzCards: React.FC<RewardCardsProps> = ({ item }) => {
+  const cardReveal = {
+    hidden: { y: "10%", opacity: 0 },
+    visible: {
+      y: "0%",
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut",
+      },
+    },
+  };
   return (
-    <div className="relative bg-white border border-green-300 rounded-lg shadow-md max-w-lg p-4 m-4 h-72 flex flex-col justify-between w-full mx-auto">
+    <motion.div
+      variants={cardReveal}
+      initial="hidden"
+      animate="visible"
+      className="relative bg-white border border-green-300 overflow-hidden rounded-lg shadow-md max-w-lg p-4 m-4 h-72 flex flex-col justify-between w-full mx-auto"
+    >
       {/* Player Details Section */}
       <div className="flex flex-col justify-between pr-20">
         <div className="text-left">
@@ -39,7 +56,7 @@ const RewardzCards: React.FC<RewardCardsProps> = ({ item }) => {
       <div className="flex justify-end mt-4">
         <SendTipsButton item={item} />
       </div>
-    </div>
+    </motion.div>
   );
 };
 
