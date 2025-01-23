@@ -9,12 +9,10 @@ import { FaDollarSign, FaRegUserCircle, FaStar } from "react-icons/fa";
 import { useContextData } from "@/provider/ContextProvider";
 import Cookies from "js-cookie";
 import { motion } from "framer-motion";
-
 const Navbar: React.FC = () => {
   const [drawerVisible, setDrawerVisible] = useState(false);
   const [activeMenu, setActiveMenu] = useState("");
   const data = useContextData();
-
   const showDrawer = () => {
     setDrawerVisible(true);
   };
@@ -22,7 +20,6 @@ const Navbar: React.FC = () => {
   const closeDrawer = () => {
     setDrawerVisible(false);
   };
-
   const navItems = [
     { href: "/tippz", text: "TIPPZ" },
     { href: "/playerz", text: "PLAYERZ" },
@@ -30,19 +27,18 @@ const Navbar: React.FC = () => {
     { href: "/rewardz", text: "REWARDZ" },
     { href: "/store", text: "STORE" },
   ];
-
   const handleMenuClick = (href: string) => {
     setActiveMenu(href);
     closeDrawer();
   };
-
+  // Dropdown menu for user options
   const [userMenu, setUserMenu] = useState(
     <Menu>
       <Menu.Item key="1">
         <Link
           href={
-            data?.userData?.user?.role === "player" ||
-            data?.userData?.user?.role === "team"
+            data?.userData?.user?.role == "player" ||
+            data?.userData?.user?.role == "team"
               ? `home`
               : "/profile"
           }
@@ -66,17 +62,30 @@ const Navbar: React.FC = () => {
 
   useEffect(() => {
     if (
-      data?.userData?.user?.role !== "player" &&
-      data?.userData?.user?.role !== "team"
+      data?.userData?.user?.role != "player" &&
+      data?.userData?.user?.role != "team"
     ) {
       setUserMenu(
         <Menu>
           <Menu.Item key="1">
-            <Link href="/profile">My Profile</Link>
+            <Link
+              href={
+                data?.userData?.user?.role == "player" ||
+                data?.userData?.user?.role == "team"
+                  ? `home`
+                  : "/profile"
+              }
+            >
+              My Profile
+            </Link>
           </Menu.Item>
+
           <Menu.Item key="2">
             <Link href="/deposit">Deposit Funds</Link>
           </Menu.Item>
+          {/* <Menu.Item key="3">
+            <Link href="/withdraw">Withdraw Funds</Link>
+          </Menu.Item> */}
           <Menu.Item key="4">
             <Link href="/tippz-history">TIPPZ HISTORY</Link>
           </Menu.Item>
@@ -89,6 +98,9 @@ const Navbar: React.FC = () => {
           <Menu.Item key="7">
             <Link href="/faqs">FAQs</Link>
           </Menu.Item>
+          {/* <Menu.Item key="8">
+                <Link href="/settings">Settings</Link>
+            </Menu.Item> */}
           <Menu.Item key="9">
             <Link href="/invite-friends">Invite Friends</Link>
           </Menu.Item>
@@ -108,17 +120,40 @@ const Navbar: React.FC = () => {
           </Menu.Item>
         </Menu>
       );
+    } else {
+      setUserMenu(
+        <Menu>
+          <Menu.Item key="1">
+            <Link
+              href={
+                data?.userData?.user?.role == "player" ||
+                data?.userData?.user?.role == "team"
+                  ? `home`
+                  : "/profile"
+              }
+            >
+              My Profile
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="11">
+            <button
+              onClick={() => {
+                Cookies.remove("token");
+                localStorage.removeItem("token");
+                window.location.href = "sign-in";
+              }}
+            >
+              Sign out
+            </button>
+          </Menu.Item>
+        </Menu>
+      );
     }
   }, [data?.userData]);
 
   return (
     <div className="p-4 bg-white shadow-md">
-      <motion.nav
-        className="flex items-center justify-between container mx-auto"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
+      <nav className="flex items-center justify-between container mx-auto">
         <Link href={`/`}>
           <Image
             src={logo}
@@ -129,12 +164,15 @@ const Navbar: React.FC = () => {
           />
         </Link>
 
+        {/* Desktop Navigation Links */}
         <ul className="hidden md:flex space-x-6 text-blue-500">
           {navItems.map((item) => (
             <motion.li
               key={item.href}
               className={`cursor-pointer hover:text-[#053697] transition-all ${
-                activeMenu === item.href ? "text-[#053697] font-semibold px-2" : ""
+                activeMenu === item.href
+                  ? "text-[#053697] font-semibold px-2"
+                  : ""
               } relative`}
               onClick={() => handleMenuClick(item.href)}
               // whileHover={{ scale: 1.1 }}
@@ -147,13 +185,13 @@ const Navbar: React.FC = () => {
             </motion.li>
           ))}
         </ul>
-
+        {/* Action Buttons for Desktop */}
         <div className="hidden md:flex items-center space-x-4">
           {data?.userData?._id ? (
             <>
               <div className="flex flex-col space-y-2">
-                {data?.userData?.user?.role !== "player" &&
-                  data?.userData?.user?.role !== "team" && (
+                {data?.userData?.user?.role != "player" &&
+                  data?.userData?.user?.role != "team" && (
                     <>
                       <div className="flex items-center space-x-2 px-3 py-1 rounded-full bg-green-100">
                         <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white border border-green-500">
@@ -204,6 +242,7 @@ const Navbar: React.FC = () => {
           )}
         </div>
 
+        {/* Drawer for Mobile */}
         <div className="md:hidden flex items-center">
           <Button icon={<IoMdMenu />} onClick={showDrawer} />
         </div>
@@ -222,50 +261,89 @@ const Navbar: React.FC = () => {
           open={drawerVisible}
           className="text-blue-500"
         >
-          <motion.ul
-            className="space-y-4"
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            transition={{ type: "spring", stiffness: 50 }}
-          >
-            {navItems.map((item) => (
-              <li key={item.href} onClick={() => handleMenuClick(item.href)}>
-                <Link
-                  href={item.href}
-                  className={`hover:text-[#053697] cursor-pointer ${
-                    activeMenu === item.href ? "text-[#053697]" : ""
-                  }`}
-                >
-                  {item.text}
-                </Link>
-              </li>
-            ))}
-          </motion.ul>
+          <ul className="space-y-4">
+            <li>
+              <Link
+                href="/tippz"
+                className="hover:text-[#053697] cursor-pointer"
+              >
+                TIPPZ
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/playerz"
+                className="hover:text-[#053697] cursor-pointer"
+              >
+                PLAYERZ
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/teamz"
+                className="hover:text-[#053697] cursor-pointer"
+              >
+                TEAMZ
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/rewardz"
+                className="hover:text-[#053697] cursor-pointer"
+              >
+                REWARDZ
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/store"
+                className="hover:text-[#053697] cursor-pointer"
+              >
+                STORE
+              </Link>
+            </li>
+          </ul>
 
           {data?.userData?._id ? (
-            <motion.div
-              className="flex flex-col space-y-2 my-2"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-            >
-              <div className="flex items-center space-x-2 px-3 py-1 rounded-full bg-green-100">
-                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white border border-green-500">
-                  <FaDollarSign className="text-green-500" />
-                </span>
-                <span className="text-green-800 font-semibold">
-                  {data?.userData?.totalAmount}
-                </span>
+            <>
+              <div className="flex flex-col space-y-2 my-2">
+                <div className="flex items-center space-x-2 px-3 py-1 rounded-full bg-green-100">
+                  <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white border border-green-500">
+                    <FaDollarSign className="text-green-500" />
+                  </span>
+                  <span className="text-green-800 font-semibold">
+                    {data?.userData?.totalAmount}
+                  </span>
+                </div>
+                <div className="flex items-center space-x-2 px-3 py-1 rounded-full bg-green-100">
+                  <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white border border-green-500">
+                    <FaStar className="text-green-500" />
+                  </span>
+                  <span className="text-green-800 font-semibold">
+                    {data?.userData?.totalPoint}
+                  </span>
+                </div>
               </div>
-              <div className="flex items-center space-x-2 px-3 py-1 rounded-full bg-green-100">
-                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white border border-green-500">
-                  <FaStar className="text-green-500" />
-                </span>
-                <span className="text-green-800 font-semibold">
-                  {data?.userData?.totalPoint}
-                </span>
+              <div className="flex items-center space-x-4 mt-4">
+                <Link
+                  href={`/notification`}
+                  className="flex items-center justify-center w-10 h-10 rounded-full bg-green-100"
+                >
+                  <IoIosNotificationsOutline
+                    className="text-green-500"
+                    style={{ fontSize: "18px" }}
+                  />
+                </Link>
+                <Dropdown overlay={userMenu} trigger={["click"]}>
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-green-100 cursor-pointer">
+                    <FaRegUserCircle
+                      className="text-green-500"
+                      style={{ fontSize: "18px" }}
+                    />
+                  </div>
+                </Dropdown>
               </div>
-            </motion.div>
+            </>
           ) : (
             <Link
               href={`/sign-in`}
@@ -276,7 +354,7 @@ const Navbar: React.FC = () => {
             </Link>
           )}
         </Drawer>
-      </motion.nav>
+      </nav>
     </div>
   );
 };

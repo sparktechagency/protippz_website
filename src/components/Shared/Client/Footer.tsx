@@ -14,12 +14,12 @@ const Footer = () => {
     <>
       <hr className="h-[4px] w-full bg-[#2FC191]" />
       <hr className="h-[4px] w-full -mt-[1px] bg-[#053697]" />
-      <footer className="bg-white shadow-md mt-10">
-        <div className="container mx-auto text-center flex justify-between items-center">
+      <footer className="bg-white shadow-md mt-10 px-2">
+        <div className="container mx-auto text-center flex justify-between items-end md:items-center">
           <div className="flex justify-center mb-4">
             <Image src={logo} alt="PROTIPPZ" width={150} height={50} />
           </div>
-          <div className="flex justify-center space-x-8 mb-6 text-blue-500">
+          <div className="flex justify-center text-xs md:text-base space-x-8 mb-6 text-blue-500">
             <Link href="/terms">
               <span className="hover:text-[#053697] cursor-pointer">Terms</span>
             </Link>

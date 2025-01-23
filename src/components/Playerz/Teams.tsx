@@ -27,9 +27,9 @@ const Teams = async () => {
           data?.map((team: teamsType) => (
             <CarouselItem
               key={team._id}
-              className="basis-1/4 cursor-pointer md:basis-1/7 lg:basis-1/12 "
+              className="basis-1/4  cursor-pointer md:basis-1/7 lg:basis-1/12 "
             >
-              <div className="relative flex items-center justify-center flex-col">
+              <div className="relative hover:bg-slate-100 flex items-center justify-center flex-col">
                 <Image
                   src={
                     team?.league_image ? imageUrl(team.league_image) : teamImage

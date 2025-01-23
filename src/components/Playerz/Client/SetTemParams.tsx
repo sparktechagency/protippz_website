@@ -35,10 +35,10 @@ const SetTemParams = ({
   return (
     <div
       onClick={handleButtonClick}
-      className={`w-full absolute  h-full left-0 flex items-start justify-center top-0 `}
+      className={`w-full absolute h-full left-0 flex items-start justify-center top-0 `}
     >
       {isActive && (
-        <div className="bg-slate-500/10 text-white font-semibold flex items-center justify-center w-full h-full pointer-events-none"></div>
+        <div className="bg-slate-500/40  text-white font-semibold flex items-center justify-center w-full h-full"></div>
       )}
     </div>
   );
