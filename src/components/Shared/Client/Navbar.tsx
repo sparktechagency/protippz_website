@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
     { href: "/playerz", text: "PLAYERZ" },
     { href: "/teamz", text: "TEAMZ" },
     { href: "/rewardz", text: "REWARDZ" },
-    { href: "/store", text: "STORE" },
+    { href: "https://www.protippz.store", text: "STORE"},
   ];
   const handleMenuClick = (href: string) => {
     setActiveMenu(href);
@@ -181,7 +181,16 @@ const Navbar: React.FC = () => {
               {activeMenu === item.href && (
                 <div className="w-full h-[2px] bg-blue-500 absolute bottom-0 left-0"></div>
               )}
-              <Link href={item.href}>{item.text}</Link>
+              <Link
+                target={
+                  item?.href === "https://www.protippz.store"
+                    ? "_blank"
+                    : "_self"
+                }
+                href={item.href}
+              >
+                {item.text}
+              </Link>
             </motion.li>
           ))}
         </ul>
