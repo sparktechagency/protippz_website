@@ -4,55 +4,89 @@ import { useContextData } from "@/provider/ContextProvider";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { FaMobile, FaRegUserCircle } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import { HiOutlineLocationMarker } from "react-icons/hi";
 
 const ProfilePage = () => {
   const data = useContextData();
-  return (
-    <div className="container mx-auto p-8 text-center">
-      <h1 className="text-4xl font-bold text-blue-700 mb-8">Profile</h1>
 
-      <div className="flex flex-col items-center">
+  return (
+    <div className="container mx-auto p-8 text-center max-w-3xl">
+      <h1 className="text-4xl font-extrabold text-blue-700 mb-6">
+        Your Profile
+      </h1>
+
+      <div className="flex flex-col items-center bg-white shadow-lg rounded-lg p-6">
+        {/* Profile Image */}
         <Image
-          width={100}
-          height={100}
+          width={120}
+          height={120}
           unoptimized
           src={
             imageUrl(data?.userData?.profile_image || "") ||
             "https://i.ibb.co.com/f4tzYw2/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg"
           }
           alt="Profile"
-          className="w-32 h-32 rounded-full object-cover mb-4"
+          className="w-32 h-32 rounded-full border-4 border-blue-700 object-cover mb-4"
         />
 
-        <h2 className="text-2xl font-semibold text-blue-700">
-          {data?.userData?.name}
+        {/* Name */}
+        <h2 className="text-2xl font-bold text-blue-700 mb-2">
+          {data?.userData?.name || "Guest User"}
         </h2>
-        <p className="text-green-600 mb-8">{data?.userData?.email}</p>
 
-        <div className="text-left space-y-4">
-          <div className="flex justify-between">
-            <p className="font-semibold text-blue-700">User Name:</p>
-            <p className="text-green-600">{data?.userData?.username}</p>
+        {/* Info Section */}
+        <div className="w-full mt-4 space-y-4 text-left text-gray-700">
+          <div className="flex items-center gap-4 bg-gray-100 p-4 rounded-lg">
+            <FaRegUserCircle className="text-blue-700 text-2xl" />
+            <div>
+              <p className="font-semibold text-sm">User Name</p>
+              <p className="text-lg text-green-600">
+                {data?.userData?.username || "N/A"}
+              </p>
+            </div>
           </div>
-          <div className="flex justify-between">
-            <p className="font-semibold text-blue-700">Phone Number:</p>
-            <p className="text-green-600">{data?.userData?.phone}</p>
+
+          <div className="flex items-center gap-4 bg-gray-100 p-4 rounded-lg">
+            <FaMobile className="text-blue-700 text-2xl" />
+            <div>
+              <p className="font-semibold text-sm">Phone Number</p>
+              <p className="text-lg text-green-600">
+                {data?.userData?.phone || "N/A"}
+              </p>
+            </div>
           </div>
-          <div className="flex justify-between">
-            <p className="font-semibold text-blue-700">Address:</p>
-            <p className="text-green-600">
-              {typeof data?.userData?.address === "string"
-                ? data?.userData?.address
-                : data?.userData?.address?.streetAddress}
-            </p>
+
+          <div className="flex items-center gap-4 bg-gray-100 p-4 rounded-lg">
+            <MdEmail className="text-blue-700 text-2xl" />
+            <div>
+              <p className="font-semibold text-sm">Email</p>
+              <p className="text-lg text-green-600">
+                {data?.userData?.email || "N/A"}
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 bg-gray-100 p-4 rounded-lg">
+            <HiOutlineLocationMarker className="text-blue-700 text-2xl" />
+            <div>
+              <p className="font-semibold text-sm">Address</p>
+              <p className="text-lg text-green-600">
+                {typeof data?.userData?.address === "string"
+                  ? data?.userData?.address || "N/A"
+                  : data?.userData?.address?.streetAddress || "N/A"}
+              </p>
+            </div>
           </div>
         </div>
 
+        {/* Edit Button */}
         <Link
           href={`/profile/${data?.userData?._id}`}
-          className="mt-8 bg-blue-700 text-white font-semibold py-2 px-8 rounded-md hover:bg-blue-800 transition"
+          className="mt-8 inline-block bg-blue-700 text-white font-semibold py-3 px-10 rounded-full hover:bg-blue-800 transition-transform transform hover:scale-105"
         >
-          Edit
+          Edit Profile
         </Link>
       </div>
     </div>

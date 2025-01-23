@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React from "react";
 import Image from "next/image";
 import SendTipsButton from "./Client/RedeemButton";
@@ -26,7 +26,7 @@ const RewardzCards: React.FC<RewardCardsProps> = ({ item }) => {
       variants={cardReveal}
       initial="hidden"
       animate="visible"
-      className="relative bg-white border border-green-300 overflow-hidden rounded-lg shadow-md max-w-lg p-4 m-4 h-72 flex flex-col justify-between w-full mx-auto"
+      className="relative bg-white border  border-green-300 overflow-hidden rounded-lg shadow-md max-w-lg p-4 m-4  flex flex-col justify-between w-full mx-auto"
     >
       {/* Player Details Section */}
       <div className="flex flex-col justify-between pr-20">
@@ -43,12 +43,12 @@ const RewardzCards: React.FC<RewardCardsProps> = ({ item }) => {
           <p className="text-blue-900">{item.pointRequired}</p>
         </div>
       </div>
-      <div className="absolute right-4 top-12 w-40 h-40">
+      <div className="absolute m-2 right-0 top-0">
         <Image
           src={imageUrl(item.reward_image)}
           alt={item.name}
-          width={130}
-          height={150}
+          width={80}
+          height={80}
           className="object-cover rounded-md"
         />
       </div>

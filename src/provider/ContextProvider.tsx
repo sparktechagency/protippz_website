@@ -21,6 +21,7 @@ interface User {
   totalPoint: number;
   dueAmount: number;
   isStripeConnected: boolean;
+  totalTips: number;
   user: {
     role: string;
   };

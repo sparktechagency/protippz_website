@@ -7,8 +7,9 @@ const StorePage = () => {
     <div>
       <Heading headingText="STORE" subHeadingText="Coming Soon" />
       <Link
+        target="_blank"
         href={`https://www.protippz.store`}
-        className="px-6 py-3 bg-blue-500 rounded-md text-white"
+        className="px-6 py-3 bg-[#053697] rounded-md text-white"
       >
         see more
       </Link>

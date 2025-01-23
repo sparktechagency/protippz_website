@@ -6,15 +6,29 @@ import { IoChevronBack, IoChevronForwardSharp } from "react-icons/io5";
 
 const PlayerHomePage = () => {
   const data = useContextData();
+  console.log(data);
+
   return (
     <div className="flex flex-col items-center justify-center">
       <div className="text-center mb-6">
-        <h1 className="text-lg font-medium text-[#2FC191]">
-          Amount of Tippz:{" "}
-          <span className="text-[#053697] text-2xl">
-            $ {data?.userData?.dueAmount?.toString() || 0}
-          </span>
-        </h1>
+        <div className="flex items-center justify-center gap-4">
+          <div className="px-12 py-4 flex flex-col items-center justify-center rounded-md bg-slate-200 ">
+            <h1 className="text-lg font-medium text-[#2FC191]">
+              Amount of Tippz
+            </h1>
+            <span className="text-[#053697] text-2xl">
+              $ {data?.userData?.dueAmount?.toString() || 0}
+            </span>
+          </div>
+          <div className="px-12 py-4 flex flex-col items-center justify-center rounded-md bg-slate-200 ">
+            <h1 className="text-lg font-medium  text-[#2FC191]">
+            Current Balance
+            </h1>
+            <span className="text-[#053697] text-2xl">
+              $ {data?.userData?.totalTips?.toString() || 0}
+            </span>
+          </div>
+        </div>
         <Link
           href={`/player-withdraw`}
           className="mt-4 block px-6 py-2 bg-[#053697] text-white font-medium rounded-lg hover:bg-blue-700 transition"

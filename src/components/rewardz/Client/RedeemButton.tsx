@@ -139,7 +139,7 @@ const RedeemButton: React.FC<SendTipsButtonProps> = ({ item }) => {
     <>
       <button
         onClick={showGuideModal}
-        className="bg-blue-600 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none"
+        className="bg-[#053697] text-white font-bold py-2 px-4 rounded-md hover:bg-[#053697]/90 focus:outline-none"
       >
         Redeem
       </button>
@@ -153,7 +153,7 @@ const RedeemButton: React.FC<SendTipsButtonProps> = ({ item }) => {
         footer={[
           <button
             onClick={handleGuideModalNext}
-            className="bg-blue-600 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none"
+            className="bg-[#053697] text-white font-bold py-2 px-4 rounded-md hover:bg-[#053697]/90 focus:outline-none"
           >
             Redeem
           </button>,
