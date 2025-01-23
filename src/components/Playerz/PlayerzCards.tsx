@@ -88,62 +88,44 @@ const PlayerzCards: React.FC<PlayerzCardsProps> = ({ item }) => {
             >
               {item?.team?.name}
             </motion.p>
-            <motion.p
-              className="text-sm font-semibold text-green-500 mt-2"
+            <motion.div
               variants={textReveal}
               initial="hidden"
               animate="visible"
+              className="flex items-center gap-2"
             >
-              Position
-            </motion.p>
-            <motion.p
-              className="text-blue-900"
+              <motion.p className="text-sm font-semibold text-green-500 mt-2">
+                Position
+              </motion.p>
+              <motion.p className="text-sm mt-2 text-blue-900">{item.position}</motion.p>
+            </motion.div>
+            <motion.div
               variants={textReveal}
               initial="hidden"
               animate="visible"
+              className="flex items-center gap-2"
             >
-              {item.position}
-            </motion.p>
-            {item?.jerceyNumber && (
-              <>
-                <motion.p
-                  className="text-sm font-semibold text-green-500 mt-2"
-                  variants={textReveal}
-                  initial="hidden"
-                  animate="visible"
-                >
-                  Jersey No.
-                </motion.p>
-                <motion.p
-                  className="text-blue-900"
-                  variants={textReveal}
-                  initial="hidden"
-                  animate="visible"
-                >
-                  {item?.jerceyNumber}
-                </motion.p>
-              </>
-            )}
-            {item?.experience && (
-              <>
-                <motion.p
-                  className="text-sm font-semibold text-green-500 mt-2"
-                  variants={textReveal}
-                  initial="hidden"
-                  animate="visible"
-                >
-                  Experience.
-                </motion.p>
-                <motion.p
-                  className="text-blue-900"
-                  variants={textReveal}
-                  initial="hidden"
-                  animate="visible"
-                >
-                  {item?.experience}
-                </motion.p>
-              </>
-            )}
+              <motion.p className="text-sm font-semibold text-green-500 mt-2">
+                Jersey No.
+              </motion.p>
+              <motion.p className="text-sm mt-2 text-blue-900">
+                {item?.jerceyNumber || "N/A"}
+              </motion.p>
+            </motion.div>
+
+            <motion.div
+              variants={textReveal}
+              initial="hidden"
+              animate="visible"
+              className="flex items-center gap-2"
+            >
+              <motion.p className="text-sm font-semibold text-green-500 mt-2">
+                Experience.
+              </motion.p>
+              <motion.p className="text-sm mt-2 text-blue-900">
+                {item?.experience || "N/A"}
+              </motion.p>
+            </motion.div>
           </div>
           <div className="absolute top-4 right-4 text-green-500 text-2xl">
             <BookmarkButton
