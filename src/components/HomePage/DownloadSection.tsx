@@ -31,7 +31,7 @@ const DownloadSection = () => {
       </div>
       <div className="container mx-auto flex flex-col md:flex-row items-center justify-center space-y-8 md:space-y-0 md:space-x-12 relative">
         <motion.div
-          className="bg-[#2FC191] relative p-1 lg:h-[500px] h-[400px] text-white w-full max-w-lg md:max-w-lg lg:max-w-xl text-center z-10 flex flex-col justify-center items-center"
+          className="bg-[#2FC191] relative p-1 lg:h-[500px] h-[400px] text-white w-full max-w-lg md:max-w-lg lg:max-w-xl md:px-12 text-center z-10 flex flex-col justify-center items-center"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => {
             setIsHovered(false);

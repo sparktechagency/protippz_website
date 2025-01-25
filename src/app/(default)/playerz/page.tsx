@@ -2,6 +2,7 @@ import { get } from "@/ApisRequests/server";
 import PlayerzCards from "@/components/Playerz/PlayerzCards";
 import SearchAndSortComponent from "@/components/Playerz/SearchAndSortComponent";
 import Teams from "@/components/Playerz/Teams";
+import GoToTop from "@/components/ui/GoToTop";
 import PaginationComponents from "@/components/Shared/Client/Pagination";
 import Heading from "@/components/Shared/Heading";
 import { Empty } from "antd";
@@ -66,15 +67,17 @@ const PlayerZPage = async ({ searchParams }: ParamsProps) => {
   });
   const data = res.data?.result;
   const meta = res.data?.meta;
+
   return (
     <div className="container mx-auto mt-10">
+      <GoToTop />
       <Teams />
       <Heading headingText="PLAYERZ" subHeadingText="Select a Player" />
       <SearchAndSortComponent />
       {data?.length >= 1 ? (
         <>
-          <div className="w-full flex items-center justify-center px-2">
-            <div className="grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+          <div className="w-full flex px-2">
+            <div className="w-full grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
               {data &&
                 Array.isArray(data) &&
                 data?.map((item: Player) => (

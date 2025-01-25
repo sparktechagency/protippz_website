@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
     { href: "/playerz", text: "PLAYERZ" },
     { href: "/teamz", text: "TEAMZ" },
     { href: "/rewardz", text: "REWARDZ" },
-    { href: "https://www.protippz.store", text: "STORE"},
+    { href: "https://protippz.store", text: "STORE" },
   ];
   const handleMenuClick = (href: string) => {
     setActiveMenu(href);
@@ -165,7 +165,7 @@ const Navbar: React.FC = () => {
         </Link>
 
         {/* Desktop Navigation Links */}
-        <ul className="hidden md:flex space-x-6 text-blue-500">
+        <ul className="hidden md:flex space-x-6 text-[#06389F]">
           {navItems.map((item) => (
             <motion.li
               key={item.href}
@@ -183,7 +183,7 @@ const Navbar: React.FC = () => {
               )}
               <Link
                 target={
-                  item?.href === "https://www.protippz.store"
+                  item?.href === "https://protippz.store"
                     ? "_blank"
                     : "_self"
                 }
@@ -268,7 +268,7 @@ const Navbar: React.FC = () => {
           placement="right"
           onClose={closeDrawer}
           open={drawerVisible}
-          className="text-blue-500"
+          className="text-[#053697]"
         >
           <ul className="space-y-4">
             <li>

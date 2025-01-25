@@ -41,7 +41,7 @@ const SignInPage: React.FC = () => {
         Cookies.set("token", res?.data?.accessToken);
         if (Cookies.get("token")) {
           toast.success(res?.message || "logged in successfully");
-          window.location.href = "/";
+          window.location.href = "/home";
         } else {
           toast.custom(
             (t) => (

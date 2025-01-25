@@ -24,6 +24,7 @@ interface User {
   totalTips: number;
   user: {
     role: string;
+    email: string | undefined | null;
   };
   username: string;
   _id: string;

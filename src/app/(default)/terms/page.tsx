@@ -7,6 +7,7 @@ const page = async () => {
   } else {
     return (
       <div
+      className="px-12"
         dangerouslySetInnerHTML={{ __html: result?.data?.description }}
       ></div>
     );

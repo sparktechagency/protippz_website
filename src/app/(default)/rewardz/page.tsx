@@ -7,6 +7,8 @@ import React from "react";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { get } from "@/ApisRequests/server";
 import PaginationComponents from "@/components/Shared/Client/Pagination";
+import GoToTop from "@/components/ui/GoToTop";
+import { Empty } from "antd";
 
 export interface RewardInterface {
   _id: string;
@@ -34,17 +36,28 @@ const RewardzPage = async ({ searchParams }: PageProps) => {
   return (
     <>
       <div className="container mx-auto mt-10">
+        <GoToTop />
         <Rewards />
         <Heading headingText="REWARDZ" subHeadingText="Select a Reward" />
         <SearchAndSortComponent />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-          {rewardData?.map((item) => (
-            <RewardzCards item={item} key={item?._id} />
-          ))}
+          {rewardData?.length > 0 ? (
+            rewardData?.map((item) => (
+              <RewardzCards item={item} key={item?._id} />
+            ))
+          ) : (
+            <div className="col-span-3 py-28">
+              <Empty />
+            </div>
+          )}
         </div>
-        <div className="flex justify-center items-center">
-          <PaginationComponents paginationData={meta} />
-        </div>
+        {rewardData?.length > 0 ? (
+          <div className="flex justify-center items-center">
+            <PaginationComponents paginationData={meta} />
+          </div>
+        ) : (
+          ""
+        )}
       </div>
       <div
         style={{

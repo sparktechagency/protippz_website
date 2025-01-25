@@ -1,15 +1,33 @@
 "use client";
+import EmailVerfiyModal from "@/components/UserEmail/EmailVerifyModal";
 import { useContextData } from "@/provider/ContextProvider";
+
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { IoChevronBack, IoChevronForwardSharp } from "react-icons/io5";
 
 const PlayerHomePage = () => {
   const data = useContextData();
-  console.log(data);
+  const verifyEmail = data?.userData?.user?.email;
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    if (!verifyEmail) {
+      setShowModal(true);
+    }
+  }, [verifyEmail]);
 
   return (
     <div className="flex flex-col items-center justify-center">
+      {/* Modal */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <EmailVerfiyModal />
+        </div>
+      )}
+
+      {/* Main Content */}
       <div className="text-center mb-6">
         <div className="flex items-center justify-center gap-4">
           <div className="px-12 py-4 flex flex-col items-center justify-center rounded-md bg-slate-200 ">
@@ -22,7 +40,7 @@ const PlayerHomePage = () => {
           </div>
           <div className="px-12 py-4 flex flex-col items-center justify-center rounded-md bg-slate-200 ">
             <h1 className="text-lg font-medium  text-[#2FC191]">
-            Current Balance
+              Current Balance
             </h1>
             <span className="text-[#053697] text-2xl">
               $ {data?.userData?.totalTips?.toString() || 0}
@@ -43,13 +61,13 @@ const PlayerHomePage = () => {
             Player Name:
           </p>
           <p className=" rounded-md px-3 py-2 text-[#2FC191]">
-            {data?.userData?.name}
+            {data?.userData?.name || "N/A"}
           </p>
         </div>
         <div className="mb-4 flex justify-between items-center border  p-2 py-0 rounded-md border-[#2FC191]">
           <p className="block text-sm font-medium text-[#053697]">email:</p>
           <p className=" rounded-md px-3 py-2 text-[#2FC191]">
-            {data?.userData?.email}
+            {data?.userData?.user?.email || "N/A"}
           </p>
         </div>
         <div className="mb-4 flex justify-between items-center border  p-2 py-0 rounded-md border-[#2FC191]">
@@ -58,7 +76,7 @@ const PlayerHomePage = () => {
             1901 Thornridge Cir. Shiloh, Hawaii 81063, New York
             <Link
               href={`/address`}
-              className="text-blue-500 hover:underline text-sm ml-5"
+              className="text-[#053697] hover:underline text-sm ml-5"
             >
               ✏️
             </Link>
