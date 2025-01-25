@@ -1,5 +1,7 @@
 "use client";
 import EmailVerfiyModal from "@/components/UserEmail/EmailVerifyModal";
+import SuccessModal from "@/components/UserEmail/SuccessModal";
+import UserVerifyOtp from "@/components/UserEmail/UserVerifyOtp";
 import { useContextData } from "@/provider/ContextProvider";
 
 import Link from "next/link";
@@ -9,11 +11,16 @@ import { IoChevronBack, IoChevronForwardSharp } from "react-icons/io5";
 
 const PlayerHomePage = () => {
   const data = useContextData();
-  const verifyEmail = data?.userData?.user?.email;
+  const verifyEmail =
+    !data?.userData?.user?.email &&
+    (data?.userData?.user?.role == "player" ||
+      data?.userData?.user?.role == "team");
   const [showModal, setShowModal] = useState(false);
+  const [showModaOtp, setShowModalOtp] = useState(false);
+  const [addEmail, setAddEmail] = useState("");
 
   useEffect(() => {
-    if (!verifyEmail) {
+    if (verifyEmail) {
       setShowModal(true);
     }
   }, [verifyEmail]);
@@ -23,7 +30,18 @@ const PlayerHomePage = () => {
       {/* Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <EmailVerfiyModal />
+          <EmailVerfiyModal
+            setAddEmail={setAddEmail}
+            showModal={showModal}
+            setShowModalOtp={setShowModalOtp}
+            setShowModal={setShowModal}
+            showModaOtp={showModaOtp}
+          />
+        </div>
+      )}
+      {showModaOtp && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <UserVerifyOtp setShowModalOtp={setShowModalOtp} addEmail={addEmail} />
         </div>
       )}
 

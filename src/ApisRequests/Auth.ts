@@ -1,6 +1,6 @@
 'use server'
 
-import { baseUrl } from "./server"
+import { baseUrl, post } from "./server"
 interface SignUp {
     "password": string,
     "confirmPassword": string,
@@ -46,6 +46,9 @@ interface SignIn {
     "userNameOrEmail": number,
     "password": string,
 }
+
+
+
 export const SignInHandler = async (value: SignIn) => {
     const url = await baseUrl('auth/login')
     const response = await fetch(url, {
@@ -57,4 +60,13 @@ export const SignInHandler = async (value: SignIn) => {
     })
     return await response.json()
 }
+
+export interface IverifyEmail {
+    email: string,
+}
+
+
+export const addEmailAddress = async (data: IverifyEmail) => {
+   
+};
 
