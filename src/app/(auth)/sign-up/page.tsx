@@ -16,6 +16,16 @@ import { useGoogleLogin } from "@react-oauth/google";
 const { Title, Text } = Typography;
 import Cookies from "js-cookie";
 import { post } from "@/ApisRequests/server";
+
+export interface FinishFailedInfo {
+  values: Record<string, unknown>;
+  errorFields: {
+    name: (string | number)[];
+    errors: string[];
+  }[];
+  outOfDate: boolean;
+}
+
 const SignUpPage: React.FC = () => {
   const [invite, setInvite] = useState(
     new URLSearchParams(
@@ -41,6 +51,7 @@ const SignUpPage: React.FC = () => {
       termsAccepted: e.target.checked,
     });
   };
+
   const login = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       const response = await fetch(
@@ -102,7 +113,7 @@ const SignUpPage: React.FC = () => {
                     padding: "4px 8px",
                     cursor: "pointer",
                   }}
-                  onClick={() => toast.dismiss(t.id)} // Manually dismiss the toast
+                  onClick={() => toast.dismiss(t.id)}
                 >
                   Close
                 </button>
@@ -121,6 +132,31 @@ const SignUpPage: React.FC = () => {
     },
     onError: (err) => {},
   });
+  // const onFinish = async (values: any) => {
+  //   setLoading(true);
+  //   const data = {
+  //     password: values?.password,
+  //     confirmPassword: values?.confirmPassword,
+  //     userData: {
+  //       name: values?.fullName,
+  //       username: values?.username,
+  //       phone: values?.phoneNumber,
+  //       email: values?.email,
+  //       address: values?.address,
+  //       inviteToken: invite || "",
+  //     },
+  //   };
+  //   const res = await signUpHandler(data);
+  //   setLoading(false);
+  //   if (res?.success) {
+  //     localStorage.setItem("email", values?.email);
+  //     toast.success(res?.message || "Please check your email");
+  //     router.push("/otp");
+  //   } else {
+  //     toast.error(res?.message || "something went wrong");
+  //   }
+  // };
+
   const onFinish = async (values: any) => {
     setLoading(true);
     const data = {
@@ -135,18 +171,31 @@ const SignUpPage: React.FC = () => {
         inviteToken: invite || "",
       },
     };
+
     const res = await signUpHandler(data);
     setLoading(false);
+
     if (res?.success) {
       localStorage.setItem("email", values?.email);
       toast.success(res?.message || "Please check your email");
       router.push("/otp");
     } else {
-      toast.error(res?.message || "something went wrong");
+      if (res?.message?.includes("Email already exists")) {
+        toast.error(
+          "This email is already registered. Please use a different one."
+        );
+      } else {
+        toast.error(res?.message || "Something went wrong. Please try again.");
+      }
     }
   };
+  const onFinishFailed = ({ errorFields }: FinishFailedInfo) => {
+    if (errorFields.length) {
+      console.log(errorFields);
 
-  const onFinishFailed = (errorInfo: any) => {};
+      toast.error(errorFields[0].errors[0]);
+    }
+  };
 
   return (
     <>

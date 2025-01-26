@@ -95,13 +95,18 @@ body {
 body {
   font-family: "Poppins", serif;
 }
+::selection {
+  background-color: #073499;
+  color: white;
+}
 
 .dontTouch {
   user-select: none;
 }
 
 @keyframes shake {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateX(0);
   }
   20% {
@@ -121,7 +126,6 @@ body {
 .animate-shake {
   animation: shake 0.3s ease-in-out;
 }
-
 
 .animate-shake {
   animation: shake 0.5s ease-in-out;
