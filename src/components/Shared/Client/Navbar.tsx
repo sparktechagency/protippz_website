@@ -150,7 +150,7 @@ const Navbar: React.FC = () => {
       );
     }
   }, [data?.userData]);
-
+  console.log("user Id",data?.userData?._id);
   return (
     <div className="p-4 bg-white shadow-md">
       <nav className="flex items-center justify-between container mx-auto">
@@ -183,9 +183,7 @@ const Navbar: React.FC = () => {
               )}
               <Link
                 target={
-                  item?.href === "https://protippz.store"
-                    ? "_blank"
-                    : "_self"
+                  item?.href === "https://protippz.store" ? "_blank" : "_self"
                 }
                 href={item.href}
               >
@@ -194,6 +192,7 @@ const Navbar: React.FC = () => {
             </motion.li>
           ))}
         </ul>
+
         {/* Action Buttons for Desktop */}
         <div className="hidden md:flex items-center space-x-4">
           {data?.userData?._id ? (

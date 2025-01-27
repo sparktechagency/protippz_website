@@ -202,7 +202,7 @@ const SignUpPage: React.FC = () => {
       <div className="flex flex-col items-center bg-[#2FC191] p-8 rounded-lg max-w-2xl mt-10 w-full">
         <Image src={logo_green} alt="logo" height={100} width={200} />
         <Title level={3} className="text-center text-[#053697] text-3xl">
-          Sign up
+          Sign Up
         </Title>
         <Button
           onClick={() => login()}

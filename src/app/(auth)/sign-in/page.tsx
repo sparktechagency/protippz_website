@@ -41,7 +41,7 @@ const SignInPage: React.FC = () => {
         Cookies.set("token", res?.data?.accessToken);
         if (Cookies.get("token")) {
           toast.success(res?.message || "logged in successfully");
-          window.location.href = "/home";
+          window.location.href = res?.data?.role === "user" ? "/" : "/home";
         } else {
           toast.custom(
             (t) => (
@@ -83,7 +83,7 @@ const SignInPage: React.FC = () => {
               position: "top-center",
             }
           );
-          window.location.href = "/";
+          window.location.href = res?.data?.role === "user" ? "/" : "/home";
         }
       } else {
         toast.error(res?.message || "something went wrong");
@@ -101,7 +101,7 @@ const SignInPage: React.FC = () => {
       Cookies.set("token", res?.data?.accessToken);
       if (Cookies.get("token")) {
         toast.success(res?.message || "logged in successfully");
-        window.location.href = "/home";
+        window.location.href = res?.data?.role === "user" ? "/" : "/home";
       } else {
         toast.custom(
           (t) => (
@@ -143,7 +143,7 @@ const SignInPage: React.FC = () => {
             position: "top-center",
           }
         );
-        window.location.href = "/";
+        window.location.href = res?.data?.role === "user" ? "/" : "/home";
       }
     } else {
       toast.error(res?.message || "something went wrong");
@@ -165,7 +165,7 @@ const SignInPage: React.FC = () => {
         <Image src={logo} alt="logo" height={100} width={200} />
 
         <Title level={3} className="text-center text-[#053697] text-3xl mt-4">
-          Sign up
+          Sign Up
         </Title>
 
         <Button

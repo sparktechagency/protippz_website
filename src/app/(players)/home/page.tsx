@@ -6,8 +6,7 @@ import { useContextData } from "@/provider/ContextProvider";
 
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { IoChevronBack, IoChevronForwardSharp } from "react-icons/io5";
+import { IoChevronForwardSharp } from "react-icons/io5";
 
 const PlayerHomePage = () => {
   const data = useContextData();
@@ -41,7 +40,10 @@ const PlayerHomePage = () => {
       )}
       {showModaOtp && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <UserVerifyOtp setShowModalOtp={setShowModalOtp} addEmail={addEmail} />
+          <UserVerifyOtp
+            setShowModalOtp={setShowModalOtp}
+            addEmail={addEmail}
+          />
         </div>
       )}
 
@@ -53,7 +55,7 @@ const PlayerHomePage = () => {
               Amount of Tippz
             </h1>
             <span className="text-[#053697] text-2xl">
-              $ {data?.userData?.dueAmount?.toString() || 0}
+              $ {data?.userData?.totalTips?.toString() || 0}
             </span>
           </div>
           <div className="px-12 py-4 flex flex-col items-center justify-center rounded-md bg-slate-200 ">
@@ -61,7 +63,7 @@ const PlayerHomePage = () => {
               Current Balance
             </h1>
             <span className="text-[#053697] text-2xl">
-              $ {data?.userData?.totalTips?.toString() || 0}
+              $ {data?.userData?.dueAmount?.toString() || 0}
             </span>
           </div>
         </div>

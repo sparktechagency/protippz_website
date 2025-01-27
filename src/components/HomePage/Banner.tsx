@@ -51,7 +51,7 @@ const Banner = () => {
                 href={`/playerz`}
                 className="bg-[#053697] hover:bg-[#6491eb] text-white font-semibold py-3 px-6 rounded-lg transition-all"
               >
-                Start Tip
+                Send Tip
               </Link>
             </motion.div>
           ) : (
@@ -60,7 +60,7 @@ const Banner = () => {
                 href={`/sign-up`}
                 className="bg-[#053697] hover:bg-[#6491eb] text-white font-semibold py-3 px-6 rounded-lg transition-all"
               >
-                Sign up Now
+                Sign Up Now
               </Link>
             </motion.div>
           )}
