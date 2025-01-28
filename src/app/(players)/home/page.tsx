@@ -69,7 +69,7 @@ const PlayerHomePage = () => {
         </div>
         <Link
           href={`/player-withdraw`}
-          className="mt-4 block px-6 py-2 bg-[#053697] text-white font-medium rounded-lg hover:bg-blue-700 transition"
+          className="mt-4 block px-6 py-2 bg-[#053697] text-white font-medium rounded-lg hover:bg-[#053697]/90 transition"
         >
           Withdraw Now
         </Link>

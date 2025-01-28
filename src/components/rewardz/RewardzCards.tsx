@@ -32,15 +32,15 @@ const RewardzCards: React.FC<RewardCardsProps> = ({ item }) => {
       <div className="flex flex-col justify-between pr-20">
         <div className="text-left">
           <p className="text-sm font-semibold text-green-500">Reward</p>
-          <p className="font-bold text-blue-900 text-lg">{item.name}</p>
+          <p className="font-bold text-[#053697] text-lg">{item.name}</p>
           <p className="text-sm font-semibold text-green-500 mt-2">
             Description
           </p>
-          <p className="text-blue-900 max-w-[300px]">{item.description}</p>
+          <p className="text-[#053697] max-w-[300px]">{item.description}</p>
           <p className="text-sm font-semibold text-green-500 mt-2">
             PointsRequired
           </p>
-          <p className="text-blue-900">{item.pointRequired}</p>
+          <p className="text-[#053697]">{item.pointRequired}</p>
         </div>
       </div>
       <div className="absolute m-2 right-0 top-0">

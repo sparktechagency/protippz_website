@@ -97,7 +97,7 @@ const AddressPage = () => {
           <input className="w-full h-[38px] border border-[#2FC191] outline-none rounded-md p-2" />
         </Form.Item>
         <div className="col-span-2 flex justify-center items-center">
-          <button className=" px-6 py-2 bg-[#053697] text-white font-medium rounded-lg hover:bg-blue-700 transition">
+          <button className=" px-6 py-2 bg-[#053697] text-white font-medium rounded-lg hover:bg-[#053697]/90 transition">
             Save
           </button>
         </div>

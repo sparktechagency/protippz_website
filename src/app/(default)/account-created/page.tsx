@@ -11,7 +11,7 @@ const Page = async () => {
         <p className="mt-2 text-gray-700 my-5">Thank you .</p>
         <Link
           href={`/`}
-          className="mt-6 px-4 py-2 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-600 transition-colors duration-300"
+          className="mt-6 px-4 py-2 bg-[#053697] text-white font-bold rounded-lg hover:bg-[#053697]/90 transition-colors duration-300"
         >
           Go Home
         </Link>

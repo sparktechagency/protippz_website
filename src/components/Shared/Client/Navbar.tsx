@@ -87,7 +87,7 @@ const Navbar: React.FC = () => {
             <Link href="/withdraw">Withdraw Funds</Link>
           </Menu.Item> */}
           <Menu.Item key="4">
-            <Link href="/tippz-history">TIPPZ HISTORY</Link>
+            <Link href="/tippz-history">Tippz History</Link>
           </Menu.Item>
           <Menu.Item key="5">
             <Link href="/transaction-log">Transaction Log</Link>
@@ -115,7 +115,7 @@ const Navbar: React.FC = () => {
                 window.location.href = "sign-in";
               }}
             >
-              Sign out
+              Sign Out
             </button>
           </Menu.Item>
         </Menu>
@@ -143,14 +143,14 @@ const Navbar: React.FC = () => {
                 window.location.href = "sign-in";
               }}
             >
-              Sign out
+              Sign Out
             </button>
           </Menu.Item>
         </Menu>
       );
     }
   }, [data?.userData]);
-  console.log("user Id",data?.userData?._id);
+  console.log("user Id", data?.userData?._id);
   return (
     <div className="p-4 bg-white shadow-md">
       <nav className="flex items-center justify-between container mx-auto">
@@ -179,7 +179,7 @@ const Navbar: React.FC = () => {
               whileTap={{ scale: 0.9 }}
             >
               {activeMenu === item.href && (
-                <div className="w-full h-[2px] bg-blue-500 absolute bottom-0 left-0"></div>
+                <div className="w-full h-[2px] bg-[#053697] absolute bottom-0 left-0"></div>
               )}
               <Link
                 target={
@@ -275,7 +275,7 @@ const Navbar: React.FC = () => {
                 href="/tippz"
                 className="hover:text-[#053697] cursor-pointer"
               >
-                TIPPZ
+                Tippz
               </Link>
             </li>
             <li>
@@ -283,7 +283,7 @@ const Navbar: React.FC = () => {
                 href="/playerz"
                 className="hover:text-[#053697] cursor-pointer"
               >
-                PLAYERZ
+                Playerz
               </Link>
             </li>
             <li>
@@ -291,7 +291,7 @@ const Navbar: React.FC = () => {
                 href="/teamz"
                 className="hover:text-[#053697] cursor-pointer"
               >
-                TEAMZ
+                Teamz
               </Link>
             </li>
             <li>
@@ -299,7 +299,7 @@ const Navbar: React.FC = () => {
                 href="/rewardz"
                 className="hover:text-[#053697] cursor-pointer"
               >
-                REWARDZ
+                Rewardz
               </Link>
             </li>
             <li>
@@ -307,7 +307,7 @@ const Navbar: React.FC = () => {
                 href="/store"
                 className="hover:text-[#053697] cursor-pointer"
               >
-                STORE
+                Store
               </Link>
             </li>
           </ul>

@@ -47,7 +47,7 @@ const FAQPage: React.FC = () => {
             >
                 {
                     data?.map((item: FaqInterface) => <Panel
-                        header={<span className="text-blue-900 font-semibold">{item?.question}</span>}
+                        header={<span className="text-[#053697] font-semibold">{item?.question}</span>}
                         key={item?._id}
                         className="custom-panel"
                     >

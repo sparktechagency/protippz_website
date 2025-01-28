@@ -160,17 +160,17 @@ const WithDrawPage = () => {
   return (
     <div style={{ width: "100vw" }} className="w-full container mx-auto">
       <div className="w-full p-8 bg-white rounded-lg max-w-4xl mx-auto">
-        <h2 className="text-3xl font-semibold text-center mb-3 text-blue-900">
+        <h2 className="text-3xl font-semibold text-center mb-3 text-[#053697]">
           {" "}
           Withdraw Funds
         </h2>
-        <h2 className="text-3xl font-semibold text-center mb-6 text-blue-900">
+        <h2 className="text-3xl font-semibold text-center mb-6 text-[#053697]">
           <span className="text-[#2FC191]">Total Funds : </span> $
           {data?.userData?.dueAmount}
         </h2>
         <Form.Item name="amount">
           <div className="flex justify-center items-center gap-3 max-w-[400px] mx-auto md:flex-row flex-col">
-            <p className="text-blue-900 text-2xl whitespace-nowrap">
+            <p className="text-[#053697] text-2xl whitespace-nowrap">
               Enter amount
             </p>
             <Input
@@ -202,7 +202,7 @@ const WithDrawPage = () => {
                 <div className="flex items-center p-3 border rounded-lg border-green-400">
                   <Radio value="ach" className="flex items-center">
                     <div className="flex flex-nowrap gap-3 items-center justify-between">
-                      <span className="font-medium text-lg text-blue-900">
+                      <span className="font-medium text-lg text-[#053697]">
                         ACH
                       </span>
                       <Image
@@ -218,7 +218,7 @@ const WithDrawPage = () => {
                 <div className="flex items-center p-3 border rounded-lg border-green-400 mt-4">
                   <Radio value="check" className="flex items-center">
                     <div className="flex flex-nowrap gap-3 items-center justify-between">
-                      <span className="font-medium text-lg text-blue-900">
+                      <span className="font-medium text-lg text-[#053697]">
                         Check
                       </span>
                       <Image
@@ -274,7 +274,7 @@ const WithDrawPage = () => {
               <Form layout="vertical" onFinish={handleSubmit}>
                 <Form.Item
                   label={
-                    <span className="text-lg font-medium text-blue-900">
+                    <span className="text-lg font-medium text-[#053697]">
                       Player/Team Name
                     </span>
                   }
@@ -295,7 +295,7 @@ const WithDrawPage = () => {
                 <p className="text-xl">Mailing Address</p>
                 <Form.Item
                   label={
-                    <span className="text-lg font-medium text-blue-900">
+                    <span className="text-lg font-medium text-[#053697]">
                       Email
                     </span>
                   }
@@ -314,7 +314,7 @@ const WithDrawPage = () => {
 
                 <Form.Item
                   label={
-                    <span className="text-lg font-medium text-blue-900">
+                    <span className="text-lg font-medium text-[#053697]">
                       Street Address
                     </span>
                   }
@@ -335,7 +335,7 @@ const WithDrawPage = () => {
 
                 <Form.Item
                   label={
-                    <span className="text-lg font-medium text-blue-900">
+                    <span className="text-lg font-medium text-[#053697]">
                       City
                     </span>
                   }
@@ -353,7 +353,7 @@ const WithDrawPage = () => {
 
                 <Form.Item
                   label={
-                    <span className="text-lg font-medium text-blue-900">
+                    <span className="text-lg font-medium text-[#053697]">
                       State
                     </span>
                   }
@@ -371,7 +371,7 @@ const WithDrawPage = () => {
 
                 <Form.Item
                   label={
-                    <span className="text-lg font-medium text-blue-900">
+                    <span className="text-lg font-medium text-[#053697]">
                       Zip Code
                     </span>
                   }
@@ -391,7 +391,7 @@ const WithDrawPage = () => {
                   <Button
                     type="primary"
                     htmlType="submit"
-                    className="w-full bg-[#053697] h-[42px] text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition duration-300"
+                    className="w-full bg-[#053697] h-[42px] text-white font-semibold py-3 rounded-lg hover:bg-[#053697]/90 transition duration-300"
                   >
                     Withdraw Now
                   </Button>

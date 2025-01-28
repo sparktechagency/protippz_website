@@ -219,9 +219,16 @@ const SignInPage: React.FC = () => {
 
           <Form.Item>
             <Button
-              type="primary"
               htmlType="submit"
-              className="w-full bg-[#053697] hover:bg-[#467eee] h-[42px]"
+              className="w-full bg-[#053697] text-white h-[42px]"
+              onMouseEnter={(event: any) => (
+                (event.target.style.backgroundColor = "#053697c9"),
+                (event.target.style.color = "#fff")
+              )}
+              onMouseLeave={(event: any) => (
+                (event.target.style.backgroundColor = "#053697"),
+                (event.target.style.color = "#fff")
+              )}
             >
               {loading ? <Spin /> : "Sign In"}
             </Button>

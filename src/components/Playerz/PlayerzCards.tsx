@@ -65,7 +65,7 @@ const PlayerzCards: React.FC<PlayerzCardsProps> = ({ item }) => {
               Name
             </motion.p>
             <motion.p
-              className="font-bold text-blue-900 text-lg"
+              className="font-bold text-[#053697] text-lg"
               variants={textReveal}
               initial="hidden"
               animate="visible"
@@ -81,7 +81,7 @@ const PlayerzCards: React.FC<PlayerzCardsProps> = ({ item }) => {
               Team
             </motion.p>
             <motion.p
-              className="text-blue-900 w-10/12"
+              className="text-[#053697] w-10/12"
               variants={textReveal}
               initial="hidden"
               animate="visible"
@@ -97,7 +97,7 @@ const PlayerzCards: React.FC<PlayerzCardsProps> = ({ item }) => {
               <motion.p className="text-sm font-semibold text-green-500 mt-2">
                 Position
               </motion.p>
-              <motion.p className="text-sm mt-2 text-blue-900">{item.position}</motion.p>
+              <motion.p className="text-sm mt-2 text-[#053697]">{item.position}</motion.p>
             </motion.div>
             <motion.div
               variants={textReveal}
@@ -108,7 +108,7 @@ const PlayerzCards: React.FC<PlayerzCardsProps> = ({ item }) => {
               <motion.p className="text-sm font-semibold text-green-500 mt-2">
                 Jersey No.
               </motion.p>
-              <motion.p className="text-sm mt-2 text-blue-900">
+              <motion.p className="text-sm mt-2 text-[#053697]">
                 {item?.jerceyNumber || "N/A"}
               </motion.p>
             </motion.div>
@@ -122,7 +122,7 @@ const PlayerzCards: React.FC<PlayerzCardsProps> = ({ item }) => {
               <motion.p className="text-sm font-semibold text-green-500 mt-2">
                 Experience.
               </motion.p>
-              <motion.p className="text-sm mt-2 text-blue-900">
+              <motion.p className="text-sm mt-2 text-[#053697]">
                 {item?.experience || "N/A"}
               </motion.p>
             </motion.div>

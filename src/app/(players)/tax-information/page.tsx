@@ -103,7 +103,7 @@ const TaxInformationPage = () => {
           </Radio.Group>
         </Form.Item>
         <div className="col-span-2 flex justify-center items-center">
-          <button className=" px-6 py-2 bg-[#053697] text-white font-medium rounded-lg hover:bg-blue-700 transition">
+          <button className=" px-6 py-2 bg-[#053697] text-white font-medium rounded-lg hover:bg-[#053697]/90 transition">
             Save
           </button>
         </div>

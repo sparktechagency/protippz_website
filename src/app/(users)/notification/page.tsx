@@ -59,14 +59,14 @@ const NotificationPage = async () => {
     <div className="container mx-auto p-4">
       {data?.length >= 1 ? (
         <div>
-          <h1 className="text-4xl font-bold text-blue-700 mb-12 text-center">
+          <h1 className="text-4xl font-bold text-[#053697] mb-12 text-center">
             Notifications
           </h1>
           <div className="space-y-4">
             {data?.map((notification) => (
               <div className="flex justify-between items-start border-b pb-4">
                 <div>
-                  <h2 className="text-lg font-semibold text-blue-700">
+                  <h2 className="text-lg font-semibold text-[#053697]">
                     {notification.title}
                   </h2>
                   <p className="text-green-600">{notification.message}</p>
@@ -86,7 +86,9 @@ const NotificationPage = async () => {
         </div>
       ) : (
         <div>
-          <h1 className="text-4xl font-bold text-blue-700 mb-12 text-center">Notifications Empty</h1>
+          <h1 className="text-4xl font-bold text-[#053697] mb-12 text-center">
+            Notifications Empty
+          </h1>
           <Empty />
         </div>
       )}

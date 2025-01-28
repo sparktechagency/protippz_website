@@ -67,7 +67,7 @@ const TeamzCards: React.FC<TeamzCardsProps> = ({ item }) => {
               variants={textReveal}
               initial="hidden"
               animate="visible"
-              className="font-bold w-9/12 text-blue-900 text-lg"
+              className="font-bold w-9/12 text-[#053697] text-lg"
             >
               {item.name}
             </motion.p>
@@ -83,7 +83,7 @@ const TeamzCards: React.FC<TeamzCardsProps> = ({ item }) => {
               variants={textReveal}
               initial="hidden"
               animate="visible"
-              className="text-blue-900"
+              className="text-[#053697]"
             >
               {item.league?.sport}
             </motion.p>

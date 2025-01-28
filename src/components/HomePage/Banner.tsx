@@ -49,16 +49,16 @@ const Banner = () => {
             <motion.div variants={childVariants}>
               <Link
                 href={`/playerz`}
-                className="bg-[#053697] hover:bg-[#6491eb] text-white font-semibold py-3 px-6 rounded-lg transition-all"
+                className="bg-[#053697] hover:bg-[#053697]/90 text-white font-semibold py-3 px-6 rounded-lg transition-all"
               >
-                Send Tip
+                Send Tippz
               </Link>
             </motion.div>
           ) : (
             <motion.div variants={childVariants}>
               <Link
                 href={`/sign-up`}
-                className="bg-[#053697] hover:bg-[#6491eb] text-white font-semibold py-3 px-6 rounded-lg transition-all"
+                className="bg-[#053697] hover:bg-[#053697]/90 text-white font-semibold py-3 px-6 rounded-lg transition-all"
               >
                 Sign Up Now
               </Link>

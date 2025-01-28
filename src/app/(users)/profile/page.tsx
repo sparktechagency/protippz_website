@@ -13,7 +13,7 @@ const ProfilePage = () => {
 
   return (
     <div className="container mx-auto p-8 text-center max-w-3xl">
-      <h1 className="text-4xl font-extrabold text-blue-700 mb-6">
+      <h1 className="text-4xl font-extrabold text-[#053697] mb-6">
         Your Profile
       </h1>
 
@@ -28,18 +28,18 @@ const ProfilePage = () => {
             "https://i.ibb.co.com/f4tzYw2/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg"
           }
           alt="Profile"
-          className="w-32 h-32 rounded-full border-4 border-blue-700 object-cover mb-4"
+          className="w-32 h-32 rounded-full border-4 border-[#053697] object-cover mb-4"
         />
 
         {/* Name */}
-        <h2 className="text-2xl font-bold text-blue-700 mb-2">
+        <h2 className="text-2xl font-bold text-[#053697] mb-2">
           {data?.userData?.name || "Guest User"}
         </h2>
 
         {/* Info Section */}
         <div className="w-full mt-4 space-y-4 text-left text-gray-700">
           <div className="flex items-center gap-4 bg-gray-100 p-4 rounded-lg">
-            <FaRegUserCircle className="text-blue-700 text-2xl" />
+            <FaRegUserCircle className="text-[#053697] text-2xl" />
             <div>
               <p className="font-semibold text-sm">User Name</p>
               <p className="text-lg text-green-600">
@@ -49,7 +49,7 @@ const ProfilePage = () => {
           </div>
 
           <div className="flex items-center gap-4 bg-gray-100 p-4 rounded-lg">
-            <FaMobile className="text-blue-700 text-2xl" />
+            <FaMobile className="text-[#053697] text-2xl" />
             <div>
               <p className="font-semibold text-sm">Phone Number</p>
               <p className="text-lg text-green-600">
@@ -59,7 +59,7 @@ const ProfilePage = () => {
           </div>
 
           <div className="flex items-center gap-4 bg-gray-100 p-4 rounded-lg">
-            <MdEmail className="text-blue-700 text-2xl" />
+            <MdEmail className="text-[#053697] text-2xl" />
             <div>
               <p className="font-semibold text-sm">Email</p>
               <p className="text-lg text-green-600">
@@ -69,7 +69,7 @@ const ProfilePage = () => {
           </div>
 
           <div className="flex items-center gap-4 bg-gray-100 p-4 rounded-lg">
-            <HiOutlineLocationMarker className="text-blue-700 text-2xl" />
+            <HiOutlineLocationMarker className="text-[#053697] text-2xl" />
             <div>
               <p className="font-semibold text-sm">Address</p>
               <p className="text-lg text-green-600">
@@ -84,7 +84,7 @@ const ProfilePage = () => {
         {/* Edit Button */}
         <Link
           href={`/profile/${data?.userData?._id}`}
-          className="mt-8 inline-block bg-blue-700 text-white font-semibold py-3 px-10 rounded-full hover:bg-blue-800 transition-transform transform hover:scale-105"
+          className="mt-8 inline-block bg-[#053697] text-white font-semibold py-3 px-10 rounded-full hover:bg-[#053697]/90 transition-transform transform hover:scale-105"
         >
           Edit Profile
         </Link>

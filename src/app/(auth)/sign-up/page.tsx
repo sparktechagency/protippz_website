@@ -205,9 +205,17 @@ const SignUpPage: React.FC = () => {
           Sign Up
         </Title>
         <Button
+          className="w-full bg-[#053697] text-white h-[42px]"
+          onMouseEnter={(event: any) => (
+            (event.target.style.backgroundColor = "#053697c9"),
+            (event.target.style.color = "#fff")
+          )}
+          onMouseLeave={(event: any) => (
+            (event.target.style.backgroundColor = "#053697"),
+            (event.target.style.color = "#fff")
+          )}
           onClick={() => login()}
           icon={<FaGoogle />}
-          className="w-full mb-4 bg-white text-[#053697] h-[42px]"
         >
           Sign up with Google
         </Button>
@@ -329,7 +337,15 @@ const SignUpPage: React.FC = () => {
             <Button
               type="primary"
               htmlType="submit"
-              className="w-full mb-3 bg-[#053697] hover:bg-[#467eee] h-[42px]"
+              className="w-full bg-[#053697] text-white h-[42px]"
+              onMouseEnter={(event: any) => (
+                (event.target.style.backgroundColor = "#053697c9"),
+                (event.target.style.color = "#fff")
+              )}
+              onMouseLeave={(event: any) => (
+                (event.target.style.backgroundColor = "#053697"),
+                (event.target.style.color = "#fff")
+              )}
             >
               {loading ? <Spin size="small" /> : " Sign up"}
             </Button>

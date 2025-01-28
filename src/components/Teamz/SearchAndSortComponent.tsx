@@ -87,6 +87,14 @@ const SearchAndSortComponent: React.FC = () => {
         <Button
           type="primary"
           className="bg-[#053697] text-white w-full sm:w-auto md:h-[42px]"
+          onMouseEnter={(event: any) => (
+            (event.target.style.backgroundColor = "#053697c9"),
+            (event.target.style.color = "#fff")
+          )}
+          onMouseLeave={(event: any) => (
+            (event.target.style.backgroundColor = "#053697"),
+            (event.target.style.color = "#fff")
+          )}
           onClick={handleSearch}
         >
           Search

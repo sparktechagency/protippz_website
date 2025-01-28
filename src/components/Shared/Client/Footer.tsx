@@ -39,7 +39,7 @@ const Footer = () => {
             </Link>
           </div>
         </div>
-        <hr className="border-t border-blue-500 mb-6" />
+        <hr className="border-t border-[#053697] mb-6" />
         <div className="container mx-auto flex justify-between items-center pb-6">
           <p className="text-[#053697] text-sm">
             © {new Date().getFullYear()} PROTIPPZ. All rights reserved.

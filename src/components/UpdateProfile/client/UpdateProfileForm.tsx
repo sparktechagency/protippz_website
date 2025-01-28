@@ -71,7 +71,7 @@ const UpdateProfileForm: React.FC = () => {
   };
   return (
     <div className="container mx-auto p-8 text-center w-full">
-      <h1 className="text-4xl font-bold text-blue-700 mb-8">Edit Profile</h1>
+      <h1 className="text-4xl font-bold text-[#053697] mb-8">Edit Profile</h1>
 
       <div className="flex flex-col items-center mb-6 relative">
         <Upload
@@ -178,7 +178,7 @@ const UpdateProfileForm: React.FC = () => {
           <Button
             type="primary"
             htmlType="submit"
-            className="w-full bg-blue-700 hover:bg-blue-800"
+            className="w-full bg-[#053697] hover:bg-[#053697]/90"
           >
             Save
           </Button>

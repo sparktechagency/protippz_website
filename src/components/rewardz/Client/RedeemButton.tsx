@@ -299,7 +299,7 @@ const RedeemButton: React.FC<SendTipsButtonProps> = ({ item }) => {
       {/* Shipping Address Modal */}
       <Modal
         title={
-          <span className="text-lg font-bold text-blue-900">
+          <span className="text-lg font-bold text-[#053697]">
             Verify Name and Mailing Address
           </span>
         }
@@ -414,7 +414,7 @@ const RedeemButton: React.FC<SendTipsButtonProps> = ({ item }) => {
             <Button
               type="primary"
               htmlType="submit"
-              className="w-full rounded-lg bg-blue-900 text-white"
+              className="w-full rounded-lg bg-[#053697] text-white"
             >
               Submit
             </Button>

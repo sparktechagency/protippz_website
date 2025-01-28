@@ -101,7 +101,7 @@ const SendTipsButton: React.FC<SendTipsButtonProps> = ({ item }) => {
     <>
       <button
         onClick={showModal}
-        className="bg-[#053697] text-white font-bold py-2 px-4 rounded-md hover:bg-[#184eb9] focus:outline-none"
+        className="bg-[#053697] text-white font-bold py-2 px-4 rounded-md hover:bg-[#184eb9]/90 focus:outline-none"
       >
         Send Tippz
       </button>
@@ -122,7 +122,7 @@ const SendTipsButton: React.FC<SendTipsButtonProps> = ({ item }) => {
             className="rounded-full border-2 mx-auto mb-4"
             unoptimized
           />
-          <h2 className="text-xl font-bold text-blue-900">{item.name}</h2>
+          <h2 className="text-xl font-bold text-[#053697]">{item.name}</h2>
           {/* <p><span className="text-green-500 font-semibold">League:</span> NCAA</p> */}
           <p>
             <span className="text-green-500 font-semibold">Team:</span>{" "}
