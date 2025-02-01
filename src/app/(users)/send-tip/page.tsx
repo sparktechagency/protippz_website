@@ -27,7 +27,7 @@ const DepositFundForm = () => {
   );
   const stripe = useStripe();
   const elements = useElements();
-  const [paymentMethod, setPaymentMethod] = useState("credit");
+  const [paymentMethod, setPaymentMethod] = useState("paypal");
   const [amount, setAmount] = useState(currentParams.get("amount"));
   const [entityType, setEntityType] = useState(currentParams.get("entityType"));
   const [entityId, setEntityId] = useState(currentParams.get("entityId"));

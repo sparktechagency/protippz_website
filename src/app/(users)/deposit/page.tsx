@@ -24,7 +24,7 @@ const DepositFundForm = () => {
   const router = useRouter();
   const stripe = useStripe();
   const elements = useElements();
-  const [paymentMethod, setPaymentMethod] = useState("credit");
+  const [paymentMethod, setPaymentMethod] = useState("paypal");
   const [amount, setAmount] = useState("");
 
   const handleSubmit = async (event: React.FormEvent) => {
