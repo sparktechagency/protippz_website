@@ -15,12 +15,12 @@ interface SendTipsButtonProps {
 
 const SendTipsButton: React.FC<SendTipsButtonProps> = ({ item }) => {
   const [form] = Form.useForm();
-  const router = useRouter();
   const [amount, setAmount] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [isOopsModalOpen, setIsOopsModalOpen] = useState(false);
   const data = useContextData();
+  const router = useRouter();
 
   const showModal = () => {
     if (data?.userData?.user) {

@@ -67,6 +67,6 @@ export interface IverifyEmail {
 
 
 export const addEmailAddress = async (data: IverifyEmail) => {
-   
+
 };
 

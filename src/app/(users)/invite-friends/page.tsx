@@ -1,13 +1,17 @@
 "use client";
 import React, { useState } from "react";
-import { Button, Input, Modal } from "antd";
+import { Modal } from "antd";
 import { post } from "@/ApisRequests/server";
 import { FiClipboard } from "react-icons/fi";
 import toast from "react-hot-toast";
+import { FaWhatsapp } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import Link from "next/link";
 
 const InviteFriendsPage: React.FC = () => {
   const [inviteLink, setInviteLink] = useState("");
   const [openModal, setOpenModal] = useState(false);
+
   const inviteHandler = async () => {
     const res = await post(
       "/invite/invite-friend",
@@ -25,6 +29,7 @@ const InviteFriendsPage: React.FC = () => {
       toast.error(res?.message);
     }
   };
+
   const handleCopy = () => {
     navigator.clipboard
       .writeText(inviteLink)
@@ -35,6 +40,16 @@ const InviteFriendsPage: React.FC = () => {
         toast.error("There was an error copying the invite link.");
       });
   };
+
+  const openGmail = () => {
+    const subject = "Join me on PROTIPPZ!";
+    const body = `Hey, join PROTIPPZ using this link: ${inviteLink}`;
+    const mailtoLink = `mailto:?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+    window.open(mailtoLink, "_blank");
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       <h2 className="text-center text-[#053697] text-4xl font-bold mb-2">
@@ -104,7 +119,7 @@ const InviteFriendsPage: React.FC = () => {
           <h3 className="text-2xl font-semibold text-green-600 mb-6 text-center">
             Invite Link Created Successfully!
           </h3>
-          <div className="flex items-center w-full">
+          <div className="flex items-center w-full mb-6">
             <p className="text-center w-full">{inviteLink}</p>
             <button onClick={handleCopy}>
               <FiClipboard
@@ -112,6 +127,32 @@ const InviteFriendsPage: React.FC = () => {
                 className="ml-2 cursor-pointer text-green-600 hover:text-green-700 transition-all duration-300 ease-in-out"
               />
             </button>
+          </div>
+
+          <div className="flex space-x-4">
+            <a
+              href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
+                inviteLink
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-green-500 hover:text-green-600 transition-all duration-300 ease-in-out"
+            >
+              <FaWhatsapp size={24} />
+            </a>
+
+            <Link
+              href={`https://mail.google.com/mail/?view=cm&fs=1&su=${encodeURIComponent(
+                "Join me on PROTIPPZ!"
+              )}&body=${encodeURIComponent(
+                `Hi,\n\nJoin me on PROTIPPZ using this link: ${inviteLink}\n\nCheers!`
+              )}`}
+              target="_blank"
+            >
+              <button className="text-green-500 hover:text-green-600 transition-all duration-300 ease-in-out">
+                <MdEmail size={24} />
+              </button>
+            </Link>
           </div>
         </div>
       </Modal>

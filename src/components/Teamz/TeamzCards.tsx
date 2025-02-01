@@ -4,7 +4,7 @@ import SendTipsButton from "./Client/SendTipsButton";
 import { imageUrl } from "@/ApisRequests/server";
 import BookmarkButton from "../Shared/Client/BookmarkButton";
 import bg from "@/Assets/bg.png";
-import league from "@/Assets/league.png";
+import league from "@/Assets/PT Logo.png";
 import { TeamInterface } from "@/app/(default)/teamz/page";
 import { motion } from "framer-motion";
 interface TeamzCardsProps {

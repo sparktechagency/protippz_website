@@ -1,13 +1,13 @@
 import { get } from "@/ApisRequests/server";
 import PlayerzCards from "@/components/Playerz/PlayerzCards";
 import SearchAndSortComponent from "@/components/Playerz/SearchAndSortComponent";
-import Teams from "@/components/Playerz/Teams";
 import GoToTop from "@/components/ui/GoToTop";
 import PaginationComponents from "@/components/Shared/Client/Pagination";
 import Heading from "@/components/Shared/Heading";
 import { Empty } from "antd";
 import { cookies } from "next/headers";
 import React from "react";
+import Teams from "@/components/Playerz/Teams";
 
 export const metadata = {
   title: "PROTIPPZ - PLAYERZ",
@@ -43,14 +43,14 @@ interface ParamsProps {
 }
 
 const PlayerZPage = async ({ searchParams }: ParamsProps) => {
-  const { searchTerm, sort, page, league } = await searchParams;
+  const { searchTerm, sort, page, team } = await searchParams;
 
   const param = {
     searchTerm: searchTerm || undefined,
     sort: sort || undefined,
     // position: position || undefined,
     page: page || undefined,
-    league: league || undefined,
+    team: team || undefined,
   };
   const cookie = cookies();
   const token = (await cookie).get("token")?.value;
@@ -72,6 +72,7 @@ const PlayerZPage = async ({ searchParams }: ParamsProps) => {
     <div className="container mx-auto mt-10">
       <GoToTop />
       <Teams />
+
       <Heading headingText="PLAYERZ" subHeadingText="Select a Player" />
       <SearchAndSortComponent />
       {data?.length >= 1 ? (

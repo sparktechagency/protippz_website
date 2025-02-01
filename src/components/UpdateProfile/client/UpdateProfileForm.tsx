@@ -77,7 +77,7 @@ const UpdateProfileForm: React.FC = () => {
         <Upload
           showUploadList={false}
           onChange={handleUploadChange}
-          beforeUpload={() => false} // Prevent automatic upload
+          beforeUpload={() => false} 
         >
           <Image
             width={100}

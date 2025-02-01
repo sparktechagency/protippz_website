@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import { imageUrl, post } from "@/ApisRequests/server";
 import toast from "react-hot-toast";
 import { TeamInterface } from "@/app/(default)/teamz/page";
+import { useContextData } from "@/provider/ContextProvider";
+import Swal from "sweetalert2";
 
 interface SendTipsButtonProps {
   item: TeamInterface;
@@ -13,16 +15,36 @@ interface SendTipsButtonProps {
 
 const SendTipsButton: React.FC<SendTipsButtonProps> = ({ item }) => {
   const [form] = Form.useForm();
-  const router = useRouter();
   const [amount, setAmount] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [isOopsModalOpen, setIsOopsModalOpen] = useState(false);
 
+  const data = useContextData();
+  const router = useRouter();
+
   const showModal = () => {
-    setIsModalOpen(true);
+    if (data?.userData?.user) {
+      setIsModalOpen(true);
+    } else {
+      Swal.fire({
+        title: "You need to log in!",
+        text: "Please log in to access this feature.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Go to Login",
+        cancelButtonText: "Cancel",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigateToLogin();
+        }
+      });
+    }
   };
 
+  const navigateToLogin = () => {
+    router.push("/sign-in");
+  };
   const handleCancel = () => {
     setIsModalOpen(false);
     setIsPaymentModalOpen(false);

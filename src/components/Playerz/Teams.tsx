@@ -13,9 +13,10 @@ import SetTemParams from "./Client/SetTemParams";
 interface teamsType {
   _id: string;
   name: string;
-  league_image: string;
+  team_bg_image: string;
   sport: string;
 }
+import bg from "@/Assets/bg.png";
 const Teams = async () => {
   const [data, meta] = await getTeam();
   return (
@@ -31,16 +32,14 @@ const Teams = async () => {
             >
               <div className="relative hover:bg-slate-100 flex items-center justify-center flex-col">
                 <Image
-                  src={
-                    team?.league_image ? imageUrl(team.league_image) : teamImage
-                  } //
+                  src={team?.team_bg_image ? imageUrl(team?.team_bg_image) : bg} //
                   alt={team.name}
                   className=" w-[80px] h-[80px] object-contain"
                   height={100}
                   width={100}
                 />
                 <p className="text-sm">{team?.name?.slice(0, 10)}..</p>
-                <SetTemParams ParamKey="league" value={team?._id} />
+                <SetTemParams ParamKey="team" value={team?._id} />
               </div>
             </CarouselItem>
           ))}
@@ -52,6 +51,6 @@ const Teams = async () => {
 
 export default Teams;
 const getTeam = async () => {
-  const res = await get("/league/get-all?limit=999999999");
+  const res = await get("/team/get-all?limit=999999999");
   return [res.data?.result, res.data?.meta];
 };
