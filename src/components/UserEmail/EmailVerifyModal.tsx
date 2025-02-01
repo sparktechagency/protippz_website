@@ -31,7 +31,6 @@ function EmailVerifyModal({
           Authorization: `${localStorage.getItem("token")}`,
         },
       });
-      console.log(result);
 
       if (result.success) {
         setAddEmail(EmailVerify);

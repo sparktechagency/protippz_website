@@ -40,7 +40,6 @@ const UserVerifyOtp = ({ setShowModalOtp, addEmail }:{
           Authorization: `${localStorage.getItem("token")}`,
         },
       });
-      console.log(result);
 
       if (result.success) {
         toast.success("Email verified successfull");

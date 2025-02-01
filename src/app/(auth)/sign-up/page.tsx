@@ -191,8 +191,6 @@ const SignUpPage: React.FC = () => {
   };
   const onFinishFailed = ({ errorFields }: FinishFailedInfo) => {
     if (errorFields.length) {
-      console.log(errorFields);
-
       toast.error(errorFields[0].errors[0]);
     }
   };

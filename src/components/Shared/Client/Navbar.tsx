@@ -150,7 +150,6 @@ const Navbar: React.FC = () => {
       );
     }
   }, [data?.userData]);
-  console.log("user Id", data?.userData?._id);
   return (
     <div className="p-4 bg-white shadow-md">
       <nav className="flex items-center justify-between container mx-auto">

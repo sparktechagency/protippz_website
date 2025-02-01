@@ -21,7 +21,6 @@ const SetTemParams = ({
 
   const handleButtonClick = () => {
     const currentParams = new URLSearchParams(searchParams?.toString() || "");
-    console.log(currentParams);
 
     for (const [paramKey, paramValue] of currentParams.entries()) {
       if (paramValue === "undefined") {
