@@ -7,8 +7,8 @@ import toast from "react-hot-toast";
 import { post } from "@/ApisRequests/server";
 const { Title } = Typography;
 interface UserVerifyOtpProps {
-  setShowModalOtp: (value: boolean) => void; // Function to control OTP modal visibility
-  addEmail: string; // Email address to verify
+  setShowModalOtp: (value: boolean) => void;
+  addEmail: string; 
 }
 const UserVerifyOtp = ({ setShowModalOtp, addEmail }:{
   addEmail: string; 

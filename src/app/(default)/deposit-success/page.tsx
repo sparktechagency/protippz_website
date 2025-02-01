@@ -9,6 +9,7 @@ const Page = async ({
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }) => {
   const { PayerID, paymentId, token } = await searchParams;
+
   const cookie = cookies();
   const res = await post(
     `/deposit/execute-paypal-deposit`,
@@ -24,13 +25,13 @@ const Page = async ({
   );
   if (res?.success) {
     return (
-      <div className="flex justify-center items-center min-h-screen ">
+      <div className="flex justify-center items-center">
         <div className="text-center p-6 bg-white rounded-lg shadow-lg">
           <h2 className="text-2xl font-semibold text-green-600">
             Deposit Successful!
           </h2>
           <p className="mt-2 text-gray-700 my-5">
-            Thank you for your purchase. Your payment was successful.
+            Thank you for your deposit. Your payment was successful.
           </p>
           <Link
             href={`/`}
@@ -44,7 +45,7 @@ const Page = async ({
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen ">
+    <div className="flex justify-center items-center">
       <div className="text-center p-6 bg-white rounded-lg shadow-lg">
         <h2 className="text-2xl font-semibold text-red-600">Payment Failed</h2>
         <p className="mt-2 text-gray-700 my-4">
