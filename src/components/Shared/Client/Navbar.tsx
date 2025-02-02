@@ -303,7 +303,8 @@ const Navbar: React.FC = () => {
             </li>
             <li>
               <Link
-                href="/store"
+                target="_blank"
+                href="https://protippz.store"
                 className="hover:text-[#053697] cursor-pointer"
               >
                 Store
