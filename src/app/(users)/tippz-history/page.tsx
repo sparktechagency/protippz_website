@@ -50,7 +50,13 @@ const TippzHistoryPage = () => {
       dataIndex: "date",
       key: "date",
       render: (_: any, record: TipHistoryInterface) => (
-        <span>{record?.createdAt?.split("T")?.[0]}</span>
+        <span>
+          {new Date(record?.createdAt).toLocaleDateString("en-GB", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+          })}
+        </span>
       ),
     },
     {
@@ -64,7 +70,7 @@ const TippzHistoryPage = () => {
             alt={record?.entity?.name}
             style={{ marginRight: 8 }}
           />
-          <span>{record?.entity?.name}</span>
+          <span>{record?.entity?.name || "N/A"}</span>
         </div>
       ),
     },
@@ -99,11 +105,12 @@ const TippzHistoryPage = () => {
   }, []);
 
   return (
-    <div style={{ padding: "20px", textAlign: "center" }}>
+    <div className="w-full max-w-screen-2xl" style={{ padding: "20px", textAlign: "center" }}>
       <Title level={2} style={{ color: "#053697" }}>
         Tippz History
       </Title>
       <Table
+      className="w-full"
         columns={columns}
         dataSource={tipHistory}
         pagination={{
@@ -112,7 +119,6 @@ const TippzHistoryPage = () => {
           onChange: (page) => setPage(page),
         }}
         bordered
-        style={{ maxWidth: "800px", margin: "auto", marginTop: "20px" }}
         rowClassName={(record, index) =>
           index % 2 === 0 ? "even-row" : "odd-row"
         }

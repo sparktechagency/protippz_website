@@ -6,7 +6,7 @@ export function middleware(request: NextRequest) {
     const protectedRoutes = ["/rewardz"];
     if (protectedRoutes.includes(request.nextUrl.pathname)) {
         if (!token) {
-            return NextResponse.redirect(new URL("/sign-in", request.url));
+            return NextResponse.redirect(new URL("/prottiz-special", request.url));
         }
     }
 
