@@ -11,8 +11,6 @@ interface Props {
 }
 
 const Cards: React.FC<Props> = ({ data }) => {
-  console.log(data);
-
   return (
     <div className="max-w-sm mx-auto rounded-lg overflow-hidden shadow-lg bg-white">
       <div className="relative h-60 w-full">
@@ -27,10 +25,8 @@ const Cards: React.FC<Props> = ({ data }) => {
           />
         ) : (
           <video
-            className="rounded-t-lg"
+            className="rounded-t-lg w-full h-full bg-center object-cover"
             src={data?.videoUrl}
-            width="100%"
-            height="100%"
             controls={false}
             muted
             autoPlay

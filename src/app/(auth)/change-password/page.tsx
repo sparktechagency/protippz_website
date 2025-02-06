@@ -15,7 +15,6 @@ const ChangePasswordPage: React.FC = () => {
         Authorization: `${localStorage.getItem("token")}`,
       },
     });
-    console.log(res);
 
     if (res?.success) {
       toast.success(res?.message || "Password changed successfully");

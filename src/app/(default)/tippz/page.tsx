@@ -16,14 +16,14 @@ import Image from "next/image";
 const cardData = [
   {
     _id: "1",
-    image: Money,
+    image: "https://i.ibb.co/r4bbwcj/image-10.png",
     title: "Choose a Player or Team",
     description:
       "Select your favorite player or team from a variety of sports and leagues including professional and college.",
   },
   {
     _id: "2",
-    image: "https://i.ibb.co.com/C9zMb8W/Group-1000006224.png",
+    image: Money,
     title: "Send them Tippz",
     description:
       "After selecting your player or team, you can show your support and love for their game by sending them tips.",
