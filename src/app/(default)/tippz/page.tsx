@@ -1,6 +1,7 @@
 import React from "react";
 import Heading from "@/components/Shared/Heading";
 import Cards from "@/components/Tippz/Cards";
+import Money from "@/Assets/Money.png";
 export const metadata = {
   title: "PROTIPPZ - TIPPZ",
   description:
@@ -10,10 +11,12 @@ import playstore from "@/Assets/playstore.png";
 import appstore from "@/Assets/appsore.png";
 import phoneImage2 from "@/Assets/phone_image2.png";
 import Image from "next/image";
+
+
 const cardData = [
   {
     _id: "1",
-    image: "https://i.ibb.co/KNKRr46/image-2.png",
+    image: Money,
     title: "Choose a Player or Team",
     description:
       "Select your favorite player or team from a variety of sports and leagues including professional and college.",
@@ -27,7 +30,7 @@ const cardData = [
   },
   {
     _id: "3",
-    image: "https://i.ibb.co/r4bbwcj/image-10.png",
+    videoUrl: "/videos/video.mp4",
     title: "Earn Rewards & Win Prizes",
     description:
       "You are eligible to earn rewards and win prizes when you send Tippz. Rewards and prizes include exclusive sports merchandise, tickets, and more.",

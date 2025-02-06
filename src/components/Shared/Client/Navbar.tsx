@@ -9,14 +9,19 @@ import { FaDollarSign, FaRegUserCircle, FaStar } from "react-icons/fa";
 import { useContextData } from "@/provider/ContextProvider";
 import Cookies from "js-cookie";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 const Navbar: React.FC = () => {
   const [drawerVisible, setDrawerVisible] = useState(false);
   const [activeMenu, setActiveMenu] = useState("");
   const data = useContextData();
+  const router = useRouter();
   const showDrawer = () => {
     setDrawerVisible(true);
   };
 
+  const handleChnagePassword = () => {
+    router.push("/change-password");
+  };
   const closeDrawer = () => {
     setDrawerVisible(false);
   };
@@ -108,6 +113,9 @@ const Navbar: React.FC = () => {
             <Link href="/contact">Contact Us</Link>
           </Menu.Item>
           <Menu.Item key="11">
+            <h1 onClick={() => handleChnagePassword()}>Change Password</h1>
+          </Menu.Item>
+          <Menu.Item key="12">
             <button
               onClick={() => {
                 Cookies.remove("token");
@@ -134,6 +142,9 @@ const Navbar: React.FC = () => {
             >
               My Profile
             </Link>
+          </Menu.Item>
+          <Menu.Item key="11">
+            <h1 onClick={() => handleChnagePassword()}>Change Password</h1>
           </Menu.Item>
           <Menu.Item key="11">
             <button

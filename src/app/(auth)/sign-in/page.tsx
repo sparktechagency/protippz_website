@@ -72,7 +72,7 @@ const SignInPage: React.FC = () => {
                     padding: "4px 8px",
                     cursor: "pointer",
                   }}
-                  onClick={() => toast.dismiss(t.id)} // Manually dismiss the toast
+                  onClick={() => toast.dismiss(t.id)}
                 >
                   Close
                 </button>

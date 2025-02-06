@@ -3,10 +3,29 @@ import React from "react";
 import { Form, Input, Button, Typography } from "antd";
 import { post } from "@/ApisRequests/server";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const { Title } = Typography;
 
 const ChangePasswordPage: React.FC = () => {
+  const router = useRouter();
+  const handleFinish = async (values: any) => {
+    const res = await post("/auth/change-password", values, {
+      headers: {
+        Authorization: `${localStorage.getItem("token")}`,
+      },
+    });
+    console.log(res);
+
+    if (res?.success) {
+      toast.success(res?.message || "Password changed successfully");
+      setTimeout(() => {
+        router.push("/");
+      }, 1500);
+    } else {
+      toast.error(res?.message || "Something went wrong. Please try again.");
+    }
+  };
   return (
     <div className="container mx-auto px-4 py-8">
       <Title
@@ -21,18 +40,7 @@ const ChangePasswordPage: React.FC = () => {
         requiredMark={false}
         layout="vertical"
         className="max-w-md mx-auto"
-        onFinish={async (values) => {
-          const res = await post("/auth/change-password", values, {
-            headers: {
-              Authorization: `${localStorage.getItem("token")}`,
-            },
-          });
-          if (res?.success) {
-            toast.success(res?.message);
-          } else {
-            toast.error(res?.message);
-          }
-        }}
+        onFinish={handleFinish}
       >
         <Form.Item
           label="Current Password"
