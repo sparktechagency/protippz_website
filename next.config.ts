@@ -21,6 +21,12 @@ const nextConfig: NextConfig = {
         hostname: 'api.protippz.com',
         // port: '5050',
       },
+      {
+        protocol: 'https',
+        // hostname: '192.168.10.11',
+        hostname: 'protippz-bucket.s3.us-east-2.amazonaws.com',
+        // port: '5050',
+      },
     ],
   },
 };

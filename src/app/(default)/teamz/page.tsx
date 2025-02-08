@@ -37,8 +37,8 @@ interface ParamsProps {
 }
 
 const TeamPage = async ({ searchParams }: ParamsProps) => {
-  const { searchTerm, name, page, league } = await searchParams;
-  const param = { searchTerm, sort: name, page, league };
+  const { searchTerm, sort, page, league } = await searchParams;
+  const param = { searchTerm, "sort": sort, page, league };
   const [data, meta] = await getTeam(param);
   const playersData = data as TeamInterface[];
 

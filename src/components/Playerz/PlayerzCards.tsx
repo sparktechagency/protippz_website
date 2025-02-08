@@ -6,7 +6,7 @@ import SendTipsButton from "./Client/SendTipsButton";
 import { imageUrl } from "@/ApisRequests/server";
 import BookmarkButton from "../Shared/Client/BookmarkButton";
 import bg from "@/Assets/bg.png";
-import player from "@/Assets/player.webp";
+import player from "@/Assets/playerDefult.jpg";
 import { Player } from "@/app/(default)/playerz/page";
 
 interface PlayerzCardsProps {
@@ -97,7 +97,9 @@ const PlayerzCards: React.FC<PlayerzCardsProps> = ({ item }) => {
               <motion.p className="text-sm font-semibold text-green-500 mt-2">
                 Position
               </motion.p>
-              <motion.p className="text-sm mt-2 text-[#053697]">{item.position}</motion.p>
+              <motion.p className="text-sm mt-2 text-[#053697]">
+                {item.position}
+              </motion.p>
             </motion.div>
             <motion.div
               variants={textReveal}

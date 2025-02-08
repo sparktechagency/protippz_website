@@ -16,7 +16,7 @@ interface teamsType {
   team_bg_image: string;
   sport: string;
 }
-import bg from "@/Assets/bg.png";
+import bg from "@/Assets/player.webp";
 const Teams = async () => {
   const [data, meta] = await getTeam();
   return (
