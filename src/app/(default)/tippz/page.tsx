@@ -12,7 +12,6 @@ import appstore from "@/Assets/appsore.png";
 import phoneImage2 from "@/Assets/phone_image2.png";
 import Image from "next/image";
 
-
 const cardData = [
   {
     _id: "1",
