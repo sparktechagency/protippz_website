@@ -158,7 +158,13 @@ const TippzHistoryPage = () => {
       dataIndex: "date",
       key: "date",
       render: (_: any, record: TipHistoryInterface) => (
-        <span>{record?.createdAt?.split("T")?.[0]}</span>
+        <span>
+          {new Date(record?.createdAt).toLocaleDateString("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+          })}
+        </span>
       ),
     },
     {

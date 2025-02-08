@@ -38,9 +38,9 @@ const TransactionLogPage = () => {
       key: "createdAt",
       render: (createdAt: string) => (
         <span>
-          {new Date(createdAt).toLocaleDateString("en-GB", {
-            day: "2-digit",
-            month: "2-digit",
+          {new Date(createdAt).toLocaleDateString("en-US", {
+            month: "long",
+            day: "numeric",
             year: "numeric",
           })}
         </span>
@@ -70,7 +70,10 @@ const TransactionLogPage = () => {
     getMyTip();
   }, []);
   return (
-    <div className="w-full max-w-screen-2xl" style={{ padding: "20px", textAlign: "center" }}>
+    <div
+      className="w-full max-w-screen-2xl"
+      style={{ padding: "20px", textAlign: "center" }}
+    >
       <Title level={2} style={{ color: "#1A73E8" }}>
         Transaction Log
       </Title>

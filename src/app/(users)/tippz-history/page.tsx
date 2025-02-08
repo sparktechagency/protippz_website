@@ -51,9 +51,9 @@ const TippzHistoryPage = () => {
       key: "date",
       render: (_: any, record: TipHistoryInterface) => (
         <span>
-          {new Date(record?.createdAt).toLocaleDateString("en-GB", {
-            day: "2-digit",
-            month: "2-digit",
+          {new Date(record?.createdAt).toLocaleDateString("en-US", {
+            month: "long",
+            day: "numeric",
             year: "numeric",
           })}
         </span>
@@ -105,12 +105,15 @@ const TippzHistoryPage = () => {
   }, []);
 
   return (
-    <div className="w-full max-w-screen-2xl" style={{ padding: "20px", textAlign: "center" }}>
+    <div
+      className="w-full max-w-screen-2xl"
+      style={{ padding: "20px", textAlign: "center" }}
+    >
       <Title level={2} style={{ color: "#053697" }}>
         Tippz History
       </Title>
       <Table
-      className="w-full"
+        className="w-full"
         columns={columns}
         dataSource={tipHistory}
         pagination={{
