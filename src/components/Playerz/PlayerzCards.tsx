@@ -6,7 +6,7 @@ import SendTipsButton from "./Client/SendTipsButton";
 import { imageUrl } from "@/ApisRequests/server";
 import BookmarkButton from "../Shared/Client/BookmarkButton";
 import bg from "@/Assets/bg.png";
-import player from "@/Assets/player.png";
+import player from "@/Assets/player.webp";
 import { Player } from "@/app/(default)/playerz/page";
 
 interface PlayerzCardsProps {
@@ -136,7 +136,7 @@ const PlayerzCards: React.FC<PlayerzCardsProps> = ({ item }) => {
           </div>
         </div>
 
-        <div className="absolute -right-8 top-12 w-40 h-40 ">
+        <div className="absolute -right-8 top-16 w-40 h-40 ">
           <Image
             src={item?.player_image ? imageUrl(item?.player_image) : player}
             alt={item.name}
