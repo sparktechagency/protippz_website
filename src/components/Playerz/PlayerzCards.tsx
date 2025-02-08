@@ -6,7 +6,7 @@ import SendTipsButton from "./Client/SendTipsButton";
 import { imageUrl } from "@/ApisRequests/server";
 import BookmarkButton from "../Shared/Client/BookmarkButton";
 import bg from "@/Assets/bg.png";
-import player from "@/Assets/player.png";
+import player from "@/Assets/playerDefult.jpg";
 import { Player } from "@/app/(default)/playerz/page";
 
 interface PlayerzCardsProps {
