@@ -2,6 +2,7 @@ import React from "react";
 import Heading from "@/components/Shared/Heading";
 import Cards from "@/components/Tippz/Cards";
 import Money from "@/Assets/Money.png";
+import player from "@/Assets/player.webp";
 export const metadata = {
   title: "PROTIPPZ - TIPPZ",
   description:
@@ -15,7 +16,7 @@ import Image from "next/image";
 const cardData = [
   {
     _id: "1",
-    image: "https://i.ibb.co/r4bbwcj/image-10.png",
+    image: player,
     title: "Choose a Player or Team",
     description:
       "Select your favorite player or team from a variety of sports and leagues including professional and college.",
