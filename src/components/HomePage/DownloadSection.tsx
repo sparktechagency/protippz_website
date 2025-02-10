@@ -6,6 +6,7 @@ import download from "@/Assets/download.png";
 import qrCode from "@/Assets/qrcode.png";
 import appsore from "@/Assets/appsore.png";
 import playstore from "@/Assets/playstore.png";
+import Link from "next/link";
 
 const DownloadSection = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -60,8 +61,8 @@ const DownloadSection = () => {
                 />
               </div>
               <div className="flex flex-col gap-2">
-                <a
-                  href="https://play.google.com"
+                <Link
+                  href="https://play.google.com/store/apps/details?id=com.protipz.cory"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -71,7 +72,7 @@ const DownloadSection = () => {
                     width={100}
                     height={100}
                   />
-                </a>
+                </Link>
                 <a
                   href="https://apple.com"
                   target="_blank"

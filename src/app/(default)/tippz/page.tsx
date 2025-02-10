@@ -12,6 +12,7 @@ import playstore from "@/Assets/playstore.png";
 import appstore from "@/Assets/appsore.png";
 import phoneImage2 from "@/Assets/phone_image2.png";
 import Image from "next/image";
+import Link from "next/link";
 
 const cardData = [
   {
@@ -59,8 +60,8 @@ const TipsPage = () => {
           Download Today
         </h2>
         <div className="flex gap-4 mb-8">
-          <a
-            href="https://play.google.com"
+          <Link
+            href="https://play.google.com/store/apps/details?id=com.protipz.cory"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -70,7 +71,7 @@ const TipsPage = () => {
               width={120}
               height={40}
             />
-          </a>
+          </Link>
           <a href="https://apple.com" target="_blank" rel="noopener noreferrer">
             <Image
               src={appstore}

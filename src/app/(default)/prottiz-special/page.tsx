@@ -36,12 +36,13 @@ function page() {
             )}
           </ul>
           <div className="mt-4 flex justify-center md:justify-start">
-            <a
-              href="#"
+            <Link
+              target="_blank"
+              href="https://play.google.com/store/apps/details?id=com.protipz.cory"
               className="text-[#053697] font-semibold flex items-center"
             >
               Download Today <FaLongArrowAltRight className="ml-2" />
-            </a>
+            </Link>
           </div>
           <Link href="/sign-in">
             <Button className="bg-[#053697] mt-3 hover:bg-[#053697]/90">
