@@ -17,6 +17,7 @@ interface teamsType {
   sport: string;
 }
 import bg from "@/Assets/bg.webp";
+import { Tooltip } from "antd";
 const Teams = async () => {
   const [data, meta] = await getTeam();
   return (
@@ -30,17 +31,21 @@ const Teams = async () => {
               key={team._id}
               className="basis-1/4  cursor-pointer md:basis-1/7 lg:basis-1/12 "
             >
-              <div className="relative hover:bg-slate-100 flex items-center justify-center flex-col">
-                <Image
-                  src={team?.team_bg_image ? imageUrl(team?.team_bg_image) : bg} //
-                  alt={team.name}
-                  className=" w-[80px] h-[80px] object-contain"
-                  height={100}
-                  width={100}
-                />
-                <p className="text-sm">{team?.name?.slice(0, 10)}..</p>
-                <SetTemParams ParamKey="team" value={team?._id} />
-              </div>
+              <Tooltip placement="top" title={team?.name}>
+                <div className="relative hover:bg-slate-100 flex items-center justify-center flex-col">
+                  <Image
+                    src={
+                      team?.team_bg_image ? imageUrl(team?.team_bg_image) : bg
+                    } 
+                    alt={team.name}
+                    className=" w-[80px] h-[80px] object-contain"
+                    height={100}
+                    width={100}
+                  />
+                  <p className="text-sm">{team?.name?.slice(0, 10)}..</p>
+                  <SetTemParams ParamKey="team" value={team?._id} />
+                </div>
+              </Tooltip>
             </CarouselItem>
           ))}
       </CarouselContent>

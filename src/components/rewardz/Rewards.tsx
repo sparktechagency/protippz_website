@@ -9,6 +9,7 @@ import {
 import Image from "next/image";
 import { get, imageUrl } from "@/ApisRequests/server";
 import SetTemParams from "../Playerz/Client/SetTemParams";
+import { Tooltip } from "antd";
 
 interface RewardInterface {
   _id: string;
@@ -33,22 +34,26 @@ const Rewards = async () => {
               key={team?._id}
               className="basis-1/4 md:basis-1/7 lg:basis-1/12"
             >
-              <div className="relative hover:bg-slate-100 cursor-pointer flex flex-col items-center justify-center">
-                <Image
-                  src={team?.image ? imageUrl(team?.image) : category}
-                  alt={team?.name}
-                  className="w-[100px] h-[100px] object-cover"
-                  height={100}
-                  width={100}
-                  unoptimized
-                />
-                <p className="text-center text-sm">{team.name}</p>
-                <SetTemParams
-                  key={team?._id}
-                  ParamKey="category"
-                  value={team?._id}
-                />
-              </div>
+              <Tooltip placement="top" title={team?.name}>
+                <div className="relative hover:bg-slate-100 cursor-pointer flex flex-col items-center justify-center">
+                  <Image
+                    src={team?.image ? imageUrl(team?.image) : category}
+                    alt={team?.name}
+                    className="w-[100px] h-[100px] object-contain"
+                    height={100}
+                    width={100}
+                    unoptimized
+                  />
+                  <p className="text-center text-sm">
+                    {team?.name?.slice(0, 10)}..
+                  </p>
+                  <SetTemParams
+                    key={team?._id}
+                    ParamKey="category"
+                    value={team?._id}
+                  />
+                </div>
+              </Tooltip>
             </CarouselItem>
           ))}
       </CarouselContent>

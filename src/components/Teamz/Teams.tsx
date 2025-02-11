@@ -9,6 +9,7 @@ import {
 import Image from "next/image";
 import { get, imageUrl } from "@/ApisRequests/server";
 import SetTemParams from "../Playerz/Client/SetTemParams";
+import { Tooltip } from "antd";
 
 interface teamsType {
   _id: string;
@@ -31,19 +32,21 @@ const Teams = async () => {
               key={team._id}
               className="basis-1/4 md:basis-1/7 lg:basis-1/12 "
             >
-              <div className="relative hover:bg-slate-100 cursor-pointer flex items-center justify-center flex-col">
-                <Image
-                  src={
-                    team?.league_image ? imageUrl(team?.league_image) : league
-                  }
-                  alt={team.name}
-                  className="w-[80px] h-[80px] object-contain"
-                  height={100}
-                  width={100}
-                />
-                <p className="text-sm">{team?.name?.slice(0, 10)}..</p>
-                <SetTemParams  ParamKey="league" value={team?._id} />
-              </div>
+              <Tooltip placement="top" title={team?.name}>
+                <div className="relative hover:bg-slate-100 cursor-pointer flex items-center justify-center flex-col">
+                  <Image
+                    src={
+                      team?.league_image ? imageUrl(team?.league_image) : league
+                    }
+                    alt={team.name}
+                    className="w-[80px] h-[80px] object-contain"
+                    height={100}
+                    width={100}
+                  />
+                  <p className="text-sm">{team?.name?.slice(0, 10)}..</p>
+                  <SetTemParams ParamKey="league" value={team?._id} />
+                </div>
+              </Tooltip>
             </CarouselItem>
           ))}
       </CarouselContent>
