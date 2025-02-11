@@ -33,11 +33,11 @@ const Rewards = async () => {
               key={team?._id}
               className="basis-1/4 md:basis-1/7 lg:basis-1/12"
             >
-              <div className="relative hover:bg-slate-100 flex flex-col items-center justify-center">
+              <div className="relative hover:bg-slate-100 cursor-pointer flex flex-col items-center justify-center">
                 <Image
                   src={team?.image ? imageUrl(team?.image) : category}
                   alt={team?.name}
-                  className="w-[100px] h-[100px] object-contain"
+                  className="w-[100px] h-[100px] object-cover"
                   height={100}
                   width={100}
                   unoptimized

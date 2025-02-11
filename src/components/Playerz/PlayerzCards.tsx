@@ -1,13 +1,12 @@
-"use client";
 import React from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import SendTipsButton from "./Client/SendTipsButton";
 import { imageUrl } from "@/ApisRequests/server";
 import BookmarkButton from "../Shared/Client/BookmarkButton";
 import bg from "@/Assets/bg.png";
 import player from "@/Assets/playerDefult.jpg";
 import { Player } from "@/app/(default)/playerz/page";
+import SendTipsButton from "./Client/SendTipsButton";
+import MotionDiv from "./Motion";
 
 interface PlayerzCardsProps {
   item: Player;
@@ -24,6 +23,7 @@ const textReveal = {
     },
   },
 };
+
 const cardReveal = {
   hidden: { y: "10%" },
   visible: {
@@ -37,7 +37,7 @@ const cardReveal = {
 
 const PlayerzCards: React.FC<PlayerzCardsProps> = ({ item }) => {
   return (
-    <motion.div
+    <MotionDiv
       variants={cardReveal}
       initial="hidden"
       animate="visible"
@@ -56,78 +56,78 @@ const PlayerzCards: React.FC<PlayerzCardsProps> = ({ item }) => {
       <div className=" p-4 z-40 ">
         <div className="flex flex-col justify-between pr-20 mt-6">
           <div className="text-left">
-            <motion.p
+            <MotionDiv
               className="text-sm font-semibold text-green-500"
               variants={textReveal}
               initial="hidden"
               animate="visible"
             >
               Name
-            </motion.p>
-            <motion.p
+            </MotionDiv>
+            <MotionDiv
               className="font-bold text-[#053697] text-lg"
               variants={textReveal}
               initial="hidden"
               animate="visible"
             >
               {item?.name}
-            </motion.p>
-            <motion.p
+            </MotionDiv>
+            <MotionDiv
               className="text-sm font-semibold text-green-500 mt-2"
               variants={textReveal}
               initial="hidden"
               animate="visible"
             >
               Team
-            </motion.p>
-            <motion.p
+            </MotionDiv>
+            <MotionDiv
               className="text-[#053697] w-10/12"
               variants={textReveal}
               initial="hidden"
               animate="visible"
             >
               {item?.team?.name}
-            </motion.p>
-            <motion.div
+            </MotionDiv>
+            <MotionDiv
               variants={textReveal}
               initial="hidden"
               animate="visible"
               className="flex items-center gap-2"
             >
-              <motion.p className="text-sm font-semibold text-green-500 mt-2">
+              <MotionDiv className="text-sm font-semibold text-green-500 mt-2">
                 Position
-              </motion.p>
-              <motion.p className="text-sm mt-2 text-[#053697]">
+              </MotionDiv>
+              <MotionDiv className="text-sm mt-2 text-[#053697]">
                 {item.position}
-              </motion.p>
-            </motion.div>
-            <motion.div
+              </MotionDiv>
+            </MotionDiv>
+            <MotionDiv
               variants={textReveal}
               initial="hidden"
               animate="visible"
               className="flex items-center gap-2"
             >
-              <motion.p className="text-sm font-semibold text-green-500 mt-2">
+              <MotionDiv className="text-sm font-semibold text-green-500 mt-2">
                 Jersey No.
-              </motion.p>
-              <motion.p className="text-sm mt-2 text-[#053697]">
+              </MotionDiv>
+              <MotionDiv className="text-sm mt-2 text-[#053697]">
                 {item?.jerceyNumber || "N/A"}
-              </motion.p>
-            </motion.div>
+              </MotionDiv>
+            </MotionDiv>
 
-            <motion.div
+            <MotionDiv
               variants={textReveal}
               initial="hidden"
               animate="visible"
               className="flex items-center gap-2"
             >
-              <motion.p className="text-sm font-semibold text-green-500 mt-2">
+              <MotionDiv className="text-sm font-semibold text-green-500 mt-2">
                 Experience.
-              </motion.p>
-              <motion.p className="text-sm mt-2 text-[#053697]">
+              </MotionDiv>
+              <MotionDiv className="text-sm mt-2 text-[#053697]">
                 {item?.experience || "N/A"}
-              </motion.p>
-            </motion.div>
+              </MotionDiv>
+            </MotionDiv>
           </div>
           <div className="absolute top-4 right-4 text-green-500 text-2xl">
             <BookmarkButton
@@ -152,7 +152,7 @@ const PlayerzCards: React.FC<PlayerzCardsProps> = ({ item }) => {
       <div className="flex justify-end m-2 z-50">
         <SendTipsButton item={item} />
       </div>
-    </motion.div>
+    </MotionDiv>
   );
 };
 

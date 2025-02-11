@@ -1,4 +1,3 @@
-"use client";
 import Image from "next/image";
 import SendTipsButton from "./Client/SendTipsButton";
 import { imageUrl } from "@/ApisRequests/server";
@@ -6,7 +5,7 @@ import BookmarkButton from "../Shared/Client/BookmarkButton";
 import bg from "@/Assets/bg.png";
 import league from "@/Assets/PT Logo.png";
 import { TeamInterface } from "@/app/(default)/teamz/page";
-import { motion } from "framer-motion";
+import MotionDiv from "../Playerz/Motion";
 interface TeamzCardsProps {
   item: TeamInterface;
 }
@@ -35,7 +34,7 @@ const TeamzCards: React.FC<TeamzCardsProps> = ({ item }) => {
     },
   };
   return (
-    <motion.div
+    <MotionDiv
       variants={cardReveal}
       initial="hidden"
       animate="visible"
@@ -55,38 +54,38 @@ const TeamzCards: React.FC<TeamzCardsProps> = ({ item }) => {
       <div className="h-56 p-4 z-40">
         <div className="flex flex-col justify-between pr-20">
           <div className="text-left">
-            <motion.p
+            <MotionDiv
               variants={textReveal}
               initial="hidden"
               animate="visible"
               className="text-sm font-semibold text-green-500"
             >
               Name
-            </motion.p>
-            <motion.p
+            </MotionDiv>
+            <MotionDiv
               variants={textReveal}
               initial="hidden"
               animate="visible"
               className="font-bold w-9/12 text-[#053697] text-lg"
             >
               {item.name}
-            </motion.p>
-            <motion.p
+            </MotionDiv>
+            <MotionDiv
               variants={textReveal}
               initial="hidden"
               animate="visible"
               className="text-sm font-semibold text-green-500 mt-2"
             >
               Sport
-            </motion.p>
-            <motion.p
+            </MotionDiv>
+            <MotionDiv
               variants={textReveal}
               initial="hidden"
               animate="visible"
               className="text-[#053697]"
             >
               {item.league?.sport}
-            </motion.p>
+            </MotionDiv>
           </div>
           <div className="absolute top-4 right-4 text-green-500 text-2xl">
             {/* <span>{item.isBookmark ? '★' : '☆'}</span> */}
@@ -112,7 +111,7 @@ const TeamzCards: React.FC<TeamzCardsProps> = ({ item }) => {
       <div className="flex justify-end m-2 z-50">
         <SendTipsButton item={item} />
       </div>
-    </motion.div>
+    </MotionDiv>
   );
 };
 

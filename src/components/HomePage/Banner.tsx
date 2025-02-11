@@ -3,6 +3,7 @@ import { useContextData } from "@/provider/ContextProvider";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import React from "react";
+import MotionDiv from "../Playerz/Motion";
 
 const Banner = () => {
   const data = useContextData();
@@ -26,45 +27,45 @@ const Banner = () => {
         }}
       >
         <div className="absolute w-full h-full bg-black opacity-50 z-10"></div>
-        <motion.div
+        <MotionDiv
           className="container mx-auto text-left text-white z-30 md:p-0 p-2"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          <motion.h1
+          <MotionDiv
             className="text-4xl md:text-6xl font-bold mb-4"
             variants={childVariants}
           >
             Start Tipping
-          </motion.h1>
-          <motion.p
+          </MotionDiv>
+          <MotionDiv
             className="text-lg md:text-xl mb-6 max-w-md"
             variants={childVariants}
           >
             Tip your favorite players and teams, earn rewards, win prizes, and
             join a community of passionate sports lovers.
-          </motion.p>
+          </MotionDiv>
           {data?.userData?._id ? (
-            <motion.div variants={childVariants}>
+            <MotionDiv variants={childVariants}>
               <Link
                 href={`/playerz`}
                 className="bg-[#053697] hover:bg-[#053697]/90 text-white font-semibold py-3 px-6 rounded-lg transition-all"
               >
                 Send Tippz
               </Link>
-            </motion.div>
+            </MotionDiv>
           ) : (
-            <motion.div variants={childVariants}>
+            <MotionDiv variants={childVariants}>
               <Link
                 href={`/sign-up`}
                 className="bg-[#053697] hover:bg-[#053697]/90 text-white font-semibold py-3 px-6 rounded-lg transition-all"
               >
                 Sign Up Now
               </Link>
-            </motion.div>
+            </MotionDiv>
           )}
-        </motion.div>
+        </MotionDiv>
       </div>
     </>
   );

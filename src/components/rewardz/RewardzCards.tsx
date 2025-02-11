@@ -1,10 +1,9 @@
-"use client";
 import React from "react";
 import Image from "next/image";
 import SendTipsButton from "./Client/RedeemButton";
 import { imageUrl } from "@/ApisRequests/server";
 import { RewardInterface } from "@/app/(default)/rewardz/page";
-import { motion } from "framer-motion";
+import MotionDiv from "../Playerz/Motion";
 interface RewardCardsProps {
   item: RewardInterface;
 }
@@ -22,7 +21,7 @@ const RewardzCards: React.FC<RewardCardsProps> = ({ item }) => {
     },
   };
   return (
-    <motion.div
+    <MotionDiv
       variants={cardReveal}
       initial="hidden"
       animate="visible"
@@ -56,7 +55,7 @@ const RewardzCards: React.FC<RewardCardsProps> = ({ item }) => {
       <div className="flex justify-end mt-4">
         <SendTipsButton item={item} />
       </div>
-    </motion.div>
+    </MotionDiv>
   );
 };
 
