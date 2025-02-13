@@ -34,7 +34,7 @@ const ForgetOtpPage: React.FC = () => {
     setLoading(false);
     if (res?.success) {
       toast.success(res?.message || "Email Verified");
-      router.push("/forget-password");
+      router.push("/reset-password");
     } else {
       toast.error(res?.message || "something went wrong");
     }

@@ -71,7 +71,7 @@ const ResetPage: React.FC = () => {
           className="w-full"
         >
           <Form.Item
-            label="Password"
+            label="New Password"
             name="password"
             rules={[{ required: true, message: "Please enter your password" }]}
           >

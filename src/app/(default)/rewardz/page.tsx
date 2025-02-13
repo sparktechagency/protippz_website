@@ -2,7 +2,7 @@ import Rewards from "@/components/rewardz/Rewards";
 import RewardzCards from "@/components/rewardz/RewardzCards";
 import SearchAndSortComponent from "@/components/rewardz/SearchAndSortComponent";
 import Heading from "@/components/Shared/Heading";
-import rewardbg from "@/Assets/rewardbg.png";
+import rewardbg from "@/Assets/rewardbgs.png";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { get } from "@/ApisRequests/server";
 import PaginationComponents from "@/components/Shared/Client/Pagination";
@@ -28,8 +28,8 @@ interface PageProps {
   searchParams: Promise<searchParamsInterface>;
 }
 const RewardzPage = async ({ searchParams }: PageProps) => {
-  const { searchTerm, category } = await searchParams;
-  const params = { category, searchTerm };
+  const { searchTerm, category ,page } = await searchParams;
+  const params = { category, searchTerm ,page};
   const [data, meta] = await getReward(params);
   const rewardData = data as RewardInterface[];
   return (
@@ -111,6 +111,6 @@ const getReward = async (params: searchParamsInterface) => {
     .filter(([key, value]) => value !== undefined)
     .map(([key, value]) => `${key}=${value}`)
     .join("&");
-  const res = await get(`/reward/get-all?${paramsUrl}&limit=99999`);
+  const res = await get(`/reward/get-all?${paramsUrl}&limit=200`);
   return [res.data?.result, res.data?.meta];
 };

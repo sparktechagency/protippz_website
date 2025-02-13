@@ -1,6 +1,6 @@
 import React from "react";
 import { FaLongArrowAltRight } from "react-icons/fa";
-import rewardbg from "@/Assets/rewardbg.png";
+import rewardbg from "@/Assets/rewardbgs.png";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 function page() {
