@@ -1,7 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
-import { Button, Input, Checkbox, Typography, Form, Spin } from "antd";
+import React, { useCallback, useState } from "react";
+import {
+  Button,
+  Input,
+  Checkbox,
+  Typography,
+  Form,
+  Spin,
+  AutoComplete,
+} from "antd";
 import { FaGoogle } from "react-icons/fa6";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
@@ -18,6 +26,7 @@ import Cookies from "js-cookie";
 import { post } from "@/ApisRequests/server";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import debounce from "lodash.debounce";
 export interface FinishFailedInfo {
   values: Record<string, unknown>;
   errorFields: {
@@ -172,6 +181,7 @@ const SignUpPage: React.FC = () => {
         inviteToken: invite || "",
       },
     };
+    console.log(values);
 
     const res = await signUpHandler(data);
     setLoading(false);
@@ -195,6 +205,44 @@ const SignUpPage: React.FC = () => {
       toast.error(errorFields[0].errors[0]);
     }
   };
+
+  //
+  const [options, setOptions] = useState<{ value: string; label: string }[]>(
+    []
+  );
+  const [loadings, setLoadings] = useState<boolean>(false);
+
+  const fetchLocations = async (query: string): Promise<void> => {
+    if (!query) return;
+
+    setLoadings(true);
+    const API_KEY = process.env.NEXT_PUBLIC_ADDRESS_API_KEY;
+    const url = `https://us1.locationiq.com/v1/autocomplete.php?key=${API_KEY}&q=${query}&format=json`;
+
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+
+      if (Array.isArray(data)) {
+        setOptions(
+          data.map((item: { display_name: string }) => ({
+            value: item.display_name, // Address text
+            label: item.display_name, // Shown in dropdown
+          }))
+        );
+      }
+    } catch (error) {
+      console.error("Error fetching locations:", error);
+    } finally {
+      setLoadings(false);
+    }
+  };
+
+  // Debounce API call (waits 500ms after user stops typing)
+  const debouncedFetch = useCallback(
+    debounce(fetchLocations, 500) as (query: string) => Promise<void>,
+    []
+  );
 
   return (
     <>
@@ -255,15 +303,6 @@ const SignUpPage: React.FC = () => {
               { required: true, message: "Please enter your phone number" },
             ]}
           >
-            <Input placeholder="Phone Number" className="h-[42px]" />
-          </Form.Item>
-          <Form.Item
-            label="Phone Number"
-            name="phoneNumber"
-            rules={[
-              { required: true, message: "Please enter your phone number" },
-            ]}
-          >
             <PhoneInput
               country={"us"}
               inputClass="!h-[42px] !w-full !border !border-gray-300 !rounded-md"
@@ -289,7 +328,16 @@ const SignUpPage: React.FC = () => {
             name="address"
             rules={[{ required: true, message: "Please enter your address" }]}
           >
-            <Input placeholder="Address" className="h-[42px]" />
+            <AutoComplete
+              style={{ width: "100%" }}
+              options={options}
+              onSearch={debouncedFetch}
+              placeholder="Enter address"
+              allowClear
+              notFoundContent={loading ? "Loading..." : "No results found"}
+            >
+              <Input className="h-[42px]" />
+            </AutoComplete>
           </Form.Item>
 
           <Form.Item

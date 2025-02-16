@@ -213,7 +213,7 @@ const TippzHistoryPage = () => {
   }, []);
 
   return (
-    <div style={{ padding: "20px", textAlign: "center" }}>
+    <div  className="w-full max-w-screen-2xl">
       <Title level={2} style={{ color: "#1A73E8" }}>
         Tippz History
       </Title>
@@ -226,7 +226,7 @@ const TippzHistoryPage = () => {
           onChange: (page) => setPage(page),
         }}
         bordered
-        style={{ maxWidth: "800px", margin: "auto", marginTop: "20px" }}
+        style={{ width: "100%", margin: "auto", marginTop: "20px" }}
         rowClassName={(record, index) =>
           index % 2 === 0 ? "even-row" : "odd-row"
         }

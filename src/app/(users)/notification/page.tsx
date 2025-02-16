@@ -43,7 +43,7 @@ const NotificationPage = async () => {
                 <div className="flex items-center text-green-500 space-x-2">
                   <AiOutlineClockCircle className="text-xl" />
                   <span className="text-sm">
-                    {notification.createdAt?.split("T")?.[0]}
+                    {new Date(notification.createdAt).toLocaleDateString("en-US")}
                   </span>
                 </div>
               </div>
