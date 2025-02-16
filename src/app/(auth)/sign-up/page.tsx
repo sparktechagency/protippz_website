@@ -327,6 +327,7 @@ const SignUpPage: React.FC = () => {
             label="Address"
             name="address"
             rules={[{ required: true, message: "Please enter your address" }]}
+            className="relative"
           >
             <AutoComplete
               style={{ width: "100%" }}
@@ -335,6 +336,8 @@ const SignUpPage: React.FC = () => {
               placeholder="Enter address"
               allowClear
               notFoundContent={loading ? "Loading..." : "No results found"}
+              placement="bottomLeft"
+              getPopupContainer={(triggerNode) => triggerNode.parentElement}
             >
               <Input className="h-[42px]" />
             </AutoComplete>
