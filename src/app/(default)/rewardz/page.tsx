@@ -6,7 +6,7 @@ import rewardbg from "@/Assets/rewardbgs.png";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { get } from "@/ApisRequests/server";
 import PaginationComponents from "@/components/Shared/Client/Pagination";
-import GoToTop from "@/components/ui/GoToTop";
+// import GoToTop from "@/components/ui/GoToTop";
 import { Empty } from "antd";
 
 export interface RewardInterface {
@@ -35,7 +35,7 @@ const RewardzPage = async ({ searchParams }: PageProps) => {
   return (
     <>
         <div className="container mx-auto mt-10">
-          <GoToTop />
+          {/* <GoToTop /> */}
           <Rewards />
           <Heading headingText="REWARDZ" subHeadingText="Select a Reward" />
           <SearchAndSortComponent />

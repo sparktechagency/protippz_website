@@ -36,6 +36,7 @@ const cardReveal = {
 };
 
 const PlayerzCards: React.FC<PlayerzCardsProps> = ({ item }) => {
+  
   return (
     <MotionDiv
       variants={cardReveal}
