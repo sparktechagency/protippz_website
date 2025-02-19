@@ -1,7 +1,7 @@
 import { get } from "@/ApisRequests/server";
 import PlayerzCards from "@/components/Playerz/PlayerzCards";
 import SearchAndSortComponent from "@/components/Playerz/SearchAndSortComponent";
-// import GoToTop from "@/components/ui/GoToTop";
+import GoToTop from "@/components/ui/GoToTop";
 import PaginationComponents from "@/components/Shared/Client/Pagination";
 import Heading from "@/components/Shared/Heading";
 import { Empty } from "antd";
@@ -70,7 +70,7 @@ const PlayerZPage = async ({ searchParams }: ParamsProps) => {
 
   return (
     <div className="container mx-auto mt-10">
-      {/* <GoToTop /> */}
+      <GoToTop />
       <Teams />
 
       <Heading headingText="PLAYERZ" subHeadingText="Select a Player" />

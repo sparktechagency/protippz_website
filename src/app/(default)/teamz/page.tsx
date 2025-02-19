@@ -4,7 +4,7 @@ import Heading from "@/components/Shared/Heading";
 import SearchAndSortComponent from "@/components/Teamz/SearchAndSortComponent";
 import Teams from "@/components/Teamz/Teams";
 import TeamzCards from "@/components/Teamz/TeamzCards";
-// import GoToTop from "@/components/ui/GoToTop";
+import GoToTop from "@/components/ui/GoToTop";
 import { Empty } from "antd";
 import { SearchParams } from "next/dist/server/request/search-params";
 import { cookies } from "next/headers";
@@ -44,7 +44,7 @@ const TeamPage = async ({ searchParams }: ParamsProps) => {
 
   return (
     <div className="container mx-auto mt-10">
-      {/* <GoToTop /> */}
+      <GoToTop />
       <Teams />
       <Heading headingText="TEAMZ" subHeadingText="Select a Team " />
       <SearchAndSortComponent />
