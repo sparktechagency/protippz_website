@@ -109,6 +109,7 @@
 import React, { useEffect, useState } from "react";
 import { Table, Typography, Avatar } from "antd";
 import { get, imageUrl } from "@/ApisRequests/server";
+import BackButton from "@/components/ui/BackButton";
 
 interface Player {
   key: string;
@@ -214,6 +215,7 @@ const TippzHistoryPage = () => {
 
   return (
     <div  className="w-full max-w-screen-2xl">
+        <BackButton />
       <Title level={2} style={{ color: "#1A73E8" }}>
         Tippz History
       </Title>

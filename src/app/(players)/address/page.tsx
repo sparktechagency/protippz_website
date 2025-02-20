@@ -1,10 +1,11 @@
-"use client";
+'use client';
 
-import { patch } from "@/ApisRequests/server";
-import { useContextData } from "@/provider/ContextProvider";
-import { Form, FormProps } from "antd";
-import { useEffect } from "react";
-import toast from "react-hot-toast";
+import { patch } from '@/ApisRequests/server';
+import BackButton from '@/components/ui/BackButton';
+import { useContextData } from '@/provider/ContextProvider';
+import { Form, FormProps } from 'antd';
+import { useEffect } from 'react';
+import toast from 'react-hot-toast';
 
 interface IValue {
   streetAddress: string;
@@ -15,13 +16,13 @@ interface IValue {
 const AddressPage = () => {
   const [form] = Form.useForm();
   const data = useContextData();
-  const onFinish: FormProps<IValue>["onFinish"] = async (values) => {
+  const onFinish: FormProps<IValue>['onFinish'] = async (values) => {
     const res = await patch(
       `/player/edit-address-tax`,
       { address: values },
       {
         headers: {
-          Authorization: `${localStorage.getItem("token")}`,
+          Authorization: `${localStorage.getItem('token')}`,
         },
       }
     );
@@ -38,6 +39,9 @@ const AddressPage = () => {
   }, [data?.userData]);
   return (
     <div className="flex flex-col items-center justify-center  w-full max-w-2xl">
+      <div className="justify-start mb-3 w-full">
+        <BackButton />
+      </div>
       <p className="w-full text-[#053697] text-5xl text-center mb-4">
         Edit Address
       </p>
@@ -54,7 +58,7 @@ const AddressPage = () => {
           rules={[
             {
               required: true,
-              message: "street address is required",
+              message: 'street address is required',
             },
           ]}
         >
@@ -66,7 +70,7 @@ const AddressPage = () => {
           rules={[
             {
               required: true,
-              message: "city is required",
+              message: 'city is required',
             },
           ]}
         >
@@ -78,7 +82,7 @@ const AddressPage = () => {
           rules={[
             {
               required: true,
-              message: "state is required",
+              message: 'state is required',
             },
           ]}
         >
@@ -90,7 +94,7 @@ const AddressPage = () => {
           rules={[
             {
               required: true,
-              message: "zip code is required",
+              message: 'zip code is required',
             },
           ]}
         >
