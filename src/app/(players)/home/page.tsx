@@ -4,7 +4,6 @@ import EmailVerfiyModal from '@/components/UserEmail/EmailVerifyModal';
 import SuccessModal from '@/components/UserEmail/SuccessModal';
 import UserVerifyOtp from '@/components/UserEmail/UserVerifyOtp';
 import { useContextData } from '@/provider/ContextProvider';
-
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { IoChevronForwardSharp } from 'react-icons/io5';
@@ -19,11 +18,13 @@ const PlayerHomePage = () => {
   const [showModaOtp, setShowModalOtp] = useState(false);
   const [addEmail, setAddEmail] = useState('');
 
+
   useEffect(() => {
     if (verifyEmail) {
       setShowModal(true);
     }
   }, [verifyEmail]);
+  console.log('check');
 
   return (
     <>
@@ -98,7 +99,9 @@ const PlayerHomePage = () => {
           <div className="mb-4 flex justify-between items-center border  p-2 py-0 rounded-md border-[#2FC191]">
             <p className="block text-sm font-medium text-[#053697]">Address:</p>
             <p className=" rounded-md px-3 py-2 text-[#2FC191]">
-              1901 Thornridge Cir. Shiloh, Hawaii 81063, New York
+              {data?.userData?.address?.streetAddress}
+              {data?.userData?.address?.city}, {data?.userData?.address?.state}
+              {data?.userData?.address?.zipCode}
               <Link
                 href={`/address`}
                 className="text-[#053697] hover:underline text-sm ml-5"

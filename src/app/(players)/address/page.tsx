@@ -3,8 +3,9 @@
 import { patch } from '@/ApisRequests/server';
 import BackButton from '@/components/ui/BackButton';
 import { useContextData } from '@/provider/ContextProvider';
-import { Form, FormProps } from 'antd';
-import { useEffect } from 'react';
+import { Form, FormProps, Spin } from 'antd';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 interface IValue {
@@ -16,7 +17,10 @@ interface IValue {
 const AddressPage = () => {
   const [form] = Form.useForm();
   const data = useContextData();
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const onFinish: FormProps<IValue>['onFinish'] = async (values) => {
+    setLoading(true);
     const res = await patch(
       `/player/edit-address-tax`,
       { address: values },
@@ -28,8 +32,11 @@ const AddressPage = () => {
     );
     if (res?.success) {
       toast.success(res?.message);
+      window.location.href = '/home';
+      setLoading(false);
     } else {
       toast.error(res?.message);
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -101,8 +108,15 @@ const AddressPage = () => {
           <input className="w-full h-[38px] border border-[#2FC191] outline-none rounded-md p-2" />
         </Form.Item>
         <div className="col-span-2 flex justify-center items-center">
-          <button className=" px-6 py-2 bg-[#053697] text-white font-medium rounded-lg hover:bg-[#053697]/90 transition">
-            Save
+          <button
+            disabled={loading}
+            className={` ${
+              loading
+                ? 'cursor-not-allowed bg-gray-600'
+                : 'bg-[#053697] hover:bg-[#053697]/90'
+            } px-6 py-2  text-white font-medium rounded-lg  transition`}
+          >
+            {loading ? <Spin className=" !text-white" size="small" /> : 'Save'}
           </button>
         </div>
       </Form>
