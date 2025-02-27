@@ -1,9 +1,9 @@
-"use client";
-import { useContextData } from "@/provider/ContextProvider";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import React from "react";
-import MotionDiv from "../Playerz/Motion";
+'use client';
+import { useContextData } from '@/provider/ContextProvider';
+import Link from 'next/link';
+import React from 'react';
+import MotionDiv from '../Playerz/Motion';
+import Head from 'next/head';
 
 const Banner = () => {
   const data = useContextData();
@@ -20,10 +20,60 @@ const Banner = () => {
 
   return (
     <>
+      <Head>
+        <title>Best Sports Tipping Platform - Tip & Earn Rewards</title>
+        <meta
+          name="description"
+          content="Tip your favorite players and teams, earn rewards, win prizes, and join a passionate sports community. Start tipping now!"
+        />
+        <meta
+          name="keywords"
+          content="sports tipping, online tipping, tip athletes, best sports tipping platform, earn rewards, fan tipping, digital tipping, sports fan community"
+        />
+        <meta name="robots" content="index, follow" />
+
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:title"
+          content="Best Sports Tipping Platform - Tip & Earn Rewards"
+        />
+        <meta
+          property="og:description"
+          content="Tip your favorite players, earn rewards, and support your favorite teams. Join a sports fan community today!"
+        />
+
+        <meta property="og:url" content="https://protippz.com" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Best Sports Tipping Platform - Tip & Earn Rewards"
+        />
+        <meta
+          name="twitter:description"
+          content="Join a passionate sports tipping community, earn rewards, and win prizes. Start tipping today!"
+        />
+
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Website',
+            name: 'Best Sports Tipping Platform',
+            url: 'https://protippz.com',
+            description:
+              'Tip your favorite players, earn rewards, and support your favorite teams. Join a sports fan community today!',
+            publisher: {
+              '@type': 'Organization',
+              name: 'ProTipz',
+              logo: 'https://protippz.com',
+            },
+          })}
+        </script>
+      </Head>
       <div
         className="relative w-full h-[500px] bg-cover bg-center flex items-center"
         style={{
-          backgroundImage: "url(https://i.ibb.co.com/cXf1gL5/image-1.png)",
+          backgroundImage: 'url(https://i.ibb.co.com/cXf1gL5/image-1.png)',
         }}
       >
         <div className="absolute w-full h-full bg-black opacity-50 z-10"></div>

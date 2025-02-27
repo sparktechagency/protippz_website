@@ -1,12 +1,13 @@
-"use client";
-import React, { useState } from "react";
-import Image from "next/image";
-import { motion, useMotionValue, useTransform } from "framer-motion";
-import download from "@/Assets/Iphone 14.png";
-import qrCode from "@/Assets/qrcode.png";
-import appsore from "@/Assets/appsore.png";
-import playstore from "@/Assets/playstore.png";
-import Link from "next/link";
+'use client';
+import React, { useState } from 'react';
+import Image from 'next/image';
+import { motion, useMotionValue, useTransform } from 'framer-motion';
+import download from '@/Assets/Iphone 14.png';
+import qrCode from '@/Assets/qrcode.png';
+import appsore from '@/Assets/appsore.png';
+import playstore from '@/Assets/playstore.png';
+import Link from 'next/link';
+import Head from 'next/head';
 
 const DownloadSection = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -24,6 +25,65 @@ const DownloadSection = () => {
 
   return (
     <section className="flex justify-center items-center bg-white px-4 mt-20 md:mt-0 min-h-screen flex-col gap-10">
+      <Head>
+        {/* ✅ Primary Meta Tags */}
+        <title>Download ProTipz App - Best Sports Tipping Platform</title>
+        <meta
+          name="description"
+          content="Download the ProTipz app today! Available on Google Play and the App Store. Tip your favorite players, earn rewards, and win prizes."
+        />
+        <meta
+          name="keywords"
+          content="download ProTipz app, sports tipping app, best sports tipping platform, earn rewards, tip players online, Google Play, App Store"
+        />
+        <meta name="robots" content="index, follow" />
+
+        {/* ✅ Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:title"
+          content="Download ProTipz App - Available on Google Play & App Store"
+        />
+        <meta
+          property="og:description"
+          content="Tip your favorite players and teams, earn rewards, and win prizes with the ProTipz app."
+        />
+        <meta property="og:image" content="/seo-image.jpg" />
+        <meta property="og:url" content="https://yourwebsite.com/download" />
+
+        {/* ✅ Twitter Cards */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Download ProTipz App - Available on Google Play & App Store"
+        />
+        <meta
+          name="twitter:description"
+          content="Get the ProTipz app now and start tipping your favorite players and teams. Earn rewards and join the best sports tipping community."
+        />
+        <meta name="twitter:image" content="/seo-image.jpg" />
+
+        {/* ✅ Structured Data for Google (JSON-LD Schema) */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'SoftwareApplication',
+            name: 'ProTipz App',
+            operatingSystem: 'Android, iOS',
+            applicationCategory: 'Sports',
+            offers: {
+              '@type': 'Offer',
+              price: '0',
+              priceCurrency: 'USD',
+            },
+            downloadUrl:
+              'https://play.google.com/store/apps/details?id=com.protipz.cory',
+            description:
+              'Download ProTipz, the best sports tipping app to tip players, earn rewards, and win prizes.',
+            image: 'https://yourwebsite.com/seo-image.jpg',
+          })}
+        </script>
+      </Head>
       <div>
         <h3 className="text-3xl text-center text-[#053697]">Download Today</h3>
         <p className="text-xl text-center text-[#2FC191]">
@@ -42,7 +102,7 @@ const DownloadSection = () => {
           onMouseMove={handleMouseMove}
           animate={{ scale: isHovered ? 1.05 : 1 }}
           transition={{ duration: 0.3 }}
-          style={{ translateX, translateY, borderRadius: "500px" }}
+          style={{ translateX, translateY, borderRadius: '500px' }}
         >
           <h2 className="text-2xl font-bold mb-4">Download Our App</h2>
           <p className="mb-6">
