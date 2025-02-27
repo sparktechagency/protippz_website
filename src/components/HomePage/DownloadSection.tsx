@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { motion, useMotionValue, useTransform } from "framer-motion";
-import download from "@/Assets/download.png";
+import download from "@/Assets/Iphone 14.png";
 import qrCode from "@/Assets/qrcode.png";
 import appsore from "@/Assets/appsore.png";
 import playstore from "@/Assets/playstore.png";
