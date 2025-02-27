@@ -21,25 +21,25 @@ const Banner = () => {
   return (
     <>
       <Head>
-        <title>Best Sports Tipping Platform - Tip & Earn Rewards</title>
+        <title>protippz</title>
         <meta
           name="description"
-          content="Tip your favorite players and teams, earn rewards, win prizes, and join a passionate sports community. Start tipping now!"
+          content="protippz"
         />
         <meta
           name="keywords"
-          content="sports tipping, online tipping, tip athletes, best sports tipping platform, earn rewards, fan tipping, digital tipping, sports fan community"
+          content="protippz"
         />
         <meta name="robots" content="index, follow" />
 
         <meta property="og:type" content="website" />
         <meta
           property="og:title"
-          content="Best Sports Tipping Platform - Tip & Earn Rewards"
+          content="protippz"
         />
         <meta
           property="og:description"
-          content="Tip your favorite players, earn rewards, and support your favorite teams. Join a sports fan community today!"
+          content="protippz"
         />
 
         <meta property="og:url" content="https://protippz.com" />
@@ -47,11 +47,11 @@ const Banner = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content="Best Sports Tipping Platform - Tip & Earn Rewards"
+          content="protippz"
         />
         <meta
           name="twitter:description"
-          content="Join a passionate sports tipping community, earn rewards, and win prizes. Start tipping today!"
+          content="protippz"
         />
 
         <script type="application/ld+json">
@@ -61,7 +61,7 @@ const Banner = () => {
             name: 'Best Sports Tipping Platform',
             url: 'https://protippz.com',
             description:
-              'Tip your favorite players, earn rewards, and support your favorite teams. Join a sports fan community today!',
+              'protippz',
             publisher: {
               '@type': 'Organization',
               name: 'ProTipz',

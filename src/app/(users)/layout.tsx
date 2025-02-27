@@ -19,24 +19,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <>
       <Head>
-        <meta
-          name="description"
-          content="Join ProTippz, the best sports tipping platform. Tip your favorite players, earn rewards, win prizes, and support your favorite teams instantly!"
-        />
+        <meta name="description" content="protippz" />
         <meta
           name="keywords"
-          content="protippz sports tipping, ProTippz, online tipping, tip athletes, best sports tipping platform, earn rewards, fan tipping, digital tipping, sports tipping community"
+          content="protippz"
         />
         <meta name="robots" content="index, follow" />
 
         <meta property="og:type" content="website" />
         <meta property="og:title" content="PROTIPPZ" />
-        <meta
-          property="og:description"
-          content="Tip your favorite players and teams, earn rewards, and support athletes instantly. Join ProTippz, the best sports tipping community today!"
-        />
+        <meta property="og:description" content="protippz" />
 
         <meta property="og:url" content="https://protippz.com" />
         <meta name="twitter:title" content="PROTIPPZ" />
@@ -51,8 +45,7 @@ export default function RootLayout({
             '@type': 'Website',
             name: 'PROTIPPZ ',
             url: 'https://protippz.com',
-            description:
-              'Join ProTippz, the best sports tipping platform. Tip your favorite players, earn rewards, win prizes, and support your favorite teams instantly!',
+            description: 'protippz',
 
             publisher: {
               '@type': 'Organization',
@@ -66,16 +59,15 @@ export default function RootLayout({
           })}
         </script>
       </Head>
-      <body className={``}>
-        <NextTopLoader />
-        <AuthProvider>
-          <Navbar />
-          <div className="min-h-[72vh] flex flex-col justify-center items-center">
-            {children}
-          </div>
-          <Footer />
-        </AuthProvider>
-      </body>
-    </html>
+
+      <NextTopLoader />
+      <AuthProvider>
+        <Navbar />
+        <div className="min-h-[72vh] flex flex-col justify-center items-center">
+          {children}
+        </div>
+        <Footer />
+      </AuthProvider>
+    </>
   );
 }

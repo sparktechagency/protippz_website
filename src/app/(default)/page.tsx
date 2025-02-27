@@ -11,7 +11,7 @@ export default function Home() {
         </title>
         <meta
           name="description"
-          content="Join ProTippz, the best sports tipping platform. Tip your favorite players, earn rewards, win prizes, and support your favorite teams instantly!"
+          content="protippz"
         />
         <meta
           name="keywords"
@@ -26,7 +26,7 @@ export default function Home() {
         />
         <meta
           property="og:description"
-          content="Tip your favorite players and teams, earn rewards, and support athletes instantly. Join ProTippz, the best sports tipping community today!"
+          content="protippz"
         />
         <meta
           property="og:image"
@@ -55,7 +55,7 @@ export default function Home() {
             name: 'ProTippz - Best Sports Tipping Platform',
             url: 'https://protippz.com',
             description:
-              'Join ProTippz, the best sports tipping platform. Tip your favorite players, earn rewards, win prizes, and support your favorite teams instantly!',
+              'protippz',
             image: 'https://protippz.com/assets/seo-banner.jpg',
             publisher: {
               '@type': 'Organization',
