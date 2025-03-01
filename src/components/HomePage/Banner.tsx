@@ -22,37 +22,19 @@ const Banner = () => {
     <>
       <Head>
         <title>protippz</title>
-        <meta
-          name="description"
-          content="protippz"
-        />
-        <meta
-          name="keywords"
-          content="protippz"
-        />
+        <meta name="description" content="protippz" />
+        <meta name="keywords" content="protippz" />
         <meta name="robots" content="index, follow" />
 
         <meta property="og:type" content="website" />
-        <meta
-          property="og:title"
-          content="protippz"
-        />
-        <meta
-          property="og:description"
-          content="protippz"
-        />
+        <meta property="og:title" content="protippz" />
+        <meta property="og:description" content="protippz" />
 
         <meta property="og:url" content="https://protippz.com" />
 
         <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content="protippz"
-        />
-        <meta
-          name="twitter:description"
-          content="protippz"
-        />
+        <meta name="twitter:title" content="protippz" />
+        <meta name="twitter:description" content="protippz" />
 
         <script type="application/ld+json">
           {JSON.stringify({
@@ -60,8 +42,7 @@ const Banner = () => {
             '@type': 'Website',
             name: 'Best Sports Tipping Platform',
             url: 'https://protippz.com',
-            description:
-              'protippz',
+            description: 'protippz',
             publisher: {
               '@type': 'Organization',
               name: 'ProTipz',
@@ -93,8 +74,7 @@ const Banner = () => {
             className="text-lg md:text-xl mb-6 max-w-md"
             variants={childVariants}
           >
-            Tip your favorite players and teams, earn rewards, win prizes, and
-            join a community of passionate sports lovers.
+            Bridging the income gap between women and men sports
           </MotionDiv>
           {data?.userData?._id ? (
             <MotionDiv variants={childVariants}>
