@@ -29,6 +29,7 @@ const TaxInformationPage = () => {
     );
     if (res?.success) {
       toast.success(res?.message);
+      window.location.href = '/home';
     } else {
       toast.error(res?.message);
     }

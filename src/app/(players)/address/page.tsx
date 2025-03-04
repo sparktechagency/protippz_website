@@ -4,10 +4,9 @@ import { patch } from '@/ApisRequests/server';
 import BackButton from '@/components/ui/BackButton';
 import { useContextData } from '@/provider/ContextProvider';
 import { Form, FormProps, Spin } from 'antd';
-import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-
+import Cookies from 'js-cookie';
 interface IValue {
   streetAddress: string;
   city: string;
@@ -17,7 +16,6 @@ interface IValue {
 const AddressPage = () => {
   const [form] = Form.useForm();
   const data = useContextData();
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const onFinish: FormProps<IValue>['onFinish'] = async (values) => {
     setLoading(true);
@@ -32,10 +30,19 @@ const AddressPage = () => {
     );
     if (res?.success) {
       toast.success(res?.message);
-      window.location.href = '/home';
+      setTimeout(() => {
+        window.location.href = '/home';
+      }, 1500);
       setLoading(false);
     } else {
-      toast.error(res?.message);
+      if (res?.success === false) {
+        toast.error('Token Expired');
+        setTimeout(() => {
+          Cookies.remove('token');
+          localStorage.removeItem('token');
+          window.location.href = '/sign-in';
+        }, 1500);
+      }
       setLoading(false);
     }
   };

@@ -278,7 +278,7 @@ const WithDrawPage = () => {
                       Player/Team Name
                     </span>
                   }
-                  name="name"
+                  name="fullName"
                   className="mt-4"
                   rules={[
                     {

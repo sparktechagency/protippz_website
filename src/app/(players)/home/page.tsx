@@ -24,7 +24,6 @@ const PlayerHomePage = () => {
       setShowModal(true);
     }
   }, [verifyEmail]);
-  console.log('check');
 
   return (
     <>
@@ -99,9 +98,9 @@ const PlayerHomePage = () => {
           <div className="mb-4 flex justify-between items-center border  p-2 py-0 rounded-md border-[#2FC191]">
             <p className="block text-sm font-medium text-[#053697]">Address:</p>
             <p className=" rounded-md px-3 py-2 text-[#2FC191]">
-              {data?.userData?.address?.streetAddress}
-              {data?.userData?.address?.city}, {data?.userData?.address?.state}
-              {data?.userData?.address?.zipCode}
+              {data?.userData?.address?.streetAddress} {' '}
+              {data?.userData?.address?.city}, {data?.userData?.address?.state}{' '}
+              {data?.userData?.address?.zipCode}{' '}
               <Link
                 href={`/address`}
                 className="text-[#053697] hover:underline text-sm ml-5"
