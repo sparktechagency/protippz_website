@@ -18,7 +18,6 @@ const PlayerHomePage = () => {
   const [showModaOtp, setShowModalOtp] = useState(false);
   const [addEmail, setAddEmail] = useState('');
 
-
   useEffect(() => {
     if (verifyEmail) {
       setShowModal(true);
@@ -60,7 +59,7 @@ const PlayerHomePage = () => {
                 Amount of Tippz
               </h1>
               <span className="text-[#053697] text-2xl">
-                $ {data?.userData?.totalTips?.toString() || 0}
+                $ {data?.userData?.totalTips?.toFixed(2) || 0}
               </span>
             </div>
             <div className="px-12 py-4 flex flex-col items-center justify-center rounded-md bg-slate-200 ">
@@ -68,7 +67,7 @@ const PlayerHomePage = () => {
                 Current Balance
               </h1>
               <span className="text-[#053697] text-2xl">
-                $ {data?.userData?.dueAmount?.toString() || 0}
+                $ {data?.userData?.dueAmount?.toFixed(2) || 0}
               </span>
             </div>
           </div>
@@ -90,7 +89,7 @@ const PlayerHomePage = () => {
             </p>
           </div>
           <div className="mb-4 flex justify-between items-center border  p-2 py-0 rounded-md border-[#2FC191]">
-            <p className="block text-sm font-medium text-[#053697]">email:</p>
+            <p className="block text-sm font-medium text-[#053697]">Email:</p>
             <p className=" rounded-md px-3 py-2 text-[#2FC191]">
               {data?.userData?.user?.email || 'N/A'}
             </p>
@@ -98,7 +97,7 @@ const PlayerHomePage = () => {
           <div className="mb-4 flex justify-between items-center border  p-2 py-0 rounded-md border-[#2FC191]">
             <p className="block text-sm font-medium text-[#053697]">Address:</p>
             <p className=" rounded-md px-3 py-2 text-[#2FC191]">
-              {data?.userData?.address?.streetAddress} {' '}
+              {data?.userData?.address?.streetAddress}{' '}
               {data?.userData?.address?.city}, {data?.userData?.address?.state}{' '}
               {data?.userData?.address?.zipCode}{' '}
               <Link

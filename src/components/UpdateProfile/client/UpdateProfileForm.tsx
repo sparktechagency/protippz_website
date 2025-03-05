@@ -1,17 +1,18 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import { Form, Input, Button, Upload } from "antd";
+'use client';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Form, Input, Button, Upload, AutoComplete } from 'antd';
 import {
   UserOutlined,
   MailOutlined,
   PhoneOutlined,
   HomeOutlined,
   CameraOutlined,
-} from "@ant-design/icons";
-import Image from "next/image";
-import { useContextData } from "@/provider/ContextProvider";
-import { imageUrl, patch } from "@/ApisRequests/server";
-import toast from "react-hot-toast";
+} from '@ant-design/icons';
+import Image from 'next/image';
+import { useContextData } from '@/provider/ContextProvider';
+import { imageUrl, patch } from '@/ApisRequests/server';
+import toast from 'react-hot-toast';
+import debounce from 'lodash.debounce';
 
 interface ProfileFormValues {
   fullName: string;
@@ -23,9 +24,12 @@ interface ProfileFormValues {
 
 const UpdateProfileForm: React.FC = () => {
   const [fileList, setFileList] = useState<any>(null);
+   const [loadings, setLoadings] = useState<boolean>(false);
   const [form] = Form.useForm();
   const data = useContextData();
-
+  const [options, setOptions] = useState<{ value: string; label: string }[]>(
+    []
+  );
   const onFinish = async (values: ProfileFormValues) => {
     const { email, username, ...otherValues } = values;
     const formData = new FormData();
@@ -39,17 +43,48 @@ const UpdateProfileForm: React.FC = () => {
       formData.append(key, value);
     });
 
-    const res = await patch("/normal-user/update-profile", formData, {
+    const res = await patch('/normal-user/update-profile', formData, {
       headers: {
-        Authorization: `${localStorage.getItem("token")}`,
+        Authorization: `${localStorage.getItem('token')}`,
       },
     });
     if (res?.success) {
-      toast.success("Profile updated successfully");
+      toast.success('Profile updated successfully');
     } else {
-      toast.error("Fail updated Profile");
+      toast.error('Fail updated Profile');
     }
   };
+
+  const fetchLocations = async (query: string): Promise<void> => {
+    if (!query) return;
+
+    setLoadings(true);
+    const API_KEY = process.env.NEXT_PUBLIC_ADDRESS_API_KEY;
+    const url = `https://us1.locationiq.com/v1/autocomplete.php?key=${API_KEY}&q=${query}&format=json`;
+
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+
+      if (Array.isArray(data)) {
+        setOptions(
+          data.map((item: { display_name: string }) => ({
+            value: item.display_name, // Address text
+            label: item.display_name, // Shown in dropdown
+          }))
+        );
+      }
+    } catch (error) {
+      console.error('Error fetching locations:', error);
+    } finally {
+      setLoadings(false);
+    }
+  };
+
+   const debouncedFetch = useCallback(
+      debounce(fetchLocations, 500) as (query: string) => Promise<void>,
+      []
+    );
 
   useEffect(() => {
     form.setFieldsValue({
@@ -62,10 +97,10 @@ const UpdateProfileForm: React.FC = () => {
   }, [data]);
 
   const handleUploadChange = (info: any) => {
-    if (info.file.status === "done") {
-      toast.success("Image uploaded successfully");
-    } else if (info.file.status === "error") {
-      toast.error("Image upload failed");
+    if (info.file.status === 'done') {
+      toast.success('Image uploaded successfully');
+    } else if (info.file.status === 'error') {
+      toast.error('Image upload failed');
     }
     setFileList(info.fileList);
   };
@@ -77,7 +112,7 @@ const UpdateProfileForm: React.FC = () => {
         <Upload
           showUploadList={false}
           onChange={handleUploadChange}
-          beforeUpload={() => false} 
+          beforeUpload={() => false}
         >
           <Image
             width={100}
@@ -86,8 +121,8 @@ const UpdateProfileForm: React.FC = () => {
             src={
               fileList
                 ? URL.createObjectURL(fileList[0]?.originFileObj)
-                : imageUrl(data?.userData?.profile_image || "") ||
-                  "https://i.ibb.co.com/f4tzYw2/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg"
+                : imageUrl(data?.userData?.profile_image || '') ||
+                  'https://i.ibb.co.com/f4tzYw2/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg'
             }
             alt="Profile"
             className="w-32 h-32 rounded-full object-cover mb-4"
@@ -109,7 +144,7 @@ const UpdateProfileForm: React.FC = () => {
           label="Full Name"
           name="name"
           initialValue="Robert Smith"
-          rules={[{ required: true, message: "Please enter your full name" }]}
+          rules={[{ required: true, message: 'Please enter your full name' }]}
         >
           <Input className="custom-input" placeholder="Full Name" />
         </Form.Item>
@@ -119,8 +154,8 @@ const UpdateProfileForm: React.FC = () => {
           name="email"
           initialValue="robertsmithctg23@gmail.com"
           rules={[
-            { required: true, message: "Please enter your email" },
-            { type: "email", message: "Please enter a valid email" },
+            { required: true, message: 'Please enter your email' },
+            { type: 'email', message: 'Please enter a valid email' },
           ]}
         >
           <Input
@@ -135,7 +170,7 @@ const UpdateProfileForm: React.FC = () => {
           label="User Name"
           name="username"
           initialValue="siyam"
-          rules={[{ required: true, message: "Please enter your username" }]}
+          rules={[{ required: true, message: 'Please enter your username' }]}
         >
           <Input
             disabled
@@ -150,7 +185,7 @@ const UpdateProfileForm: React.FC = () => {
           name="phone"
           initialValue="+54645674567"
           rules={[
-            { required: true, message: "Please enter your phone number" },
+            { required: true, message: 'Please enter your phone number' },
           ]}
         >
           <Input
@@ -160,11 +195,11 @@ const UpdateProfileForm: React.FC = () => {
           />
         </Form.Item>
 
-        <Form.Item
+        {/* <Form.Item
           label="Address"
           name="address"
           initialValue="1901 Thornridge Cir. Shiloh, Hawaii 81063, New York"
-          rules={[{ required: true, message: "Please enter your address" }]}
+          rules={[{ required: true, message: 'Please enter your address' }]}
           className="col-span-2"
         >
           <Input
@@ -172,6 +207,30 @@ const UpdateProfileForm: React.FC = () => {
             placeholder="Address"
             prefix={<HomeOutlined />}
           />
+        </Form.Item> */}
+        <Form.Item
+          label="Address"
+          name="address"
+          initialValue="1901 Thornridge Cir. Shiloh, Hawaii 81063, New York"
+          rules={[{ required: true, message: 'Please enter your address' }]}
+          className="col-span-2"
+        >
+          <AutoComplete
+            style={{ width: '100%' }}
+            options={options}
+            onSearch={debouncedFetch}
+            placeholder="Enter address"
+            allowClear
+            notFoundContent={loadings ? 'Loading...' : 'No results found'}
+            placement="bottomLeft"
+            getPopupContainer={(triggerNode) => triggerNode.parentElement}
+          >
+            <Input
+              className="custom-input"
+              placeholder="Address"
+              prefix={<HomeOutlined />}
+            />
+          </AutoComplete>
         </Form.Item>
 
         <Form.Item className="col-span-2">
