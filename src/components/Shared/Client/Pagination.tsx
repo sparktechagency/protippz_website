@@ -15,7 +15,6 @@ const PaginationComponents = ({
   paginationData: PaginationInterface;
 }) => {
   const router = useRouter();
-  console.log(paginationData);
 
   return (
     <Pagination

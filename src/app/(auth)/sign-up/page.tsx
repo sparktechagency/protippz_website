@@ -181,7 +181,6 @@ const SignUpPage: React.FC = () => {
         inviteToken: invite || '',
       },
     };
-    console.log(values);
 
     const res = await signUpHandler(data);
     setLoading(false);
