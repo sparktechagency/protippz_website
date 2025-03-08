@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
 interface Props {
   headingText: string;
-  subHeadingText: string;
+  subHeadingText?: string;
 }
 
 const Heading: React.FC<Props> = ({ headingText, subHeadingText }) => {
@@ -11,7 +11,9 @@ const Heading: React.FC<Props> = ({ headingText, subHeadingText }) => {
       <h1 className="text-2xl md:text-3xl font-bold text-[#053697]">
         {headingText}
       </h1>
-      <p className="text-[#2FC191] mt-2">{subHeadingText}</p>
+      {subHeadingText && (
+        <p className="text-green-500 text-lg">{subHeadingText}</p>
+      )}
     </div>
   );
 };

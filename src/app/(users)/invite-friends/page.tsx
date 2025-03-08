@@ -59,34 +59,25 @@ const InviteFriendsPage: React.FC = () => {
         Bring Friends, Earn Rewards!
       </p>
 
-      <div className="mb-12">
-        <h3 className="text-[#053697] text-2xl font-semibold">Introduction</h3>
-        <p className="text-green-500">
-          At PROTIPPZ, we believe sports are better with friends. Now you can
-          share the fun of Tippzing, earn rewards together, and celebrate every
-          win as a team. Invite your friends to join PROTIPPZ and unlock
-          exclusive bonuses for each friend who signs up!
-        </p>
-      </div>
-      <div className="mb-12">
-        <h3 className="text-[#053697] text-2xl font-semibold">How It Works</h3>
-        <div className="mb-4">
-          <p className="text-[#053697] font-bold">1. Invite</p>
+      <div className="mb-12 max-w-screen-lg mx-auto">
+        <h3 className="text-[#053697] text-2xl font-semibold mb-3">How It Works</h3>
+        <div className="mb-8 ">
+          <p className="text-[#053697] font-bold mb-3">1. Invite</p>
           <p className=" ml-4 text-green-500">
             Use the “Invite Friends” button below to share your unique referral
             link via text, email, or social media.
           </p>
         </div>
-        <div className="mb-4">
-          <p className="text-[#053697] font-bold">2. Sign Up</p>
+        <div className="mb-8 ">
+          <p className="text-[#053697] font-bold mb-3">2. Sign Up</p>
           <p className=" ml-4 text-green-500">
             When your friends sign up using your link, they’ll join the PROTIPPZ
             community where they can Tippz, win rewards, and participate in
             exclusive fan events.
           </p>
         </div>
-        <div className="mb-4">
-          <p className="text-[#053697] font-bold">3. Earn Rewards</p>
+        <div className="mb-8 ">
+          <p className="text-[#053697] font-bold mb-3">3. Earn Rewards</p>
           <p className=" ml-4 text-green-500">
             For each friend who joins, you’ll earn 100 points/credits that you
             can redeem for special rewards, exclusive gear, or event tickets.
