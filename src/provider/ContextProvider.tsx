@@ -42,8 +42,7 @@ export const useContextData = () => useContext(AuthContext);
 
 // Replace with your Google Client ID
 const AuthProvider = ({ children }: Props) => {
-  const GOOGLE_CLIENT_ID =
-    '118456968798-745on7imu91o0cks3m67niu4dtejo0ju.apps.googleusercontent.com';
+  const GOOGLE_CLIENT_ID = `${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}`;
   const [userData, setUserData] = useState<User | null>(null);
   null;
   useEffect(() => {
