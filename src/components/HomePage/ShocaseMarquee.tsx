@@ -8,10 +8,10 @@ function ShocaseMarquee() {
     <div className="bg-[#fff]">
       <Marquee gradient={true} gradientColor="#fff" speed={40}>
         <div className=" flex items-center justify-between py-4">
-          <div className="text-[#053697] font-semibold flex items-center justify-between w-full gap-24">
+          <div className="text-[#053697] font-semibold flex items-center justify-between w-full gap-32">
             <div className="flex gap-2 items-end w-full justify-center">
               <Image
-                className="h-24 w-auto"
+                className="h-14 w-auto"
                 src={img}
                 alt="img"
                 width={400}
@@ -23,7 +23,7 @@ function ShocaseMarquee() {
             </div>
             <div className="flex gap-2 items-end w-full justify-center">
               <Image
-                className="h-24 w-auto"
+                className="h-14 w-auto"
                 src={img}
                 alt="img"
                 width={400}
@@ -35,7 +35,7 @@ function ShocaseMarquee() {
             </div>
             <div className="flex gap-2 items-end w-full justify-center">
               <Image
-                className="h-24 w-auto"
+                className="h-14 w-auto"
                 src={img}
                 alt="img"
                 width={400}
@@ -47,7 +47,7 @@ function ShocaseMarquee() {
             </div>
             <div className="flex gap-2 items-end w-full justify-center">
               <Image
-                className="h-24 w-auto"
+                className="h-14 w-auto"
                 src={img}
                 alt="img"
                 width={400}
@@ -59,7 +59,7 @@ function ShocaseMarquee() {
             </div>
             <div className="flex gap-2 items-end w-full justify-center">
               <Image
-                className="h-24 w-auto"
+                className="h-14 w-auto"
                 src={img}
                 alt="img"
                 width={400}
@@ -71,7 +71,7 @@ function ShocaseMarquee() {
             </div>
             <div className="flex gap-2 items-end w-full justify-center">
               <Image
-                className="h-24 w-auto"
+                className="h-14 w-auto"
                 src={img}
                 alt="img"
                 width={400}
