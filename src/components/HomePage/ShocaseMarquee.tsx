@@ -1,35 +1,89 @@
 'use client';
 import React from 'react';
 import Marquee from 'react-fast-marquee';
-import img from '@/Assets/logo2.png';
+import img from '@/Assets/download.png';
 import Image from 'next/image';
 function ShocaseMarquee() {
-
   return (
-    <div className="bg-[#053697]">
-      <Marquee gradient={true} gradientColor="#053697" speed={40}>
-        <div className=" flex items-center justify-between py-4 mr-28">
-          <div className="text-white font-semibold flex items-center justify-between w-full gap-48">
-            <div className="flex gap-2 items-center">
-              <Image className='h-4 w-auto' src={img} alt="img" width={200} height={1200} />
-              <h1 className="text-white font-semibold text-nowrap">
-                Choose a Player or Team ⛹️ ⛹️⛹️
+    <div className="bg-[#fff]">
+      <Marquee gradient={true} gradientColor="#fff" speed={40}>
+        <div className=" flex items-center justify-between py-4">
+          <div className="text-[#053697] font-semibold flex items-center justify-between w-full gap-24">
+            <div className="flex gap-2 items-end w-full justify-center">
+              <Image
+                className="h-24 w-auto"
+                src={img}
+                alt="img"
+                width={400}
+                height={1200}
+              />
+              <h1 className="text-[#053697] font-semibold text-nowrap">
+                Tip your favorite players
               </h1>
             </div>
-            <div className="flex gap-2 items-center">
-              <Image className='h-4 w-auto' src={img} alt="img" width={200} height={200} />
-              <h1 className="text-white font-semibold text-nowrap">
-                Send them Tippz 💸 💸 💸
+            <div className="flex gap-2 items-end w-full justify-center">
+              <Image
+                className="h-24 w-auto"
+                src={img}
+                alt="img"
+                width={400}
+                height={200}
+              />
+              <h1 className="text-[#053697] font-semibold text-nowrap">
+                Earn Rewards
               </h1>
             </div>
-            <div className="flex gap-2 items-center">
-              <Image className='h-4 w-auto' src={img} alt="img" width={200} height={200} />
-              <h1 className="text-white font-semibold text-nowrap mr-48 flex items-center gap-3">
-                Earn Rewards & Win Prizes 🤑🤑🤑
+            <div className="flex gap-2 items-end w-full justify-center">
+              <Image
+                className="h-24 w-auto"
+                src={img}
+                alt="img"
+                width={400}
+                height={200}
+              />
+              <h1 className="text-[#053697] font-semibold text-nowrap mr-48 flex items-center gap-3">
+                Win Prizes
+              </h1>
+            </div>
+            <div className="flex gap-2 items-end w-full justify-center">
+              <Image
+                className="h-24 w-auto"
+                src={img}
+                alt="img"
+                width={400}
+                height={1200}
+              />
+              <h1 className="text-[#053697] font-semibold text-nowrap">
+                Tip your favorite players
+              </h1>
+            </div>
+            <div className="flex gap-2 items-end w-full justify-center">
+              <Image
+                className="h-24 w-auto"
+                src={img}
+                alt="img"
+                width={400}
+                height={200}
+              />
+              <h1 className="text-[#053697] font-semibold text-nowrap">
+                Earn Rewards
+              </h1>
+            </div>
+            <div className="flex gap-2 items-end w-full justify-center">
+              <Image
+                className="h-24 w-auto"
+                src={img}
+                alt="img"
+                width={400}
+                height={200}
+              />
+              <h1 className="text-[#053697] font-semibold text-nowrap mr-48 flex items-center gap-3">
+                Win Prizes
               </h1>
             </div>
           </div>
         </div>
+
       </Marquee>
     </div>
   );
