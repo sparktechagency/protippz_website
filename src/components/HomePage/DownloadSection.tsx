@@ -24,7 +24,7 @@ const DownloadSection = () => {
   const translateY = useTransform(mouseY, [-200, 200], [-20, 20]);
 
   return (
-    <section className="flex justify-center items-center bg-white px-4 mt-20 md:mt-0 min-h-screen flex-col gap-10">
+    <section className="flex relative justify-center items-center  px-4 mt-20 md:mt-0  flex-col gap-10">
       <Head>
         {/* ✅ Primary Meta Tags */}
         <title>Download ProTipz App - Best Sports Tipping Platform</title>
@@ -104,8 +104,8 @@ const DownloadSection = () => {
           transition={{ duration: 0.3 }}
           style={{ translateX, translateY, borderRadius: '500px' }}
         >
-          <h2 className="text-2xl font-bold mb-4">Download Our App</h2>
-          <p className="mb-6">
+          <h2 className="text-xl md:text-2xl font-bold mb-4">Download Our App</h2>
+          <p className="md:text-base text-sm mb-6">
             Tip your favorite players and teams, earn rewards, win prizes, and
             join a community of passionate sports lovers.
           </p>
@@ -117,7 +117,7 @@ const DownloadSection = () => {
                   alt="Qr Code"
                   width={3000}
                   height={6000}
-                  className="w-[90px] h-[90px]"
+                  className="w-12 md:w-[90px] md:h-[90px]"
                 />
               </div>
               <div className="flex flex-col gap-2">
@@ -133,7 +133,7 @@ const DownloadSection = () => {
                     height={100}
                   />
                 </Link>
-                <a
+                <Link
                   href="https://apple.com"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -144,13 +144,13 @@ const DownloadSection = () => {
                     width={100}
                     height={100}
                   />
-                </a>
+                </Link>
               </div>
             </div>
           </div>
         </motion.div>
-        <div className="absolute md:relative  md:right-20 md:ml-10 md:top-0  lg:ml-20 md:z-20 ">
-          <Image src={download} alt="Mobile Mockup" width={300} height={600} />
+        <div className="relative md:relative  md:right-20 md:ml-10 md:top-0  lg:ml-20 md:z-20 ">
+          <Image className='lg:w-72 md:w-60 w-48' src={download} alt="Mobile Mockup" width={300} height={600} />
         </div>
       </div>
     </section>

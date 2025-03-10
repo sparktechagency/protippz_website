@@ -8,7 +8,7 @@ function ShocaseMarquee() {
     <div className="bg-[#053697]">
       <Marquee gradient={true} gradientColor="#053697" speed={40}>
         <div className=" flex items-center justify-between py-8">
-          <div className="text-[#fff] text-2xl font-semibold flex items-center justify-between w-full gap-32">
+          <div className="text-[#fff] text-2xl font-semibold flex items-center justify-between w-full gap-6  md:gap-32">
             <div className="flex gap-2 items-end w-full justify-center">
               🤑
               <h1 className="text-[#fff] text-2xl font-semibold text-nowrap">
