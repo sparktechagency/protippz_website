@@ -5,85 +5,48 @@ import img from '@/Assets/download.png';
 import Image from 'next/image';
 function ShocaseMarquee() {
   return (
-    <div className="bg-[#fff]">
-      <Marquee gradient={true} gradientColor="#fff" speed={40}>
-        <div className=" flex items-center justify-between py-4">
-          <div className="text-[#053697] font-semibold flex items-center justify-between w-full gap-32">
+    <div className="bg-[#053697]">
+      <Marquee gradient={true} gradientColor="#053697" speed={40}>
+        <div className=" flex items-center justify-between py-8">
+          <div className="text-[#fff] text-2xl font-semibold flex items-center justify-between w-full gap-32">
             <div className="flex gap-2 items-end w-full justify-center">
-              <Image
-                className="h-14 w-auto"
-                src={img}
-                alt="img"
-                width={400}
-                height={1200}
-              />
-              <h1 className="text-[#053697] font-semibold text-nowrap">
+              🤑
+              <h1 className="text-[#fff] text-2xl font-semibold text-nowrap">
                 Tip your favorite players
               </h1>
             </div>
             <div className="flex gap-2 items-end w-full justify-center">
-              <Image
-                className="h-14 w-auto"
-                src={img}
-                alt="img"
-                width={400}
-                height={200}
-              />
-              <h1 className="text-[#053697] font-semibold text-nowrap">
+              🤑
+              <h1 className="text-[#fff] text-2xl font-semibold text-nowrap">
                 Earn Rewards
               </h1>
             </div>
             <div className="flex gap-2 items-end w-full justify-center">
-              <Image
-                className="h-14 w-auto"
-                src={img}
-                alt="img"
-                width={400}
-                height={200}
-              />
-              <h1 className="text-[#053697] font-semibold text-nowrap mr-48 flex items-center gap-3">
+              🤑
+              <h1 className="text-[#fff] text-2xl font-semibold text-nowrap mr-48 flex items-center gap-3">
                 Win Prizes
               </h1>
             </div>
             <div className="flex gap-2 items-end w-full justify-center">
-              <Image
-                className="h-14 w-auto"
-                src={img}
-                alt="img"
-                width={400}
-                height={1200}
-              />
-              <h1 className="text-[#053697] font-semibold text-nowrap">
+              🤑
+              <h1 className="text-[#fff] text-2xl font-semibold text-nowrap">
                 Tip your favorite players
               </h1>
             </div>
             <div className="flex gap-2 items-end w-full justify-center">
-              <Image
-                className="h-14 w-auto"
-                src={img}
-                alt="img"
-                width={400}
-                height={200}
-              />
-              <h1 className="text-[#053697] font-semibold text-nowrap">
+              🤑
+              <h1 className="text-[#fff] text-2xl font-semibold text-nowrap">
                 Earn Rewards
               </h1>
             </div>
             <div className="flex gap-2 items-end w-full justify-center">
-              <Image
-                className="h-14 w-auto"
-                src={img}
-                alt="img"
-                width={400}
-                height={200}
-              />
-              <h1 className="text-[#053697] font-semibold text-nowrap mr-48 flex items-center gap-3">
+              🤑
+              <h1 className="text-[#fff] text-2xl font-semibold text-nowrap mr-48 flex items-center gap-3">
                 Win Prizes
               </h1>
             </div>
           </div>
         </div>
-
       </Marquee>
     </div>
   );
