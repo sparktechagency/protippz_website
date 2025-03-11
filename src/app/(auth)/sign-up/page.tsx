@@ -325,7 +325,7 @@ const SignUpPage: React.FC = () => {
           <Form.Item
             label="Address"
             name="address"
-            rules={[{ required: true, message: 'Please enter your address' }]}
+            rules={[{ required: true, message: <p className='mt-[10px]'>Please enter your address</p> }]}
             className="relative"
           >
             <AutoComplete
