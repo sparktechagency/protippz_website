@@ -1,8 +1,6 @@
 'use client';
 import React from 'react';
 import Marquee from 'react-fast-marquee';
-import img from '@/Assets/download.png';
-import Image from 'next/image';
 function ShocaseMarquee() {
   return (
     <div className="bg-[#053697]">

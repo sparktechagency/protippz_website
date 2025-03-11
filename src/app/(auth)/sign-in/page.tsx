@@ -33,7 +33,14 @@ const SignInPage: React.FC = () => {
         toast.error('Failed to fetch user info');
       }
       const { name, picture, email } = await response.json();
-      const data = { name, picture, email, username: name };
+      const userDetails = await response.json();
+      const phone =
+        userDetails?.phone ||
+        userDetails?.phoneNumber ||
+        userDetails?.phone_number ||
+        '';
+      const address = userDetails?.address || '';
+      const data = { name, picture, email, username: name, phone, address };
       const res = await post('/auth/google-login', data);
       if (res?.success) {
         Cookies.remove('token');

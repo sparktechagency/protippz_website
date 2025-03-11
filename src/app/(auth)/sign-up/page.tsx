@@ -77,13 +77,23 @@ const SignUpPage: React.FC = () => {
       if (!response.ok) {
         toast.error('Failed to fetch user info');
       }
+
       const { name, picture, email } = await response.json();
+      const userDetails = await response.json();
+      const phone =
+        userDetails?.phone ||
+        userDetails?.phoneNumber ||
+        userDetails?.phone_number ||
+        '';
+      const address = userDetails?.address || '';
       const data = {
         name,
         picture,
         email,
         username: name,
         inviteToken: invite || '',
+        phone,
+        address,
       };
       const res = await post('/auth/google-login', data);
       if (res?.success) {
@@ -325,7 +335,12 @@ const SignUpPage: React.FC = () => {
           <Form.Item
             label="Address"
             name="address"
-            rules={[{ required: true, message: <p className='mt-[10px]'>Please enter your address</p> }]}
+            rules={[
+              {
+                required: true,
+                message: <p className="mt-[10px]">Please enter your address</p>,
+              },
+            ]}
             className="relative"
           >
             <AutoComplete
@@ -398,7 +413,9 @@ const SignUpPage: React.FC = () => {
             <div>
               <Checkbox className="text-white">I agree to the</Checkbox>
               <Link href={'/terms'}>
-              <Text className='cursor-pointer' underline>Terms of Service</Text>
+                <Text className="cursor-pointer" underline>
+                  Terms of Service
+                </Text>
               </Link>
             </div>
           </Form.Item>
