@@ -27,6 +27,12 @@ const nextConfig: NextConfig = {
         hostname: 'protippz-bucket.s3.us-east-2.amazonaws.com',
         // port: '5050',
       },
+      {
+        protocol: 'https',
+        // hostname: '192.168.10.11',
+        hostname: 'https://maps.googleapis.com/maps/api/place/autocomplete/json',
+        // port: '5050',
+      },
     ],
   },
 };

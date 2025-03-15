@@ -220,23 +220,22 @@ const SignUpPage: React.FC = () => {
     []
   );
   const [loadings, setLoadings] = useState<boolean>(false);
-
   const fetchLocations = async (query: string): Promise<void> => {
     if (!query) return;
 
     setLoadings(true);
-    const API_KEY = process.env.NEXT_PUBLIC_ADDRESS_API_KEY;
-    const url = `https://us1.locationiq.com/v1/autocomplete.php?key=${API_KEY}&q=${query}&format=json`;
 
     try {
-      const response = await fetch(url);
+      const response = await fetch(
+        `/api/places?query=${encodeURIComponent(query)}`
+      );
       const data = await response.json();
 
-      if (Array.isArray(data)) {
+      if (data.predictions && Array.isArray(data.predictions)) {
         setOptions(
-          data.map((item: { display_name: string }) => ({
-            value: item.display_name, // Address text
-            label: item.display_name, // Shown in dropdown
+          data.predictions.map((item: { description: string }) => ({
+            value: item.description,
+            label: item.description,
           }))
         );
       }
@@ -246,8 +245,6 @@ const SignUpPage: React.FC = () => {
       setLoadings(false);
     }
   };
-
-  // Debounce API call (waits 500ms after user stops typing)
   const debouncedFetch = useCallback(
     debounce(fetchLocations, 500) as (query: string) => Promise<void>,
     []

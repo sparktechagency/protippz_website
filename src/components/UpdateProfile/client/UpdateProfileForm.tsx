@@ -24,7 +24,7 @@ interface ProfileFormValues {
 
 const UpdateProfileForm: React.FC = () => {
   const [fileList, setFileList] = useState<any>(null);
-   const [loadings, setLoadings] = useState<boolean>(false);
+  const [loadings, setLoadings] = useState<boolean>(false);
   const [form] = Form.useForm();
   const data = useContextData();
   const [options, setOptions] = useState<{ value: string; label: string }[]>(
@@ -59,18 +59,18 @@ const UpdateProfileForm: React.FC = () => {
     if (!query) return;
 
     setLoadings(true);
-    const API_KEY = process.env.NEXT_PUBLIC_ADDRESS_API_KEY;
-    const url = `https://us1.locationiq.com/v1/autocomplete.php?key=${API_KEY}&q=${query}&format=json`;
 
     try {
-      const response = await fetch(url);
+      const response = await fetch(
+        `/api/places?query=${encodeURIComponent(query)}`
+      );
       const data = await response.json();
 
-      if (Array.isArray(data)) {
+      if (data.predictions && Array.isArray(data.predictions)) {
         setOptions(
-          data.map((item: { display_name: string }) => ({
-            value: item.display_name, // Address text
-            label: item.display_name, // Shown in dropdown
+          data.predictions.map((item: { description: string }) => ({
+            value: item.description,
+            label: item.description,
           }))
         );
       }
@@ -81,10 +81,10 @@ const UpdateProfileForm: React.FC = () => {
     }
   };
 
-   const debouncedFetch = useCallback(
-      debounce(fetchLocations, 500) as (query: string) => Promise<void>,
-      []
-    );
+  const debouncedFetch = useCallback(
+    debounce(fetchLocations, 500) as (query: string) => Promise<void>,
+    []
+  );
 
   useEffect(() => {
     form.setFieldsValue({
@@ -194,29 +194,20 @@ const UpdateProfileForm: React.FC = () => {
             prefix={<PhoneOutlined />}
           />
         </Form.Item>
-
-        {/* <Form.Item
-          label="Address"
-          name="address"
-          initialValue="1901 Thornridge Cir. Shiloh, Hawaii 81063, New York"
-          rules={[{ required: true, message: 'Please enter your address' }]}
-          className="col-span-2"
-        >
-          <Input
-            className="custom-input"
-            placeholder="Address"
-            prefix={<HomeOutlined />}
-          />
-        </Form.Item> */}
         <Form.Item
           label="Address"
           name="address"
-          initialValue="1901 Thornridge Cir. Shiloh, Hawaii 81063, New York"
-          rules={[{ required: true, message: 'Please enter your address' }]}
+          rules={[
+            {
+              required: true,
+              message: <h1 className="!mt-3">Please enter your address</h1>,
+            },
+          ]}
           className="col-span-2"
         >
           <AutoComplete
             style={{ width: '100%' }}
+            className="!justify-start !items-start"
             options={options}
             onSearch={debouncedFetch}
             placeholder="Enter address"

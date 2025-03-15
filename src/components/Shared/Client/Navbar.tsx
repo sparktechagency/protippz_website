@@ -56,7 +56,7 @@ const Navbar: React.FC = () => {
           onClick={() => {
             Cookies.remove('token');
             localStorage.removeItem('token');
-            window.location.href = 'sign-in';
+            window.location.href = '/sign-in';
           }}
         >
           Sign out

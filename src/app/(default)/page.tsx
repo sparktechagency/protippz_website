@@ -1,76 +1,53 @@
 import Head from 'next/head';
 import Banner from '@/components/HomePage/Banner';
 import DownloadSection from '@/components/HomePage/DownloadSection';
+import { getSEOMetadata } from '@/components/seo/seo';
+import SeoPage from '@/components/seo/SeoPage';
 
 export default function Home() {
+  const seoMetadata = getSEOMetadata('home');
   return (
     <>
-      <Head>
-        <title>
-          Best Sports Tipping Platform - Tip & Earn Rewards | ProTippz
-        </title>
-        <meta
-          name="description"
-          content="protippz"
-        />
-        <meta
-          name="keywords"
-          content="sports tipping, online tipping, ProTippz, tip athletes, best tipping platform for sports, earn rewards, fan tipping, digital tipping, sports tipping community"
-        />
-        <meta name="robots" content="index, follow" />
-
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:title"
-          content="Best Sports Tipping Platform - Tip & Earn Rewards | ProTippz"
-        />
-        <meta
-          property="og:description"
-          content="protippz"
-        />
-        <meta
-          property="og:image"
-          content="https://protippz.com/assets/seo-banner.jpg"
-        />
-        <meta property="og:url" content="https://protippz.com" />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content="Best Sports Tipping Platform - Tip & Earn Rewards | ProTippz"
-        />
-        <meta
-          name="twitter:description"
-          content="Join a passionate sports tipping community, earn rewards, and win prizes. Start tipping today!"
-        />
-        <meta
-          name="twitter:image"
-          content="https://protippz.com/assets/seo-banner.jpg"
-        />
-
-        <script type="application/ld+json">
-          {JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'Website',
-            name: 'ProTippz - Best Sports Tipping Platform',
-            url: 'https://protippz.com',
-            description:
-              'protippz',
-            image: 'https://protippz.com/assets/seo-banner.jpg',
-            publisher: {
-              '@type': 'Organization',
-              name: 'ProTippz',
-              logo: 'https://protippz.com/assets/logo.png',
-            },
-            potentialAction: {
-              '@type': 'SearchAction',
-              target: 'https://protippz.com/search?q={search_term_string}',
-              'query-input': 'required name=search_term_string',
-            },
-          })}
-        </script>
-      </Head>
-
+      <h1 className="hidden">
+        PROTIPPZ | Sports Fan Engagement Platform & NIL Deals
+      </h1>
+      <p className="hidden">
+        Join PROTIPPZ sports community for sports tipping, fan engagement, and
+        the best NIL deals for college athletes.
+      </p>
+      <span className="hidden">sports tipping</span>
+      <span className="hidden">sports fans</span>
+      <span className="hidden">best nil deals</span>
+      <span className="hidden">sports fan engagement</span>
+      <span className="hidden">gender pay gap in sports</span>
+      <span className="hidden">college sports</span>
+      <span className="hidden">support athletes</span>
+      <span className="hidden">sports community</span>
+      <span className="hidden">fan engagement platform</span>
+      <span className="hidden">fan appreciation</span>
+      <span className="hidden">nil deals for college athletes</span>
+      <span className="hidden">nil tipping</span>
+      <h2 className='hidden'>Welcome to the PROTIPPZ Sports Community</h2>
+      <p className="hidden">
+        Join our platform for sports tipping, fan engagement, and the best NIL
+        deals for college athletes.
+      </p>
+      <h3 className='hidden'>Sports Fan Engagement</h3>
+      <p className="hidden">
+        Connect with your favorite athletes and teams in our vibrant sports
+        community.
+      </p>
+      <h3 className='hidden'>NIL Deals for College Athletes</h3>
+      <p className="hidden">
+        Discover and support the best NIL deals that help college sports stars
+        thrive.
+      </p>
+      <h3 className='hidden'>Support Athletes</h3>
+      <p className="hidden">
+        Show your fan appreciation through our innovative tipping platform.
+      </p>
+      <h1 className='hidden'>PROTIPPZ | Sports Fan Engagement Platform & NIL Deals</h1>
+      <SeoPage metadata={seoMetadata} />
       <Banner />
       <DownloadSection />
     </>
