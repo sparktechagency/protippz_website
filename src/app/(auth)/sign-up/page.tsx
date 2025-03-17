@@ -78,22 +78,19 @@ const SignUpPage: React.FC = () => {
         toast.error('Failed to fetch user info');
       }
 
-      const { name, picture, email } = await response.json();
       const userDetails = await response.json();
       const phone =
         userDetails?.phone ||
         userDetails?.phoneNumber ||
         userDetails?.phone_number ||
         '';
-      const address = userDetails?.address || '';
       const data = {
-        name,
-        picture,
-        email,
-        username: name,
-        inviteToken: invite || '',
+        name: userDetails.name || '',
+        picture: userDetails.picture || '',
+        email: userDetails.email || '',
+        username: userDetails.name || '',
+        address: userDetails?.address || '',
         phone,
-        address,
       };
       const res = await post('/auth/google-login', data);
       if (res?.success) {
