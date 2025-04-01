@@ -198,7 +198,15 @@ const SignInPage: React.FC = () => {
           className="w-full"
         >
           <Form.Item
-            label="Email or Username"
+            label={
+              <p>
+                Email or Username {''}
+                <br />{' '}
+                <span className="text-xs">
+                  ( Please make sure it is correct and case sensitive )
+                </span>
+              </p>
+            }
             name="userNameOrEmail"
             rules={[
               {
