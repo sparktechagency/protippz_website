@@ -220,7 +220,15 @@ const SignInPage: React.FC = () => {
           </Form.Item>
 
           <Form.Item
-            label="Password"
+            label={
+              <p>
+                Password {''}
+                <br />{' '}
+                <span className="text-xs">
+                  ( Please make sure it is correct and case sensitive )
+                </span>
+              </p>
+            }
             name="password"
             rules={[{ required: true, message: 'Please enter your password' }]}
           >
