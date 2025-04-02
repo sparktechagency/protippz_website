@@ -95,7 +95,7 @@ const PlayerzCards: React.FC<PlayerzCardsProps> = ({ item }) => {
               className="flex items-center gap-2"
             >
               <MotionDiv className="text-sm font-semibold text-green-500 mt-2">
-                Position
+                Position :
               </MotionDiv>
               <MotionDiv className="text-sm mt-2 text-[#053697]">
                 {item.position}

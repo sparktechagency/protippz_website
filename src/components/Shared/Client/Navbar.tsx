@@ -146,7 +146,7 @@ const Navbar: React.FC = () => {
           <Menu.Item key="11">
             <h1 onClick={() => handleChnagePassword()}>Change Password</h1>
           </Menu.Item>
-          <Menu.Item key="11">
+          <Menu.Item key="12">
             <button
               onClick={() => {
                 Cookies.remove('token');
@@ -216,7 +216,7 @@ const Navbar: React.FC = () => {
                           <FaDollarSign className="text-green-500" />
                         </span>
                         <span className="text-green-800 font-semibold">
-                          {data?.userData?.totalAmount}
+                          {data?.userData?.totalAmount?.toFixed(2)}
                         </span>
                       </div>
                       <div className="flex items-center space-x-2 px-3 py-1 rounded-full bg-green-100">
@@ -224,7 +224,7 @@ const Navbar: React.FC = () => {
                           <FaStar className="text-green-500" />
                         </span>
                         <span className="text-green-800 font-semibold">
-                          {data?.userData?.totalPoint}
+                          {data?.userData?.totalPoint?.toFixed(2)}
                         </span>
                       </div>
                     </>
