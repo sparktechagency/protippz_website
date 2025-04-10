@@ -1,18 +1,18 @@
-import { get } from "@/ApisRequests/server";
-import PlayerzCards from "@/components/Playerz/PlayerzCards";
-import SearchAndSortComponent from "@/components/Playerz/SearchAndSortComponent";
-import GoToTop from "@/components/ui/GoToTop";
-import PaginationComponents from "@/components/Shared/Client/Pagination";
-import Heading from "@/components/Shared/Heading";
-import { Empty } from "antd";
-import { cookies } from "next/headers";
-import React from "react";
-import Teams from "@/components/Playerz/Teams";
+import { get } from '@/ApisRequests/server';
+import PlayerzCards from '@/components/Playerz/PlayerzCards';
+import SearchAndSortComponent from '@/components/Playerz/SearchAndSortComponent';
+import GoToTop from '@/components/ui/GoToTop';
+import PaginationComponents from '@/components/Shared/Client/Pagination';
+import Heading from '@/components/Shared/Heading';
+import { Empty } from 'antd';
+import { cookies } from 'next/headers';
+import React from 'react';
+import Teams from '@/components/Playerz/Teams';
 
 export const metadata = {
-  title: "PROTIPPZ - PLAYERZ",
+  title: 'PROTIPPZ - PLAYERZ',
   description:
-    "Learn how to tip your favorite player/team, earn rewards, and win prizes with TIPPZ.",
+    'Learn how to tip your favorite player/team, earn rewards, and win prizes with TIPPZ.',
 };
 
 export interface Player {
@@ -53,12 +53,12 @@ const PlayerZPage = async ({ searchParams }: ParamsProps) => {
     team: team || undefined,
   };
   const cookie = cookies();
-  const token = (await cookie).get("token")?.value;
+  const token = (await cookie).get('token')?.value;
 
   const paramsUrl = Object.entries(param)
     .filter(([key, value]) => value !== undefined)
     .map(([key, value]) => `${key}=${value}`)
-    .join("&");
+    .join('&');
 
   const res = await get(`/player/get-all?${paramsUrl}&limit=100`, {
     headers: {
@@ -67,7 +67,7 @@ const PlayerZPage = async ({ searchParams }: ParamsProps) => {
   });
   const data = res.data?.result;
   const meta = res.data?.meta;
-console.log(data)
+  console.log(data);
   return (
     <div className="container mx-auto mt-10">
       <GoToTop />
@@ -92,7 +92,7 @@ console.log(data)
         </>
       ) : (
         <div className="col-span-3">
-          <Empty />
+          <Empty description="No Results Found. Search Again." />
         </div>
       )}
     </div>

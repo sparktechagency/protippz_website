@@ -47,7 +47,7 @@ const RewardzPage = async ({ searchParams }: PageProps) => {
             ))
           ) : (
             <div className="col-span-3 py-28">
-              <Empty />
+              <Empty description="No Results Found. Search Again." />
             </div>
           )}
         </div>
