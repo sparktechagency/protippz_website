@@ -1,4 +1,5 @@
 import { get } from '@/ApisRequests/server';
+import PlayerzCards from '@/components/Playerz/PlayerzCards';
 import SearchAndSortComponent from '@/components/Playerz/SearchAndSortComponent';
 import GoToTop from '@/components/ui/GoToTop';
 import PaginationComponents from '@/components/Shared/Client/Pagination';
@@ -7,13 +8,6 @@ import { Empty } from 'antd';
 import { cookies } from 'next/headers';
 import React from 'react';
 import Teams from '@/components/Playerz/Teams';
-import AdContainer from '@/components/ad/AdContainer';
-import dynamic from 'next/dynamic';
-
-const VirtualizedPlayerList = dynamic(
-  () => import('@/components/Virtualized/VirtualizedPlayerGrid'),
-  { ssr: true } 
-);
 
 export const metadata = {
   title: 'PROTIPPZ - PLAYERZ',
@@ -54,6 +48,7 @@ const PlayerZPage = async ({ searchParams }: ParamsProps) => {
   const param = {
     searchTerm: searchTerm || undefined,
     sort: sort || undefined,
+    // position: position || undefined,
     page: page || undefined,
     team: team || undefined,
   };
@@ -72,21 +67,26 @@ const PlayerZPage = async ({ searchParams }: ParamsProps) => {
   });
   const data = res.data?.result;
   const meta = res.data?.meta;
-
+  console.log(data);
   return (
     <div className="container mx-auto mt-10">
       <GoToTop />
       <Teams />
 
       <Heading headingText="PLAYERZ" subHeadingText="Select a Player" />
-      <AdContainer />
       <SearchAndSortComponent />
-
       {data?.length >= 1 ? (
         <>
-          {/* Serialize the data to pass to client component */}
-          <VirtualizedPlayerList players={data} />
-          <div className="flex justify-center items-center mt-8">
+          <div className="w-full flex px-2">
+            <div className="w-full grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+              {data &&
+                Array.isArray(data) &&
+                data?.map((item: Player) => (
+                  <PlayerzCards item={item} key={item?._id} />
+                ))}
+            </div>
+          </div>
+          <div className="flex justify-center items-center">
             <PaginationComponents paginationData={meta} />
           </div>
         </>
