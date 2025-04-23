@@ -15,6 +15,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getSEOMetadata } from "@/components/seo/seo";
 import SeoPage from "@/components/seo/SeoPage";
+import AdContainer from "@/components/ad/AdContainer";
 
 const cardData = [
   {
@@ -124,6 +125,7 @@ const TipsPage = () => {
             />
           </a>
         </div>
+        <AdContainer />
         <div className="relative w-full max-w-xs md:max-w-sm">
           <Image
             src={phoneImage2}

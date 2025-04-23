@@ -9,6 +9,7 @@ import PaginationComponents from '@/components/Shared/Client/Pagination';
 import GoToTop from '@/components/ui/GoToTop';
 import { Empty } from 'antd';
 import Link from 'next/link';
+import AdContainer from '@/components/ad/AdContainer';
 
 export interface RewardInterface {
   _id: string;
@@ -39,6 +40,7 @@ const RewardzPage = async ({ searchParams }: PageProps) => {
         <GoToTop />
         <Rewards />
         <Heading headingText="REWARDZ" subHeadingText="Select a Reward" />
+        <AdContainer />
         <SearchAndSortComponent />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
           {rewardData?.length > 0 ? (
@@ -116,4 +118,3 @@ const getReward = async (params: searchParamsInterface) => {
   const res = await get(`/reward/get-all?${paramsUrl}&limit=200`);
   return [res.data?.result, res.data?.meta];
 };
-

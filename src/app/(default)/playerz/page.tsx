@@ -8,6 +8,7 @@ import { Empty } from 'antd';
 import { cookies } from 'next/headers';
 import React from 'react';
 import Teams from '@/components/Playerz/Teams';
+import AdContainer from '@/components/ad/AdContainer';
 
 export const metadata = {
   title: 'PROTIPPZ - PLAYERZ',
@@ -74,6 +75,7 @@ const PlayerZPage = async ({ searchParams }: ParamsProps) => {
       <Teams />
 
       <Heading headingText="PLAYERZ" subHeadingText="Select a Player" />
+      <AdContainer />
       <SearchAndSortComponent />
       {data?.length >= 1 ? (
         <>
