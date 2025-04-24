@@ -45,7 +45,7 @@ const TippzHistoryPage = () => {
   const [tipHistory, setTipHistory] = useState<TipHistoryInterface[]>([]);
   const [pagination, setPagination] = useState<Pagination>();
   const [page, setPage] = useState(1);
-  console.log(tipHistory);
+
   const columns = [
     {
       title: 'Date',

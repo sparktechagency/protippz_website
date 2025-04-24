@@ -48,7 +48,7 @@ const TeamPage = async ({ searchParams }: ParamsProps) => {
       <GoToTop />
       <Teams />
       <Heading headingText="TEAMZ" subHeadingText="Select a Team " />
-      <AdContainer />
+      {/* <AdContainer /> */}
       <SearchAndSortComponent />
       <div className="px-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
         {playersData?.length > 0 ? (

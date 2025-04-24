@@ -125,7 +125,7 @@ const TipsPage = () => {
             />
           </a>
         </div>
-        <AdContainer />
+        {/* <AdContainer /> */}
         <div className="relative w-full max-w-xs md:max-w-sm">
           <Image
             src={phoneImage2}

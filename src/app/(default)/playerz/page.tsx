@@ -67,7 +67,7 @@ const PlayerZPage = async ({ searchParams }: ParamsProps) => {
   });
   const data = res.data?.result;
   const meta = res.data?.meta;
-  console.log(data);
+
   return (
     <div className="container mx-auto mt-10">
       <GoToTop />

@@ -40,7 +40,7 @@ const RewardzPage = async ({ searchParams }: PageProps) => {
         <GoToTop />
         <Rewards />
         <Heading headingText="REWARDZ" subHeadingText="Select a Reward" />
-        <AdContainer />
+        {/* <AdContainer /> */}
         <SearchAndSortComponent />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
           {rewardData?.length > 0 ? (

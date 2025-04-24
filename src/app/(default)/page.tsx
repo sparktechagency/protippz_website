@@ -58,7 +58,7 @@ export default function Home() {
       </div>
       <SeoPage metadata={seoMetadata} />
       <Banner />
-      <AdContainer />
+      {/* <AdContainer /> */}
       <DownloadSection />
     </>
   );
