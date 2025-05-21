@@ -79,8 +79,7 @@ const InviteFriendsPage: React.FC = () => {
         <div className="mb-8 ">
           <p className="text-[#053697] font-bold mb-3">3. Earn Rewards</p>
           <p className=" ml-4 text-green-500">
-            For each friend who joins, you’ll earn 100 points/credits that you
-            can redeem for special rewards, exclusive gear, or event tickets.
+            For each friend who joins, you'll earn 10 points that you can redeem under our Rewardz tab.
           </p>
         </div>
       </div>
