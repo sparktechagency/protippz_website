@@ -1,6 +1,23 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY', // or 'SAMEORIGIN' if you want to allow framing on your domain only
+          },
+          {
+            key: 'Content-Security-Policy',
+            value: "frame-ancestors 'none';", // prevents any framing
+          },
+        ],
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {

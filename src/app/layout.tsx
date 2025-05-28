@@ -3,7 +3,7 @@ import './globals.css';
 import { AuthProvider } from '@/provider/ContextProvider';
 import NextTopLoader from 'nextjs-toploader';
 import GoogleAnalytics from '@/components/GoogleAnalytics/GoogleAnalytics';
-
+import ClickjackingFixed from '@/components/ethical_process/ClickjackingFixed';
 export const metadata: Metadata = {
   title: 'PROTIPPZ',
   description: 'protippz',
@@ -44,7 +44,9 @@ export default function RootLayout({
       </head>
       <body>
         <NextTopLoader />
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <ClickjackingFixed>{children}</ClickjackingFixed>
+        </AuthProvider>
         <GoogleAnalytics />
       </body>
     </html>
