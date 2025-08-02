@@ -1,5 +1,4 @@
 import { get } from '@/ApisRequests/server';
-import AdContainer from '@/components/ad/AdContainer';
 import PaginationComponents from '@/components/Shared/Client/Pagination';
 import Heading from '@/components/Shared/Heading';
 import SearchAndSortComponent from '@/components/Teamz/SearchAndSortComponent';
@@ -42,6 +41,8 @@ const TeamPage = async ({ searchParams }: ParamsProps) => {
   const param = { searchTerm, sort: sort, page, league };
   const [data, meta] = await getTeam(param);
   const playersData = data as TeamInterface[];
+  const cookie = cookies();
+  const token = (await cookie).get('token')?.value;
 
   return (
     <div className="container mx-auto mt-10">
@@ -52,7 +53,7 @@ const TeamPage = async ({ searchParams }: ParamsProps) => {
       <SearchAndSortComponent />
       <div className="px-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
         {playersData?.length > 0 ? (
-          playersData?.map((item) => <TeamzCards item={item} key={item?._id} />)
+          playersData?.map((item) => <TeamzCards token={token} item={item} key={item?._id} />)
         ) : (
           <div className="col-span-3 py-28">
             <Empty description="No Results Found. Search Again." />

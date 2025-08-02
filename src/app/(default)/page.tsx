@@ -1,13 +1,14 @@
 'use client';
 import Banner from '@/components/HomePage/Banner';
 import DownloadSection from '@/components/HomePage/DownloadSection';
+import AnnouncementPopups from '@/components/popups/AnnouncementPopups';
 import { getSEOMetadata } from '@/components/seo/seo';
 import SeoPage from '@/components/seo/SeoPage';
 import dynamic from 'next/dynamic';
 
-const AdContainer = dynamic(() => import('@/components/ad/AdContainer'), {
-  ssr: false,
-});
+// const AdContainer = dynamic(() => import('@/components/ad/AdContainer'), {
+//   ssr: false,
+// });
 
 export default function Home() {
   const seoMetadata = getSEOMetadata('home');
@@ -60,6 +61,7 @@ export default function Home() {
       <Banner />
       {/* <AdContainer /> */}
       <DownloadSection />
+      <AnnouncementPopups />
     </>
   );
 }

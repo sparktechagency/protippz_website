@@ -82,7 +82,7 @@ const PlayerZPage = async ({ searchParams }: ParamsProps) => {
               {data &&
                 Array.isArray(data) &&
                 data?.map((item: Player) => (
-                  <PlayerzCards item={item} key={item?._id} />
+                  <PlayerzCards token={token} item={item} key={item?._id} />
                 ))}
             </div>
           </div>

@@ -19,7 +19,14 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
+    domains: ['10.10.11.15', '10.10.20.9'],
     remotePatterns: [
+      {
+        protocol: 'http',
+        // hostname: '192.168.10.11',
+        hostname: '10.10.20.9',
+        port: '5000',
+      },
       {
         protocol: 'http',
         // hostname: '192.168.10.11',
@@ -56,6 +63,10 @@ const nextConfig: NextConfig = {
         hostname: 'https://maps.googleapis.com/maps/api/place/autocomplete/json',
         // port: '5050',
       },
+      {
+        protocol: 'https',
+        hostname: '*'
+      }
     ],
   },
 };

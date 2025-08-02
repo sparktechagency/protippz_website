@@ -8,9 +8,10 @@ import { TeamInterface } from "@/app/(default)/teamz/page";
 import MotionDiv from "../Playerz/Motion";
 interface TeamzCardsProps {
   item: TeamInterface;
+  token: string | undefined | null;
 }
 
-const TeamzCards: React.FC<TeamzCardsProps> = ({ item }) => {
+const TeamzCards: React.FC<TeamzCardsProps> = ({ token, item }) => {
   const textReveal = {
     hidden: { y: "100%" },
     visible: {
@@ -109,7 +110,7 @@ const TeamzCards: React.FC<TeamzCardsProps> = ({ item }) => {
         </div>
       </div>
       <div className="flex justify-end m-2 z-50">
-        <SendTipsButton item={item} />
+        <SendTipsButton token={token} item={item} />
       </div>
     </MotionDiv>
   );

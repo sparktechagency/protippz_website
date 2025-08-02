@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Image from 'next/image';
 import { imageUrl } from '@/ApisRequests/server';
 import BookmarkButton from '../Shared/Client/BookmarkButton';
@@ -10,6 +10,7 @@ import MotionDiv from './Motion';
 
 interface PlayerzCardsProps {
   item: Player;
+  token: string | undefined | null;
 }
 
 const textReveal = {
@@ -35,7 +36,7 @@ const cardReveal = {
   },
 };
 
-const PlayerzCards: React.FC<PlayerzCardsProps> = ({ item }) => {
+const PlayerzCards: React.FC<PlayerzCardsProps> = ({ token, item }) => {
   return (
     <MotionDiv
       variants={cardReveal}
@@ -145,15 +146,15 @@ const PlayerzCards: React.FC<PlayerzCardsProps> = ({ item }) => {
             width={110}
             height={130}
             className="object-cover rounded-md"
-            unoptimized
+            unoptimized={false}
           />
         </div>
       </div>
       <div className="flex justify-end m-2 z-50">
-        <SendTipsButton item={item} />
+        <SendTipsButton token={token} item={item} />
       </div>
     </MotionDiv>
   );
 };
 
-export default PlayerzCards;
+export default memo(PlayerzCards);

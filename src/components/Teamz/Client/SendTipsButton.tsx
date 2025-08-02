@@ -8,26 +8,27 @@ import toast from "react-hot-toast";
 import { TeamInterface } from "@/app/(default)/teamz/page";
 import { useContextData } from "@/provider/ContextProvider";
 import Swal from "sweetalert2";
+import TeamDetailsModal from "@/components/Playerz/Client/TeamDetailsModal";
 
 interface SendTipsButtonProps {
   item: TeamInterface;
+  token: string | undefined | null;
 }
 
-const SendTipsButton: React.FC<SendTipsButtonProps> = ({ item }) => {
+const SendTipsButton: React.FC<SendTipsButtonProps> = ({ token, item }) => {
   const [form] = Form.useForm();
   const [amount, setAmount] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [isOopsModalOpen, setIsOopsModalOpen] = useState(false);
+  const [detailsModal, showDetailsModal] = useState(false);
 
   const data = useContextData();
   const router = useRouter();
 
-  const showModal = () => {
-    if (data?.userData?.user) {
-      setIsModalOpen(true);
-    } else {
-      Swal.fire({
+  const showModal = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!data?.userData?.user) {
+      return Swal.fire({
         title: "You need to log in!",
         text: "Please log in to access this feature.",
         icon: "warning",
@@ -40,8 +41,13 @@ const SendTipsButton: React.FC<SendTipsButtonProps> = ({ item }) => {
         }
       });
     }
+    const targetId = e.currentTarget.id;
+    if (targetId === 'details') {
+      showDetailsModal(true);
+    } else if (targetId === 'tippz') {
+      setIsModalOpen(true);
+    }
   };
-
   const navigateToLogin = () => {
     router.push("/sign-in");
   };
@@ -89,7 +95,7 @@ const SendTipsButton: React.FC<SendTipsButtonProps> = ({ item }) => {
           setIsPaymentModalOpen(false);
           setIsOopsModalOpen(true);
         }
-      } catch (error) {}
+      } catch (error) { }
     } else {
       router.push(
         `/send-tip?amount=${amount}&entityType=Team&entityId=${item?._id}`
@@ -99,12 +105,22 @@ const SendTipsButton: React.FC<SendTipsButtonProps> = ({ item }) => {
 
   return (
     <>
-      <button
-        onClick={showModal}
-        className="bg-[#053697] text-white font-bold py-2 px-4 rounded-md hover:bg-[#184eb9] focus:outline-none"
-      >
-        Send Tippz
-      </button>
+      <div className="flex items-center gap-2">
+        <button
+          id='details'
+          onClick={(e) => showModal(e)}
+          className="bg-[#37C86D] text-white font-bold py-2 px-4 rounded-md hover:bg-[#184eb9]/90 focus:outline-none"
+        >
+          See Details
+        </button>
+        <button
+          id='tippz'
+          onClick={(e) => showModal(e)}
+          className="bg-[#053697] text-white font-bold py-2 px-4 rounded-md hover:bg-[#184eb9]/90 focus:outline-none"
+        >
+          Send Tippzs
+        </button>
+      </div>
       <Modal
         title=""
         visible={isModalOpen}
@@ -223,6 +239,7 @@ const SendTipsButton: React.FC<SendTipsButtonProps> = ({ item }) => {
           </Button>
         </div>
       </Modal>
+      <TeamDetailsModal token={token} id={item?._id} detailsModal={detailsModal} showDetailsModal={showDetailsModal} />
     </>
   );
 };

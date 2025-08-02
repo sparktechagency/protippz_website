@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { Modal, Form, Input, Radio, Button } from "antd";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -9,24 +9,26 @@ import toast from "react-hot-toast";
 import { Player } from "@/app/(default)/playerz/page";
 import { useContextData } from "@/provider/ContextProvider";
 import Swal from "sweetalert2";
+import PlayerDetailsServer from "./PlayerDetailsServer";
+
 interface SendTipsButtonProps {
   item: Player;
+  token: string | undefined | null;
 }
 
-const SendTipsButton: React.FC<SendTipsButtonProps> = ({ item }) => {
+const SendTipsButton: React.FC<SendTipsButtonProps> = ({ item, token }) => {
   const [form] = Form.useForm();
   const [amount, setAmount] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [detailsModal, showDetailsModal] = useState(false);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [isOopsModalOpen, setIsOopsModalOpen] = useState(false);
   const data = useContextData();
   const router = useRouter();
 
-  const showModal = () => {
-    if (data?.userData?.user) {
-      setIsModalOpen(true);
-    } else {
-      Swal.fire({
+  const showModal = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!data?.userData?.user) {
+      return Swal.fire({
         title: "You need to log in!",
         text: "Please log in to access this feature.",
         icon: "warning",
@@ -38,6 +40,12 @@ const SendTipsButton: React.FC<SendTipsButtonProps> = ({ item }) => {
           navigateToLogin();
         }
       });
+    }
+    const targetId = e.currentTarget.id;
+    if (targetId === 'details') {
+      showDetailsModal(true);
+    } else if (targetId === 'tippz') {
+      setIsModalOpen(true);
     }
   };
 
@@ -89,7 +97,7 @@ const SendTipsButton: React.FC<SendTipsButtonProps> = ({ item }) => {
           setIsPaymentModalOpen(false);
           setIsOopsModalOpen(true);
         }
-      } catch (error) {}
+      } catch (error) { }
     } else {
       router.push(
         `/send-tip?amount=${amount}&entityType=Player&entityId=${item?._id}`
@@ -99,12 +107,22 @@ const SendTipsButton: React.FC<SendTipsButtonProps> = ({ item }) => {
 
   return (
     <>
-      <button
-        onClick={showModal}
-        className="bg-[#053697] text-white font-bold py-2 px-4 rounded-md hover:bg-[#184eb9]/90 focus:outline-none"
-      >
-        Send Tippz
-      </button>
+      <div className="flex items-center gap-2">
+        <button
+          id='details'
+          onClick={(e) => showModal(e)}
+          className="bg-[#37C86D] text-white font-bold py-2 px-4 rounded-md hover:bg-[#184eb9]/90 focus:outline-none"
+        >
+          See Details
+        </button>
+        <button
+          id='tippz'
+          onClick={(e) => showModal(e)}
+          className="bg-[#053697] text-white font-bold py-2 px-4 rounded-md hover:bg-[#184eb9]/90 focus:outline-none"
+        >
+          Send Tippzs
+        </button>
+      </div>
       <Modal
         title=""
         visible={isModalOpen}
@@ -115,22 +133,22 @@ const SendTipsButton: React.FC<SendTipsButtonProps> = ({ item }) => {
       >
         <div className="text-center">
           <Image
-            src={imageUrl(item.player_image)}
-            alt={item.name}
+            src={imageUrl(item?.player_image)}
+            alt={item?.name}
             width={100}
             height={100}
             className="rounded-full border-2 mx-auto mb-4"
             unoptimized
           />
-          <h2 className="text-xl font-bold text-[#053697]">{item.name}</h2>
+          <h2 className="text-xl font-bold text-[#053697]">{item?.name}</h2>
           {/* <p><span className="text-green-500 font-semibold">League:</span> NCAA</p> */}
           <p>
             <span className="text-green-500 font-semibold">Team:</span>{" "}
-            {item.team?.name}
+            {item?.team?.name}
           </p>
           <p>
             <span className="text-green-500 font-semibold">Position:</span>{" "}
-            {item.position}
+            {item?.position}
           </p>
         </div>
         <Form
@@ -223,10 +241,9 @@ const SendTipsButton: React.FC<SendTipsButtonProps> = ({ item }) => {
           </Button>
         </div>
       </Modal>
-
-      {/* Navigate login modal */}
+      <PlayerDetailsServer token={token} id={item?._id} detailsModal={detailsModal} showDetailsModal={showDetailsModal} />
     </>
   );
 };
 
-export default SendTipsButton;
+export default memo(SendTipsButton);
