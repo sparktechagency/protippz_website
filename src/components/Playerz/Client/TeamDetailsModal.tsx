@@ -147,3 +147,4 @@ const TeamDetailsModal: React.FC<ITeamDetailsProps> = ({ id, token, detailsModal
 };
 
 export default memo(TeamDetailsModal);
+

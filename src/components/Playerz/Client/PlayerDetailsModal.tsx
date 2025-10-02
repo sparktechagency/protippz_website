@@ -189,13 +189,6 @@ const PlayerDetailsModal: React.FC<IPlayerDetailsProps> = ({ id, token, detailsM
               </div>
             </div>
           </div>
-          {/* player address */}
-          <div style={{ marginBottom: '24px' }}>
-            <h4 style={{ margin: '0 0 12px 0', color: '#333' }}>Player Address</h4>
-            <div style={{ display: 'flex', alignItems: 'center', padding: '12px', backgroundColor: '#f8f9fa', borderRadius: '8px' }}>
-              <p style={{ margin: '0', fontSize: '12px', color: '#666' }}>{playerData?.address?.city && playerData?.address?.state && playerData?.address?.zipCode ? `${playerData?.address?.city}, ${playerData?.address?.state}, ${playerData?.address?.zipCode}` : 'Address not available'}</p>
-            </div>
-          </div>
         </div>
       ) : (
         <div style={{ textAlign: 'center', padding: '40px 0' }}>

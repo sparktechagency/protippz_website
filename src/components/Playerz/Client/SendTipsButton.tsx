@@ -108,19 +108,19 @@ const SendTipsButton: React.FC<SendTipsButtonProps> = ({ item, token }) => {
   return (
     <>
       <div className="flex items-center gap-2">
-        <button
+        {/* <button
           id='details'
           onClick={(e) => showModal(e)}
           className="bg-[#37C86D] text-white font-bold py-2 px-4 rounded-md hover:bg-[#184eb9]/90 focus:outline-none"
         >
           See Details
-        </button>
+        </button> */}
         <button
           id='tippz'
           onClick={(e) => showModal(e)}
           className="bg-[#053697] text-white font-bold py-2 px-4 rounded-md hover:bg-[#184eb9]/90 focus:outline-none"
         >
-          Send Tippzs
+          Send Tippz
         </button>
       </div>
       <Modal

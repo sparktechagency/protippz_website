@@ -1,8 +1,8 @@
 import { revalidateTag } from "next/cache"
 
 // const base = 'http://3.135.129.190:5000'
-export const base = 'http://10.10.20.9:5000'
-// export const base = 'https://api.protippz.com'
+// export const base = 'http://10.10.20.9:5000'
+export const base = 'https://api.protippz.com'
 // const base = 'https://585d-103-145-138-193.ngrok-free.app'
 export const baseUrl = async (url: string) => {
     if (url?.startsWith('/')) return `${base}${url}`
@@ -25,8 +25,8 @@ export const imageUrl = (url: string) => {
 
 // const defaultServer = 'https://585d-103-145-138-193.ngrok-free.app';
 // const defaultServer = 'http://3.135.129.190:5000';
-const defaultServer = "http://10.10.20.9:5000";
-// const defaultServer = "https://api.protippz.com";
+// const defaultServer = "http://10.10.20.9:5000";
+const defaultServer = "https://api.protippz.com";
 
 
 const request = async (

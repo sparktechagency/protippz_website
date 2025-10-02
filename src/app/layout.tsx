@@ -4,6 +4,7 @@ import { AuthProvider } from '@/provider/ContextProvider';
 import NextTopLoader from 'nextjs-toploader';
 import GoogleAnalytics from '@/components/GoogleAnalytics/GoogleAnalytics';
 import ClickjackingFixed from '@/components/ethical_process/ClickjackingFixed';
+import Script from 'next/script';
 export const metadata: Metadata = {
   title: 'PROTIPPZ',
   description: 'protippz',
@@ -45,6 +46,19 @@ export default function RootLayout({
       <body>
         <NextTopLoader />
         <AuthProvider>
+          <Script
+            id="chatbot-script"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `(function () {
+              var d = document;
+              var s = d.createElement("script");
+              s.src = "https://webagent.ai/api/chatbot/4f7a153a-a52c-4712-b58c-994a93bd04bb";
+              s.async = true;
+              d.getElementsByTagName("head")[0].appendChild(s);
+            })();`,
+            }}
+          />
           <ClickjackingFixed>{children}</ClickjackingFixed>
         </AuthProvider>
         <GoogleAnalytics />
