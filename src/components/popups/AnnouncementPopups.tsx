@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { X } from 'lucide-react';
-import popup from '@/../public/win-250.jpeg'; // replace with correct path if needed
+import popup from '@/../public/win-250.jpeg';
 import { useRouter } from 'next/navigation';
 
 const COOKIE_NAME = 'announcement_popup_dismissed';
@@ -38,7 +38,9 @@ function AnnouncementPopups() {
     };
 
     const handleShowLater = () => {
-        router.push('/sign-in');
+        if (!token) {
+            router.push('/sign-in');
+        }
         const in48Hours = new Date();
         in48Hours.setHours(in48Hours.getHours() + 48);
         Cookies.set(SHOW_LATER_COOKIE, in48Hours.toISOString(), { expires: 2 });
