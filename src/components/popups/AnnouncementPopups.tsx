@@ -41,9 +41,9 @@ function AnnouncementPopups() {
         if (!token) {
             router.push('/sign-in');
         }
-        const in48Hours = new Date();
-        in48Hours.setHours(in48Hours.getHours() + 48);
-        Cookies.set(SHOW_LATER_COOKIE, in48Hours.toISOString(), { expires: 2 });
+        // const in48Hours = new Date();
+        // in48Hours.setHours(in48Hours.getHours() + 48);
+        // Cookies.set(SHOW_LATER_COOKIE, in48Hours.toISOString(), { expires: 2 });
         setIsVisible(false);
     };
 
