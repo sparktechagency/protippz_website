@@ -102,7 +102,7 @@ const SignInPage: React.FC = () => {
         toast.error(res?.message || 'something went wrong');
       }
     },
-    onError: (err) => {},
+    onError: (err) => { },
   });
   const onFinish = async (values: any) => {
     setLoading(true);
@@ -163,7 +163,7 @@ const SignInPage: React.FC = () => {
     }
   };
 
-  const onFinishFailed = (errorInfo: any) => {};
+  const onFinishFailed = (errorInfo: any) => { };
 
   return (
     <div
@@ -203,7 +203,7 @@ const SignInPage: React.FC = () => {
                 Email or Username {''}
                 <br />{' '}
                 <span className="text-xs">
-                  ( Please make sure it is correct and case sensitive )
+                  (Password is case sensitive)
                 </span>
               </p>
             }
@@ -225,7 +225,7 @@ const SignInPage: React.FC = () => {
                 Password {''}
                 <br />{' '}
                 <span className="text-xs">
-                  ( Please make sure it is correct and case sensitive )
+                  (Password is case sensitive)
                 </span>
               </p>
             }

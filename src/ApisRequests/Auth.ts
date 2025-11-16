@@ -43,13 +43,14 @@ export const OtpVerify = async (value: verifyCode) => {
 
 
 interface SignIn {
-    "userNameOrEmail": number,
+    "userNameOrEmail": string,
     "password": string,
 }
 
 
 
 export const SignInHandler = async (value: SignIn) => {
+    console.log(value)
     const url = await baseUrl('auth/login')
     const response = await fetch(url, {
         method: 'POST',
