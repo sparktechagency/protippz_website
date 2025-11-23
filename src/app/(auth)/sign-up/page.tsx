@@ -45,23 +45,6 @@ const SignUpPage: React.FC = () => {
   );
   const [formLoading, setFormLoading] = useState(false);
   const router = useRouter();
-  const [formValues, setFormValues] = useState({
-    fullName: '',
-    email: '',
-    phoneNumber: '',
-    username: '',
-    address: '',
-    password: '',
-    confirmPassword: '',
-    termsAccepted: false,
-  });
-
-  const handleCheckboxChange = (e: CheckboxChangeEvent) => {
-    setFormValues({
-      ...formValues,
-      termsAccepted: e.target.checked,
-    });
-  };
 
   const login = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
@@ -148,7 +131,7 @@ const SignUpPage: React.FC = () => {
         toast.error(res?.message || 'something went wrong');
       }
     },
-    onError: (err) => {},
+    onError: (err) => { },
   });
 
   const onFinish = async (values: any) => {
@@ -343,10 +326,9 @@ const SignUpPage: React.FC = () => {
               allowClear
               className="h-[42px]"
               options={addressOptions}
-              dropdownMatchSelectWidth={false}
               dropdownStyle={{ minWidth: '300px' }}
               getPopupContainer={(triggerNode) => triggerNode.parentElement}
-              showArrow={false}
+    
             />
           </Form.Item>
 
@@ -396,10 +378,10 @@ const SignUpPage: React.FC = () => {
                   value
                     ? Promise.resolve()
                     : Promise.reject(
-                        new Error(
-                          'You must accept the terms and privacy policy'
-                        )
-                      ),
+                      new Error(
+                        'You must accept the terms and privacy policy'
+                      )
+                    ),
               },
             ]}
           >
