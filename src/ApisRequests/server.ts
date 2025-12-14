@@ -92,8 +92,8 @@
 // ) => {
 //     return request('DELETE', url, options);
 // };
-// export const base = 'https://api.protippz.com';
-export const base = "http://18.218.23.153:5000";
+export const base = "https://api.protippz.com";
+// export const base = "http://18.218.23.153:5000";
 
 export const baseUrl = (url: string) => {
   if (url?.startsWith("/")) return `${base}${url}`;
@@ -108,8 +108,8 @@ export const imageUrl = (url: string) => {
   return `${base}/${url}`;
 };
 
-// const defaultServer = "https://api.protippz.com";
-const defaultServer = "http://18.218.23.153:5000";
+const defaultServer = "https://api.protippz.com";
+// const defaultServer = "http://18.218.23.153:5000";
 
 const request = async (
   method: "GET" | "POST" | "PATCH" | "DELETE",
