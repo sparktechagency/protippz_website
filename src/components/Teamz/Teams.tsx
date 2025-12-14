@@ -1,4 +1,8 @@
+import { get, imageUrl } from "@/ApisRequests/server";
 import league from "@/Assets/league.jpg";
+import { Tooltip } from "antd";
+import Image from "next/image";
+import SetTemParams from "../Playerz/Client/SetTemParams";
 import {
   Carousel,
   CarouselContent,
@@ -6,10 +10,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "../ui/carousel";
-import Image from "next/image";
-import { get, imageUrl } from "@/ApisRequests/server";
-import SetTemParams from "../Playerz/Client/SetTemParams";
-import { Tooltip } from "antd";
 
 interface teamsType {
   _id: string;
@@ -54,6 +54,8 @@ const Teams = async () => {
     </Carousel>
   );
 };
+
+// kdhfdh
 
 export default Teams;
 const getTeam = async () => {
