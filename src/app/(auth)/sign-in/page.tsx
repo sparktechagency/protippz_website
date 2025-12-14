@@ -57,7 +57,7 @@ const SignInPage: React.FC = () => {
           window.location.href = '/';
         } else {
           toast.custom(
-            (t) => (
+            (t:any) => (
               <div
                 style={{
                   display: 'flex',
@@ -117,7 +117,7 @@ const SignInPage: React.FC = () => {
         window.location.href = res?.data?.role === 'user' ? '/' : '/home';
       } else {
         toast.custom(
-          (t) => (
+          (t:any) => (
             <div
               style={{
                 display: 'flex',

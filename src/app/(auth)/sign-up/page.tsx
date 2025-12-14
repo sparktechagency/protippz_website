@@ -86,7 +86,7 @@ const SignUpPage: React.FC = () => {
           window.location.href = '/';
         } else {
           toast.custom(
-            (t) => (
+            (t:any) => (
               <div
                 style={{
                   display: 'flex',
