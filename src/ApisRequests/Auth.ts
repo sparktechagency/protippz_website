@@ -12,7 +12,7 @@ interface SignUp {
     address: string;
   };
 }
-//
+//-----
 export const signUpHandler = async (value: SignUp) => {
   const url = await baseUrl("user/register-user");
   const response = await fetch(url, {
