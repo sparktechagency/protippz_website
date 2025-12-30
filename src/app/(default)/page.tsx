@@ -1,4 +1,5 @@
 'use client';
+import PoweredByStripe from '@/components/ad/PoweredByStripe';
 import Banner from '@/components/HomePage/Banner';
 import DownloadSection from '@/components/HomePage/DownloadSection';
 import AnnouncementPopups from '@/components/popups/AnnouncementPopups';
@@ -60,6 +61,7 @@ export default function Home() {
       <SeoPage metadata={seoMetadata} />
       <Banner />
       {/* <AdContainer /> */}
+      <PoweredByStripe />
       <DownloadSection />
       <AnnouncementPopups />
     </>

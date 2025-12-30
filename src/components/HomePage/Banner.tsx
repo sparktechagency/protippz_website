@@ -65,21 +65,21 @@ const Banner = () => {
           animate="visible"
         >
           <MotionDiv
-            className="text-4xl md:text-7xl italic font-black mb-4"
+            className="text-4xl md:text-7xl font-my tracking-wider italic font-black mb-4"
             variants={childVariants}
           >
             {/* Start Tipping */}
             TIP YOUR FAV PLAYERS
           </MotionDiv>
           <MotionDiv
-            className="text-4xl md:text-7xl italic text-[#2FC292] font-black mb-4"
+            className="text-4xl md:text-7xl font-my tracking-wider italic text-[#2FC292] font-black mb-4"
             variants={childVariants}
           >
             {/* Bridging the income gap between women and men sports */}
             EARN REWARDS
           </MotionDiv>
           <MotionDiv
-            className="text-4xl md:text-7xl italic text-[#043697] font-black mb-12"
+            className="text-4xl md:text-7xl font-my tracking-wider italic text-[#043697] font-black mb-12"
             variants={childVariants}
           >
             {/* Start Tipping */}
