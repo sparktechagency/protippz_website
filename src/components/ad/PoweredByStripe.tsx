@@ -34,7 +34,7 @@ export default function PoweredByStripe() {
                     {/* Description */}
                     <p className="mt-3 max-w-2xl text-sm sm:text-base text-slate-600">
                         We use Stripe to process payments securely and reliably, trusted by
-                        millions of businesses worldwide.
+                        millions of people worldwide.
                     </p>
                 </div>
 
