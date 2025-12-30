@@ -5,6 +5,7 @@ import NextTopLoader from 'nextjs-toploader';
 import GoogleAnalytics from '@/components/GoogleAnalytics/GoogleAnalytics';
 import ClickjackingFixed from '@/components/ethical_process/ClickjackingFixed';
 import Script from 'next/script';
+import { myFont } from '../../public/fonts/myFont';
 export const metadata: Metadata = {
   title: 'PROTIPPZ',
   description: 'protippz',
@@ -43,7 +44,7 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.png" sizes="any" type="image/png" />
         <meta name="theme-color" content="#ffffff" />
       </head>
-      <body>
+      <body className={myFont.variable}>
         <NextTopLoader />
         <AuthProvider>
           <Script
