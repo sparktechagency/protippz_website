@@ -28,13 +28,10 @@ export default function PoweredByStripe() {
 
                     {/* Heading */}
                     <h2 className="text-xl sm:text-2xl font-semibold text-slate-900">
-                        Secure payments powered by Stripe
+                        Trusted Infrastructure for Athlete Support
                     </h2>
-
-                    {/* Description */}
-                    <p className="mt-3 max-w-2xl text-sm sm:text-base text-slate-600">
-                        We use Stripe to process payments securely and reliably, trusted by
-                        millions of people worldwide.
+                    <p className="text-lg text-slate-600 mt-2">
+                        Secure payments powered by Stripe
                     </p>
                 </div>
 
@@ -42,18 +39,18 @@ export default function PoweredByStripe() {
                 <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6">
                     <Feature
                         icon={<Zap className="h-5 w-5" />}
-                        title="Fast checkout"
-                        description="Optimized payment flows for higher conversion rates."
+                        title="Fast, Frictionless Tipping"
+                        description="Support athletes in seconds no friction, no barriers. PROTIPPZ makes it easy for fans to tip, engage, and reward athletes instantly."
                     />
                     <Feature
                         icon={<Globe className="h-5 w-5" />}
-                        title="Global payments"
-                        description="Accept payments from customers around the world."
+                        title="Global Fan Support"
+                        description="Sports are global support should be too. Fans around the world can support athletes securely, no matter where the game is played."
                     />
                     <Feature
                         icon={<ShieldCheck className="h-5 w-5" />}
-                        title="Bank-level security"
-                        description="Advanced encryption and PCI-compliant infrastructure."
+                        title="Trust & Protection Built In"
+                        description="Your support is protected by Stripe's industry-leading security and encryption so fans can give confidently and athletes can earn safely."
                     />
                 </div>
             </motion.div>
