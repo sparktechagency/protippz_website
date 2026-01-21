@@ -54,7 +54,7 @@ export default function RootLayout({
               __html: `(function () {
               var d = document;
               var s = d.createElement("script");
-              s.src = "https://webagent.ai/api/chatbot/4f7a153a-a52c-4712-b58c-994a93bd04bb";
+              s.src = "${process.env.NEXT_PUBLIC_CHATBOT_SCRIPT}";
               s.async = true;
               d.getElementsByTagName("head")[0].appendChild(s);
             })();`,
