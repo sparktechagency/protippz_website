@@ -8,67 +8,53 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: 'X-Frame-Options',
-            value: 'DENY', // or 'SAMEORIGIN' if you want to allow framing on your domain only
+            value: 'DENY',
           },
           {
             key: 'Content-Security-Policy',
-            value: "frame-ancestors 'none';", // prevents any framing
+            value: "frame-ancestors 'none';",
           },
         ],
       },
     ];
   },
   images: {
-    domains: ['10.10.11.15', '10.10.20.9'],
+    domains: [
+      '10.10.11.15',
+      '10.10.20.9',
+      'dsuotz3idqy4q.cloudfront.net',
+    ],
     remotePatterns: [
       {
         protocol: 'http',
-        // hostname: '192.168.10.11',
         hostname: '10.10.20.9',
         port: '5000',
       },
       {
         protocol: 'http',
-        // hostname: '192.168.10.11',
         hostname: '10.0.60.137',
         port: '5050',
       },
       {
         protocol: 'http',
-        // hostname: '192.168.10.11',
-        hostname: '0.0.0.0',
-        port: '5050',
-      },
-      {
-        protocol: 'http',
-        // hostname: '192.168.10.11',
         hostname: '10.0.60.37',
         port: '5050',
       },
       {
         protocol: 'https',
-        // hostname: '192.168.10.11',
         hostname: 'api.protippz.com',
-        // port: '5050',
       },
       {
         protocol: 'https',
-        // hostname: '192.168.10.11',
         hostname: 'protippz-bucket.s3.us-east-2.amazonaws.com',
-        // port: '5050',
       },
       {
         protocol: 'https',
-        // hostname: '192.168.10.11',
-        hostname: 'https://maps.googleapis.com/maps/api/place/autocomplete/json',
-        // port: '5050',
+        hostname: 'dsuotz3idqy4q.cloudfront.net',
       },
-      {
-        protocol: 'https',
-        hostname: '*'
-      }
     ],
   },
+
 };
 
 export default nextConfig;

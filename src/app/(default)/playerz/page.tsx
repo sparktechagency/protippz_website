@@ -1,13 +1,12 @@
 import { get } from '@/ApisRequests/server';
+import Players from '@/components/Playerz/Players';
 import PlayerzCards from '@/components/Playerz/PlayerzCards';
 import SearchAndSortComponent from '@/components/Playerz/SearchAndSortComponent';
-import GoToTop from '@/components/ui/GoToTop';
 import PaginationComponents from '@/components/Shared/Client/Pagination';
 import Heading from '@/components/Shared/Heading';
+import GoToTop from '@/components/ui/GoToTop';
 import { Empty } from 'antd';
 import { cookies } from 'next/headers';
-import React from 'react';
-import Teams from '@/components/Playerz/Teams';
 
 export const metadata = {
   title: 'PROTIPPZ - PLAYERZ',
@@ -71,7 +70,7 @@ const PlayerZPage = async ({ searchParams }: ParamsProps) => {
   return (
     <div className="container mx-auto mt-10">
       <GoToTop />
-      <Teams />
+      <Players />
 
       <Heading headingText="PLAYERZ" subHeadingText="Select a Player" />
       <SearchAndSortComponent />

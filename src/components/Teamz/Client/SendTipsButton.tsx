@@ -1,14 +1,14 @@
 "use client";
-import React, { useState } from "react";
-import { Modal, Form, Input, Radio, Button } from "antd";
+import { imageUrl, post } from "@/ApisRequests/server";
+import { TeamInterface } from "@/app/(default)/teamz/page";
+import TeamDetailsModal from "@/components/Playerz/Client/TeamDetailsModal";
+import { useContextData } from "@/provider/ContextProvider";
+import { Button, Form, Input, Modal, Radio } from "antd";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { imageUrl, post } from "@/ApisRequests/server";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { TeamInterface } from "@/app/(default)/teamz/page";
-import { useContextData } from "@/provider/ContextProvider";
 import Swal from "sweetalert2";
-import TeamDetailsModal from "@/components/Playerz/Client/TeamDetailsModal";
 
 interface SendTipsButtonProps {
   item: TeamInterface;
@@ -190,7 +190,7 @@ const SendTipsButton: React.FC<SendTipsButtonProps> = ({ token, item }) => {
       {/* Payment Method Modal */}
       <Modal
         title="Select your payment method"
-        visible={isPaymentModalOpen}
+        open={isPaymentModalOpen}
         onCancel={handleCancel}
         footer={null}
         centered

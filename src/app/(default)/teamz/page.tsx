@@ -8,7 +8,6 @@ import GoToTop from '@/components/ui/GoToTop';
 import { Empty } from 'antd';
 import { SearchParams } from 'next/dist/server/request/search-params';
 import { cookies } from 'next/headers';
-import React from 'react';
 
 export const metadata = {
   title: 'PROTIPPZ - PLAYERZ',
