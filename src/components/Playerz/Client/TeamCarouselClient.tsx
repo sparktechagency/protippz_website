@@ -8,7 +8,6 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-  useCarousel,
 } from '@/components/ui/carousel';
 import { Tooltip } from "antd";
 import Image from "next/image";
@@ -36,11 +35,8 @@ const TeamCarouselClient = ({
   const [teams, setTeams] = useState<teamsType[]>(initialTeams);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [meta, setMeta] = useState(initialMeta);
-
   const loadMore = async () => {
-    if (loading) return;
-
+    // if (!hasMore || loading) return;
     setLoading(true);
     const nextPage = page + 1;
 
@@ -49,40 +45,12 @@ const TeamCarouselClient = ({
     );
 
     const newTeams = res.data?.result || [];
-    console.log(newTeams)
-    const newMeta = res.data?.meta;
+    const meta = res.data?.meta;
+
     setTeams(prev => [...prev, ...newTeams]);
     setPage(nextPage);
-    if (newMeta) {
-      setMeta(newMeta);
-    }
 
     setLoading(false);
-  };
-
-  // Custom next button component
-  const CustomNextButton = () => {
-    const { scrollNext } = useCarousel();
-
-    const handleClick = () => {
-      // Check if we need to fetch more data
-      const hasMoreData = meta?.hasNextPage || (teams.length >= limit * page);
-
-      if (hasMoreData && !loading) {
-        loadMore();
-      }
-
-      // Always scroll the carousel
-      scrollNext();
-    };
-
-    return (
-      <CarouselNext
-        className="md:-right-4 right-0"
-        onClick={handleClick}
-        loading={loading}
-      />
-    );
   };
 
   return (
@@ -107,7 +75,7 @@ const TeamCarouselClient = ({
                   height={100}
                   width={100}
                 />
-                <p className="text-sm line-clamp-1">
+                <p className="text-sm">
                   {team.name.slice(0, 10)}..
                 </p>
                 <SetTemParams ParamKey="team" value={team._id} />
@@ -117,7 +85,11 @@ const TeamCarouselClient = ({
         ))}
       </CarouselContent>
 
-      <CustomNextButton />
+      <CarouselNext
+        className="md:-right-4 right-0"
+        onClick={loadMore}
+        loading={loading}
+      />
     </Carousel>
   );
 };
