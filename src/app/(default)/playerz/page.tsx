@@ -1,12 +1,18 @@
 import { get } from '@/ApisRequests/server';
 import PlayerzCards from '@/components/Playerz/PlayerzCards';
 import SearchAndSortComponent from '@/components/Playerz/SearchAndSortComponent';
+import GoToTop from '@/components/ui/GoToTop';
 import PaginationComponents from '@/components/Shared/Client/Pagination';
 import Heading from '@/components/Shared/Heading';
+<<<<<<< HEAD
 import Teams from '@/components/Teamz/Teams';
 import GoToTop from '@/components/ui/GoToTop';
+=======
+>>>>>>> parent of 8747bde (update player and team logo slider)
 import { Empty } from 'antd';
 import { cookies } from 'next/headers';
+import React from 'react';
+import Teams from '@/components/Playerz/Teams';
 
 export const metadata = {
   title: 'PROTIPPZ - PLAYERZ',
