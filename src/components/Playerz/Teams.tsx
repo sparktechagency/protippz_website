@@ -1,5 +1,8 @@
-import React from "react";
-import teamImage from "@/Assets/team.webp";
+import { get, imageUrl } from "@/ApisRequests/server";
+import bg from "@/Assets/bg.webp";
+import bgImageCircle from "@/Assets/circle.png";
+import { Tooltip } from "antd";
+import Image from "next/image";
 import {
   Carousel,
   CarouselContent,
@@ -7,23 +10,19 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "../ui/carousel";
-import Image from "next/image";
-import { get, imageUrl } from "@/ApisRequests/server";
 import SetTemParams from "./Client/SetTemParams";
 interface teamsType {
   _id: string;
   name: string;
-  team_bg_image: string;
+  team_logo: string;
   sport: string;
 }
-import bg from "@/Assets/bg.webp";
-import { Tooltip } from "antd";
 const Teams = async () => {
   const [data, meta] = await getTeam();
   return (
     <Carousel className="w-full">
       <CarouselPrevious className={`md:-left-4 left-0 z-50`} />
-      <CarouselContent className="flex items-center justify-center">
+      <CarouselContent className="flex items-center justify-start">
         {data &&
           Array.isArray(data) &&
           data?.map((team: teamsType) => (
@@ -31,18 +30,31 @@ const Teams = async () => {
               key={team._id}
               className="basis-1/4  cursor-pointer md:basis-1/7 lg:basis-1/12 "
             >
-              <Tooltip placement="top" title={team?.name}>
-                <div className="relative hover:bg-slate-100 flex items-center justify-center flex-col">
+              <Tooltip placement="bottom" title={<div className="flex flex-col items-center">
+                <Image
+                  src={
+                    team?.team_logo ? imageUrl(team?.team_logo) : bg
+                  }
+                  alt={team.name}
+                  className=" w-[40px] h-[40px] object-contain unselectable"
+                  height={40}
+                  width={40}
+                />
+                <p className="text-center text-sm">{team?.name}</p>
+              </div>}>
+                <div
+                  style={{ backgroundImage: `url("${bgImageCircle.src}")` }}
+                  className="relative hover:bg-slate-100 bg-center bg-contain bg-no-repeat w-28 h-28 overflow-hidden flex items-center justify-center flex-col unselectable">
                   <Image
                     src={
-                      team?.team_bg_image ? imageUrl(team?.team_bg_image) : bg
-                    } 
+                      team?.team_logo ? imageUrl(team?.team_logo) : bg
+                    }
                     alt={team.name}
-                    className=" w-[80px] h-[80px] object-contain"
-                    height={100}
-                    width={100}
+                    className=" w-[40px] h-[40px] object-contain unselectable"
+                    height={40}
+                    width={40}
                   />
-                  <p className="text-sm">{team?.name?.slice(0, 10)}..</p>
+                  <p className="text-sm unselectable">{team?.name?.slice(0, 10)}..</p>
                   <SetTemParams ParamKey="team" value={team?._id} />
                 </div>
               </Tooltip>

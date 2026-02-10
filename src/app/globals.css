@@ -3,7 +3,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
 * {
   font-family: 'poppins', sans-serif;
 }
@@ -15,7 +15,6 @@ body {
 body {
   font-family: var(--font-my);
 }
-
 
 @layer base {
   :root {
@@ -109,7 +108,7 @@ body {
 }
 
 body {
-  font-family: "Poppins", serif;
+  font-family: 'Poppins', serif;
 }
 
 ::selection {
@@ -122,7 +121,6 @@ body {
 }
 
 @keyframes shake {
-
   0%,
   100% {
     transform: translateX(0);
@@ -161,4 +159,12 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.unselectable::selection {
+  user-select: text;
+}
+.unselectable {
+  -webkit-user-select: none;
+  user-select: none;
 }
