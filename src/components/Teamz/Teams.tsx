@@ -20,7 +20,7 @@ interface teamsType {
 
 
 const Teams = async () => {
-  const [data, meta] = await getTeam();
+  const [data] = await getTeam();
 
   return (
     <Carousel className="w-full">

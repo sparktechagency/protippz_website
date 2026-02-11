@@ -18,7 +18,7 @@ interface teamsType {
   sport: string;
 }
 const Teams = async () => {
-  const [data, meta] = await getTeam();
+  const [data] = await getTeam();
   return (
     <Carousel className="w-full">
       <CarouselPrevious className={`md:-left-4 left-0 z-50`} />

@@ -21,7 +21,7 @@ interface RewardInterface {
 }
 
 const Rewards = async () => {
-  const [data, pagination] = await getCategory();
+  const [data] = await getCategory();
   const teamLogos = data as RewardInterface[];
   return (
     <Carousel className="w-full">
