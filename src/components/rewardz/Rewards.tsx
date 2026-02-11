@@ -1,44 +1,69 @@
-import React from 'react';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '../ui/carousel'
-import Image from 'next/image';
-import { get, imageUrl } from '@/ApisRequests/server';
-import SetTemParams from '../Playerz/Client/SetTemParams';
+import category from "@/Assets/category.png";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "../ui/carousel";
+import Image from "next/image";
+import { get, imageUrl } from "@/ApisRequests/server";
+import SetTemParams from "../Playerz/Client/SetTemParams";
+import { Tooltip } from "antd";
+
 interface RewardInterface {
-    _id: string,
-    name: string,
-    image: string,
-    createdAt: string,
-    updatedAt: string,
-    deliveryOption: string,
+  _id: string;
+  name: string;
+  image: string;
+  createdAt: string;
+  updatedAt: string;
+  deliveryOption: string;
 }
+
 const Rewards = async () => {
-    const [data, pagination] = await getCategory()
-    const teamLogos = data as RewardInterface[]
-    return (
-        <Carousel className='w-full'>
-            <CarouselPrevious className={`md:-left-4 left-0 z-50`} />
-            <CarouselContent>
-                {teamLogos.map((team) => (
-                    <CarouselItem key={team?._id} className="basis-1/4 md:basis-1/7 lg:basis-1/12 ">
-                        <div className='relative'>
-                            <Image src={imageUrl(team?.image)} alt={team?.name} className="w-[100px] h-[100px] object-contain" height={100} width={100} unoptimized />
-                            <p className="text-center mt-2">{team.name}</p>
-                            <SetTemParams key={team?._id}
-                                ParamKey='category'
-                                value={team?._id}
-                            />
-                        </div>
-                    </CarouselItem>
-                ))}
-            </CarouselContent>
-            <CarouselNext className={`md:-right-4 right-0`} />
-        </Carousel>
-    );
+  const [data] = await getCategory();
+  const teamLogos = data as RewardInterface[];
+  return (
+    <Carousel className="w-full">
+      <CarouselPrevious className={`md:-left-4 left-0 z-50`} />
+      <CarouselContent className="flex items-center justify-center">
+        {teamLogos &&
+          Array.isArray(teamLogos) &&
+          teamLogos.map((team) => (
+            <CarouselItem
+              key={team?._id}
+              className="basis-1/4 md:basis-1/7 lg:basis-1/12"
+            >
+              <Tooltip placement="top" title={team?.name}>
+                <div className="relative hover:bg-slate-100 cursor-pointer flex flex-col items-center justify-center">
+                  <Image
+                    src={team?.image ? imageUrl(team?.image) : category}
+                    alt={team?.name}
+                    className="w-[100px] h-[100px] object-contain"
+                    height={100}
+                    width={100}
+                    unoptimized
+                  />
+                  <p className="text-center text-sm">
+                    {team?.name?.slice(0, 10)}..
+                  </p>
+                  <SetTemParams
+                    key={team?._id}
+                    ParamKey="category"
+                    value={team?._id}
+                  />
+                </div>
+              </Tooltip>
+            </CarouselItem>
+          ))}
+      </CarouselContent>
+      <CarouselNext className={`md:-right-4 right-0`} />
+    </Carousel>
+  );
 };
 
 export default Rewards;
 const getCategory = async () => {
-    const res = await get('/reward-category/get-all?limit=99999999', {})
-    return [res?.data?.result, res?.data?.meta]
-}
-
+  const res = await get("/reward-category/get-all?limit=999999999", {});
+  return [res?.data?.result, res?.data?.meta];
+};

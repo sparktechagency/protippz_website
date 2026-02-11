@@ -1,42 +1,113 @@
-'use client'
+'use client';
 import { useContextData } from '@/provider/ContextProvider';
 import Link from 'next/link';
 import React from 'react';
+import MotionDiv from '../Playerz/Motion';
+import Head from 'next/head';
+
 const Banner = () => {
-    const data = useContextData()
-    return (
-        <>
-            <div
-                className="relative w-full h-[500px] bg-cover bg-center flex items-center"
-                style={{
-                    backgroundImage: 'url(https://i.ibb.co.com/cXf1gL5/image-1.png)',
-                }}
-            >
-                <div className='absolute w-full h-full bg-black opacity-50 z-10'>
+  const data = useContextData();
 
-                </div>
-                <div className="container mx-auto text-left text-white z-30 md:p-0 p-2">
-                    <h1 className="text-4xl md:text-6xl font-bold mb-4">Start Tipping</h1>
-                    <p className="text-lg md:text-xl mb-6 max-w-md">
-                        Tip your favorite players and teams, earn rewards, win prizes, and join a community of passionate sports lovers.
-                    </p>
-                    {
-                        data?.userData?._id ? <Link href={`/playerz`} className="bg-[#053697] hover:bg-[#6491eb] text-white font-semibold py-3 px-6 rounded-lg transition-all">
-                            Start Tip
-                        </Link> : <Link href={`/sign-up`} className="bg-[#053697] hover:bg-[#6491eb] text-white font-semibold py-3 px-6 rounded-lg transition-all">
-                            Sign up Now
-                        </Link>
-                    }
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.3 } },
+  };
 
-                </div>
-            </div>
-            {/* <div className='container mx-auto center-center mt-10 md:p-0 p-2 relative'>
-                <Image src={download} alt='download' height={5000} width={5000} className='w-full' />
-                <div className='w-[0px] h-[150px] bg-white p-2 rounded-md absolute left-[30%] translate-x-[-70%] bottom-[10%]'>
-                    <Image src={qrcode} alt='download' height={5000} width={5000} className='w-full' />
-                </div>
-            </div> */}
-        </>
-    );
+  const childVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
+
+  return (
+    <>
+      <Head>
+        <title>protippz</title>
+        <meta name="description" content="protippz" />
+        <meta name="keywords" content="protippz" />
+        <meta name="robots" content="index, follow" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="protippz" />
+        <meta property="og:description" content="protippz" />
+
+        <meta property="og:url" content="https://protippz.com" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="protippz" />
+        <meta name="twitter:description" content="protippz" />
+
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Website',
+            name: 'Best Sports Tipping Platform',
+            url: 'https://protippz.com',
+            description: 'protippz',
+            publisher: {
+              '@type': 'Organization',
+              name: 'ProTipz',
+              logo: 'https://protippz.com',
+            },
+          })}
+        </script>
+      </Head>
+      <div
+        className="relative w-full h-[500px] bg-cover bg-center flex items-center"
+        style={{
+          backgroundImage: 'url(https://i.ibb.co.com/cXf1gL5/image-1.png)',
+        }}
+      >
+        <div className="absolute w-full h-full bg-black opacity-50 z-10"></div>
+        <MotionDiv
+          className="container mx-auto text-left text-white z-30 md:p-0 p-2"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <MotionDiv
+            className="text-4xl md:text-7xl font-my tracking-wider italic font-black mb-4"
+            variants={childVariants}
+          >
+            {/* Start Tipping */}
+            TIP YOUR FAV PLAYERS
+          </MotionDiv>
+          <MotionDiv
+            className="text-4xl md:text-7xl font-my tracking-wider italic text-[#2FC292] font-black mb-4"
+            variants={childVariants}
+          >
+            {/* Bridging the income gap between women and men sports */}
+            EARN REWARDS
+          </MotionDiv>
+          <MotionDiv
+            className="text-4xl md:text-7xl font-my tracking-wider italic text-[#043697] font-black mb-12"
+            variants={childVariants}
+          >
+            {/* Start Tipping */}
+            WIN PRIZES
+          </MotionDiv>
+          {data?.userData?._id ? (
+            <MotionDiv variants={childVariants}>
+              <Link
+                href={`/playerz`}
+                className="bg-[#053697] hover:bg-[#053697]/90 text-white font-semibold py-3 px-6 rounded-lg transition-all"
+              >
+                Send Tippz
+              </Link>
+            </MotionDiv>
+          ) : (
+            <MotionDiv variants={childVariants}>
+              <Link
+                href={`/sign-up`}
+                className="bg-[#053697] hover:bg-[#053697]/90 text-white font-semibold py-3 px-6 rounded-lg transition-all"
+              >
+                Sign Up Now
+              </Link>
+            </MotionDiv>
+          )}
+        </MotionDiv>
+      </div>
+    </>
+  );
 };
+
 export default Banner;

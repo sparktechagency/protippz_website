@@ -1,9 +1,19 @@
+/* @import url("@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Syne:wght@400..800&display=swap')"); */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+* {
+  font-family: 'poppins', sans-serif;
+}
+/*
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Bebas Neue", sans-serif;
+} */
+
+body {
+  font-family: var(--font-my);
 }
 
 @layer base {
@@ -34,6 +44,7 @@ body {
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
+
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -61,6 +72,7 @@ body {
     --chart-5: 340 75% 55%;
   }
 }
+
 .custom-input {
   height: 42px;
   border-color: green;
@@ -69,18 +81,21 @@ body {
 .custom-input:hover,
 .custom-input:focus {
   border-color: green !important;
-  outline: none; 
+  outline: none;
   box-shadow: 0 0 0 2px rgba(0, 128, 0, 0.2);
 }
+
 .custom-collapse .ant-collapse-header {
   padding: 12px 24px;
-  border: 1px solid #00c96d; /* Green border */
+  border: 1px solid #00c96d;
+  /* Green border */
   border-radius: 8px;
   margin-bottom: 12px;
 }
 
 .custom-panel .ant-collapse-content {
-  border-top: none; /* Remove inner top border */
+  border-top: none;
+  /* Remove inner top border */
   padding-left: 24px;
   padding-right: 24px;
 }
@@ -88,14 +103,68 @@ body {
 .custom-panel .ant-collapse-content-box {
   padding-top: 12px;
   padding-bottom: 12px;
-  color: #1a73e8; /* Content color */
+  color: #1a73e8;
+  /* Content color */
+}
+
+body {
+  font-family: 'Poppins', serif;
+}
+
+::selection {
+  background-color: #073499;
+  color: white;
+}
+
+.dontTouch {
+  user-select: none;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  20% {
+    transform: translateX(-8px);
+  }
+
+  40% {
+    transform: translateX(8px);
+  }
+
+  60% {
+    transform: translateX(-8px);
+  }
+
+  80% {
+    transform: translateX(8px);
+  }
+}
+
+.animate-shake {
+  animation: shake 0.3s ease-in-out;
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
 }
 
 @layer base {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.unselectable::selection {
+  user-select: text;
+}
+.unselectable {
+  -webkit-user-select: none;
+  user-select: none;
 }

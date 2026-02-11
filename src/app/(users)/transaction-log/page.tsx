@@ -1,51 +1,99 @@
-'use client'
-import React from 'react';
-import { Table, Typography } from 'antd';
+"use client";
+import React, { useEffect, useState } from "react";
+import { Table, Typography } from "antd";
+import { get } from "@/ApisRequests/server";
 
 const { Title } = Typography;
-
+interface TransitionLog {
+  amount: number;
+  createdAt: string;
+  transactionType: string;
+  status: string;
+}
+interface Pagination {
+  page: number;
+  limit: number;
+  total: number;
+  totalPage: number;
+}
 const TransactionLogPage = () => {
-    const data = [
-        { key: '1', type: 'Withdraw Funds', description: 'Withdraw to Account No. ********4364', amount: '$45' },
-        { key: '2', type: 'Deposit Funds', description: 'Deposit from Account No. ********4364', amount: '$125' },
-        { key: '3', type: 'Withdraw Funds', description: 'Withdraw to Account No. ********4364', amount: '$55' },
-        { key: '4', type: 'Withdraw Funds', description: 'Withdraw to Account No. ********4364', amount: '$55' },
-        { key: '5', type: 'Deposit Funds', description: 'Deposit from Account No. ********4364', amount: '$55' },
-        { key: '6', type: 'Withdraw Funds', description: 'Withdraw to Account No. ********4364', amount: '$55' },
-        { key: '7', type: 'Withdraw Funds', description: 'Withdraw to Account No. ********4364', amount: '$55' },
-        { key: '8', type: 'Deposit Funds', description: 'Deposit from Account No. ********4364', amount: '$55' },
-    ];
-    const columns = [
-        {
-            title: 'Type',
-            dataIndex: 'type',
-            key: 'type',
+  const [page, setPage] = useState(1);
+  const [transition, setTransition] = useState<TransitionLog[]>();
+  const [pagination, setPagination] = useState<Pagination>();
+  const columns = [
+    {
+      title: "Type",
+      dataIndex: "transactionType",
+      key: "transactionType",
+      render: (transactionType: string) => <span>{transactionType}</span>,
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+    },
+    {
+      title: "Date",
+      dataIndex: "createdAt",
+      key: "createdAt",
+      render: (createdAt: string) => (
+        <span>
+          {new Date(createdAt).toLocaleDateString("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+          })}
+        </span>
+      ),
+    },
+    {
+      title: "Amount",
+      dataIndex: "amount",
+      key: "amount",
+      render: (amount: string) => <span>${amount}</span>,
+    },
+  ];
+  useEffect(() => {
+    const getMyTip = async () => {
+      const res = await get(`/transaction/my-transactions?page=${page}`, {
+        headers: {
+          Authorization: `${
+            typeof localStorage === "undefined"
+              ? ""
+              : localStorage.getItem("token")
+          }`,
         },
-        {
-            title: 'Description',
-            dataIndex: 'description',
-            key: 'description',
-        },
-        {
-            title: 'Amount',
-            dataIndex: 'amount',
-            key: 'amount',
-        },
-    ];
-
-    return (
-        <div style={{ padding: '20px', textAlign: 'center' }}>
-            <Title level={2} style={{ color: '#1A73E8' }}>Transaction Log</Title>
-            <Table
-                columns={columns}
-                dataSource={data}
-                pagination={false}
-                bordered
-                style={{ maxWidth: '800px', margin: 'auto', marginTop: '20px' }}
-                rowClassName={(record, index) => (index % 2 === 0 ? 'even-row' : 'odd-row')}
-            />
-        </div>
-    );
+      });
+      setTransition(res?.data?.result);
+      setPagination(res.data?.meta);
+    };
+    getMyTip();
+  }, []);
+  return (
+    <div
+      className="w-full max-w-screen-2xl"
+      style={{ padding: "20px", textAlign: "center" }}
+    >
+      <Title level={2} style={{ color: "#1A73E8" }}>
+        Transaction Log
+      </Title>
+      <Table
+        columns={columns}
+        dataSource={transition}
+        pagination={{
+          pageSize: pagination?.limit,
+          total: pagination?.total,
+          onChange: (page) => setPage(page),
+        }}
+        bordered
+        // style={{ maxWidth: "800px", margin: "auto", marginTop: "20px" }}
+        className="w-full"
+        rowClassName={(record, index) =>
+          index % 2 === 0 ? "even-row" : "odd-row"
+        }
+      />
+    </div>
+  );
 };
 
 export default TransactionLogPage;
