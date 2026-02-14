@@ -19,11 +19,6 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
-    domains: [
-      '10.10.11.15',
-      '10.10.20.9',
-      'dsuotz3idqy4q.cloudfront.net',
-    ],
     remotePatterns: [
       {
         protocol: 'http',
