@@ -1,5 +1,4 @@
 import { get, imageUrl } from "@/ApisRequests/server";
-import bgImageCircle from "@/Assets/circle.png";
 import league from "@/Assets/league.jpg";
 import { Tooltip } from "antd";
 import Image from "next/image";
@@ -46,7 +45,6 @@ const Teams = async () => {
                 <p className="text-center text-sm">{team?.name}</p>
               </div>}>
                 <div
-                  style={{ backgroundImage: `url("${bgImageCircle.src}")` }}
                   className="relative cursor-pointer bg-center bg-contain bg-no-repeat w-28 h-28 overflow-hidden flex items-center justify-center flex-col">
                   <Image
                     src={

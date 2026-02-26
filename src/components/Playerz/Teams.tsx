@@ -1,6 +1,5 @@
 import { get, imageUrl } from "@/ApisRequests/server";
 import bg from "@/Assets/bg.webp";
-import bgImageCircle from "@/Assets/circle.png";
 import { Tooltip } from "antd";
 import Image from "next/image";
 import {
@@ -43,7 +42,6 @@ const Teams = async () => {
                 <p className="text-center text-sm">{team?.name}</p>
               </div>}>
                 <div
-                  style={{ backgroundImage: `url("${bgImageCircle.src}")` }}
                   className="relative hover:bg-slate-100 bg-center bg-contain bg-no-repeat w-28 h-28 overflow-hidden flex items-center justify-center flex-col unselectable">
                   <Image
                     src={
